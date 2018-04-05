@@ -110,7 +110,7 @@ let startTimer = () => {
     let z = parseInt(y);
     z+=1;
     //   logs(y + ' is this giving me the 0?');
-    x.innerHTML= z;
+    x.innerHTML = z;
     //    x = parseInt(x);
 
 };
@@ -174,7 +174,7 @@ const newPlay = (x) => { // the play controls and points function
                       logs(i['0'].id, item);
 
                       if (item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML) {
-                        alert('invalid play');
+//                        alert('invalid play');
                         item.removeClass('newPlay');
                       }
                       else {
@@ -196,8 +196,8 @@ const newPlay = (x) => { // the play controls and points function
                           logs(`${totalPoints} is total point `);
 
                         }
-                      }
 
+                      }
 
                   });
 
@@ -214,6 +214,7 @@ class Get {
     constructor(timer, points) {
         this.timer = timer;
         this.points = points;
+
     }
 
 }
