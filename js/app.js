@@ -86,12 +86,13 @@ $('#reset').click(() => {
 
     $('#timer').text(0);
     $('#score').text(0);
-//    setTimer;
 
     while (playLog.length > 0) {
         playLog.pop();
 
     }
+
+    setTimer;
 
 });
 
@@ -103,12 +104,10 @@ $('#reset').click(() => {
     }*/
 
 let startTimer = () => {
-    //  const d = new Date();
-    //  const n = d.getSeconds();
     let x = document.getElementById('timer');
     let y = x.innerHTML;
     let z = parseInt(y);
-    z+=1;
+    z+= 1;
     //   logs(y + ' is this giving me the 0?');
     x.innerHTML = z;
     //    x = parseInt(x);
@@ -122,7 +121,7 @@ for (let i= 0; i <= items.length; i++) {
 
         });
 
-    }
+}
 
 //feed input name to display size as typing
 nameinput.on('keyup', () => {
@@ -148,24 +147,25 @@ const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
-    if (moves < 1 || moves % 2 == 0) {
-        //restart timer for each play
-        $('#timer').html(0);
 
-        // mark this play as recorded
-        item.addClass('newPlay');
+
+    if (moves < 1 && moves < slotsLngth || moves % 2 == 0 ) { // only if moves are 0 or even and less than the max
+        $('#timer').html(0); // to restart timer after each valid match plays
+        item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
-        setTimer;
+//        setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
-      }
+      }/*
       else {
           clearInterval(setTimer);
+          setTimer;
 
-    }
+
+    }*/
 
     if (moves < 1 /*2 && moves % 2 != 0*/) {
-        logs('First move now played...')
+        logs(`First move now played... ${x}`)
 
         }
       else {
@@ -173,15 +173,15 @@ const newPlay = (x) => { // the play controls and points function
                   playLog.forEach((i) => {
                       logs(i['0'].id, item);
 
-                      if (item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML) {
+                      if (item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML) { // conditions to negate invalid plays
 //                        alert('invalid play');
-                        item.removeClass('newPlay');
+//                        item.removeClass('newPlay');
                       }
                       else {
-                        if (moves % 2 != 0) {
+                        if (moves % 2 != 0 ) {
                           clearInterval(setTimer);
 
-                          alert('Two Matched *!');
+//                          alert('Two Matched *!');
 
                           playLog.push(item);
                           item.addClass('newPlay');
@@ -243,7 +243,7 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
           logs(togameboard + " all made it to the gameboard.");
           items[x].append(icons[w]);
 
-          //duplicate the values of the first half of the gameboard to create matches for the game to wor
+          // duplicate the values of the first half of the gameboard to create matches for the game to wor
           while (x == (slotsLngth/2 - 1) && togameboard.length != slotsLngth) {
              togameboard.forEach((i) => {
                  togameboard.push(i);
