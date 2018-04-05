@@ -125,10 +125,11 @@ ul li {
 }
 
 section#gameRules {
-    height: 3rem;
+    padding: 10px;
     background: #EEECCC;
     color: #020202;
     text-align: center;
+
 }
 
 section#options {
