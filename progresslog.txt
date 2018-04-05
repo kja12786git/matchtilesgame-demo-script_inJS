@@ -3,7 +3,7 @@ Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 Want to change:
   - needs its own music, similar stuff
   - when the notification was fixed, the initial score went defunct... it was only counting points the first instance
-  - the notifications are redundant
+  - the notifications are redundant... showing the result of the entire playLog
   - button for new gameboard instead of just reset
   - it's not backwards compatible across browsers but works with webkit
-  - at the end of it the last match cannot complete for some reason
+  - at the end of the game process it seems the playCount is being limited to something other than the playLog count...
