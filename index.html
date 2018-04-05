@@ -1,0 +1,97 @@
+<html>
+<head>
+  <title>Matching Tiles [working title]</title>
+  <link type="text/css" rel="stylesheet" href="css/styles.css">
+
+</head>
+<body>
+  <header>
+    <h1>[working title]</h1>
+    <div id="name-input">
+      <h2>Enter Your Name: </h2>
+      <form>
+        <input type="text" placeholder="Enter Your Name" maxlength="30">
+        <button>Submit &#x263a;</button>
+
+      </form>
+
+      <div class="nameFeed" style="font-size: 3rem; font-size: 3em; text-align: center;"></div>
+
+      <h3 style="font-size: 360%; text-align:center;">Add your name above to start!</h3>
+
+    </div>
+
+    <h2 class="nameFeed"></h2>
+    <aside>
+      <ul id="tracker">
+        <li id="timer">0</li>
+        <li id="score">###</li>
+
+      </ul>
+
+    </aside>
+
+  </header>
+  <main>
+    <section>
+      <div id="gamearea">
+        <audio id="ambientMusic" controls autoplay>
+          <!-- <source src="#" type="audio/ogg"> -->
+          <source src="ambientmusic.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+          <div class="column01">
+            <div class="item" id="1"></div>
+            <div class="item" id="2"></div>
+            <div class="item" id="3"></div>
+            <div class="item" id="4"></div>
+
+          </div>
+          <div class="column02">
+            <div class="item" id="5"></div>
+            <div class="item" id="6"></div>
+            <div class="item" id="7"></div>
+            <div class="item" id="8"></div>
+
+          </div>
+          <div class="column03">
+            <div class="item" id="9"></div>
+            <div class="item" id="10"></div>
+            <div class="item" id="11"></div>
+            <div class="item" id="12"></div>
+
+          </div>
+
+        </div>
+
+      </section>
+      <section id="gameRules">
+        <h3>Game Rules:</h3>
+        <ol>
+          <li>Hit two tiles that contain the same graphic to score!</li>
+          <li>The total amount of points is calculated based on how fast you hit matching pairs!</li>
+
+        </ol>
+
+      </section>
+      <section id="options">
+        <ul><h3>Display Options: </h3>
+          <li><button id="s1">Style 1</button></li>
+          <li><button id="s2">Style 2</button></li>
+          <li><button id="s3">Style 3</button></li>
+          <li><button id="reset">Reset Board</button></li>
+
+        </ul>
+
+      </section>
+
+  </main>
+  <footer>A game like Majhong and similar tile-based games.</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+</body>
+
+
+</html>

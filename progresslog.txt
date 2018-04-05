@@ -1,0 +1,6 @@
+Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
+
+Want to change:
+  - needs its own music, similar stuff
+  - when the notification was fixed, the initial score went defunct... it was only counting points the first instance
+  - button for new gameboard instead of just reset
