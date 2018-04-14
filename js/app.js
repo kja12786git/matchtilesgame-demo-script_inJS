@@ -96,13 +96,6 @@ $('#reset').click(() => {
 
 });
 
-/*  set a timer after first click which resets to 0 on the second click && set the action & scoring logic for each two clicks */
-
-/*    let scoreCount = ScoreTrack. (timer) {
-        return .1 * this.moveTimespan();
-
-    }*/
-
 let startTimer = () => {
     let x = document.getElementById('timer');
     let y = x.innerHTML;
@@ -121,7 +114,7 @@ for (let i= 0; i <= items.length; i++) {
 
         });
 
-}
+};
 
 //feed input name to display size as typing
 nameinput.on('keyup', () => {
@@ -139,6 +132,7 @@ const getGameboard = togameboard.forEach((ret) => {
                     return ret;
                 }
             return false;
+
         });
 
 const setTimer = setInterval(startTimer, 1000);
@@ -147,20 +141,17 @@ const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
-
-
     if (moves < 1 && moves < slotsLngth || moves % 2 == 0 ) { // only if moves are 0 or even and less than the max
         $('#timer').html(0); // to restart timer after each valid match plays
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
-//        setTimer;
+        //        setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
       }/*
       else {
           clearInterval(setTimer);
           setTimer;
-
 
     }*/
 
@@ -169,47 +160,48 @@ const newPlay = (x) => { // the play controls and points function
 
         }
       else {
-        while (moves < items.length && (item.hasClass('newPlay') === false)) {
-                  playLog.forEach((i) => {
-                      logs(i['0'].id, item);
 
-                      if (item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML) { // conditions to negate invalid plays
-//                        alert('invalid play');
-//                        item.removeClass('newPlay');
+          while (moves < items.length && (item.hasClass('newPlay') === false)) {
+            if (item['0'].id === playLog['0'].id || item['0'].innerHTML != playLog['0'].innerHTML) { // conditions to negate invalid plays
+                alert('invalid play');
+                // item.removeClass('newPlay');
+
+            }
+              else {
+                playLog.forEach( (i) => {
+                    logs(i['0'].id, item);
+
+                      if (moves % 2 != 0 ) {
+                        clearInterval(setTimer);
+
+                        // alert('Two Matched *!');
+
+                        playLog.push(item);
+                        item.addClass('newPlay');
+
+                        logs(scoreTrack + ' is what scoreTrack returned');
+                        let x = document.getElementById('timer').innerText;
+                        x = x.value;
+                        logs(`The current value of timer... is ${x}`);
+                        let playPoints = $('#score').text(1000 - x*2);
+                        playPoints;
+                        totalPoints.push(1000-x*2);
+                        logs(`${totalPoints} is total point.`);
+
                       }
-                      else {
-                        if (moves % 2 != 0 ) {
-                          clearInterval(setTimer);
 
-//                          alert('Two Matched *!');
+                }) // end of ForEach on playLog
 
-                          playLog.push(item);
-                          item.addClass('newPlay');
+              }
 
-                          logs(scoreTrack + ' is what scoreTrack returned');
-                          let x = document.getElementById('timer').innerText;
-                          x = x.value;
-                          logs(`The current value of timer... is ${x}`);
-                          let playPoints = $('#score').text(1000 - x*2);
-                          playPoints;
-                          totalPoints.push(1000-x*2);
-                          logs(`${totalPoints} is total point `);
+              break;
 
-                        }
+            }; // end of while loop
 
-                      }
+      }
 
-                  });
+  };
 
-                  break;
-
-              };
-
-          }
-
-    };
-
-//timer is to start the count from the click and moveTimeSpan picks up after the second click to push time to the scoreCount calculator
 class Get {
     constructor(timer, points) {
         this.timer = timer;
