@@ -162,7 +162,8 @@ const newPlay = (x) => { // the play controls and points function
       else {
 
           while (moves < items.length && (item.hasClass('newPlay') === false)) {
-            if (item['0'].id === playLog['0'].id || item['0'].innerHTML != playLog['0'].innerHTML) { // conditions to negate invalid plays
+              logs(`${item} is the current item value`)            
+            if (item[moves-1].id === playLog[moves-1][0].id || item[moves-1].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
                 alert('invalid play');
                 // item.removeClass('newPlay');
 
