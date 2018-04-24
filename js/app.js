@@ -161,37 +161,38 @@ const newPlay = (x) => { // the play controls and points function
         }
       else {
 
-          while (moves < items.length && (item.hasClass('newPlay') === false)) {
-              logs(`${item} is the current item value`)            
-            if (item[moves-1].id === playLog[moves-1][0].id || item[moves-1].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
+          while (moves < items.length*2 && item.hasClass('newPlay') === false) { // while moves is less than complete board
+              logs(`${item[0].id} is the current item value`)
+            if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
                 alert('invalid play');
                 // item.removeClass('newPlay');
 
             }
               else {
-                playLog.forEach( (i) => {
-                    logs(i['0'].id, item);
 
-                      if (moves % 2 != 0 ) {
-                        clearInterval(setTimer);
+                  playLog.forEach( (i) => {
+                      logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
-                        // alert('Two Matched *!');
+                        if (moves % 2 != 0 ) {
+                          clearInterval(setTimer);
 
-                        playLog.push(item);
-                        item.addClass('newPlay');
+                          // alert('Two Matched *!');
 
-                        logs(scoreTrack + ' is what scoreTrack returned');
-                        let x = document.getElementById('timer').innerText;
-                        x = x.value;
-                        logs(`The current value of timer... is ${x}`);
-                        let playPoints = $('#score').text(1000 - x*2);
-                        playPoints;
-                        totalPoints.push(1000-x*2);
-                        logs(`${totalPoints} is total point.`);
+                          playLog.push(item);
+                          item.addClass('newPlay');
 
-                      }
+                          logs(scoreTrack + ' is what scoreTrack returned');
+                          let x = document.getElementById('timer').innerText;
+                          x = x.value;
+                          logs(`The current value of timer... is ${x}`);
+                          let playPoints = $('#score').text(1000 - x*2);
+                          playPoints;
+                          totalPoints.push(1000-x*2);
+                          logs(`${totalPoints} is total point.`);
 
-                }) // end of ForEach on playLog
+                        }
+
+                  }) // end of ForEach on playLog
 
               }
 
