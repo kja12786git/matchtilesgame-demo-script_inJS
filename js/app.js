@@ -42,7 +42,7 @@ nameInputDiv.toggleClass('popup');
 
 // both actions should return name input and remove popup
 nameinput.change(() => {
-//    nameInputDiv.toggleClass('hidden');
+    // nameInputDiv.toggleClass('hidden');
     nameInputDiv.toggleClass('popup');
     nameFeed[1].html(nameinput.val());
 
@@ -141,7 +141,7 @@ const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
-    if (moves < 1 && moves < slotsLngth || moves % 2 == 0 ) { // only if moves are 0 or even and less than the max
+    if ((moves < 1 || moves % 2 == 0) && moves < slotsLngth * 2) { // only if moves are 0 or even and less than the max
         $('#timer').html(0); // to restart timer after each valid match plays
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
@@ -161,7 +161,7 @@ const newPlay = (x) => { // the play controls and points function
         }
       else {
 
-          while (moves < items.length*2 && item.hasClass('newPlay') === false) { // while moves is less than complete board
+          while (moves < (slotsLngth * 2) && item.hasClass('newPlay') === false) { // moves less than complete board & not yet played
               logs(`${item[0].id} is the current item value`)
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
                 alert('invalid play');
@@ -202,7 +202,7 @@ const newPlay = (x) => { // the play controls and points function
 
       }
 
-  };
+};
 
 class Get {
     constructor(timer, points) {
@@ -229,7 +229,7 @@ for (let x = 0; x < halfBoard; x++) {
         togameboard.push(w);
         items[x].append(icons[w]);
         continue;
-    } // *** it worked perfectly one time but not consistently
+    }
 
     if (togameboard.length > 0 && getGameboard === false ) {
         continue;
@@ -240,8 +240,8 @@ for (let x = 0; x < halfBoard; x++) {
           logs(togameboard + " all made it to the gameboard.");
           items[x].append(icons[w]);
 
-          // duplicate the values of the first half of the gameboard to create matches for the game to wor
-          while (x == (slotsLngth/2 - 1) && togameboard.length != slotsLngth) {
+          // duplicate the values of the first half of the gameboard to create matches for the game pattern
+          while (x == (halfBoard - 1) && togameboard.length != slotsLngth) {
              togameboard.forEach((i) => {
                  togameboard.push(i);
 
