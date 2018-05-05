@@ -1,4 +1,4 @@
-//$('document').ready(() => { //unnecessary for now
+// $('document').ready(() => { // unnecessary for now
 // popup control functions
 let nameInputDiv = $('#name-input');
 let nameinput = $('form > input');
@@ -24,6 +24,7 @@ const randValue = () => {
     return x;
 
 };
+
 let randValueNi = (high, low) => {
     let xx = Math.floor((Math.random() * high) + low);
         return xx;
@@ -31,7 +32,6 @@ let randValueNi = (high, low) => {
 };
 
 const togameboard = []; //for use in generating gameboard on each load
-const firstZero = []; // *** I used this arr to limit 0 index from pushing more than once, it still did not work 100% with the randomValue ...
 const playLog = []; //for player in-game only
 const randomLog = []; //used for randomization checking
 const timerLog = []; //to accurately account for clicks similar to timestamp
@@ -220,7 +220,8 @@ var scoreTrack = new Get('',''); // for to $('#timer').html()
 // append each of the given icons to a button on the gameboard twice in random sequence. The random return can only be controlled by a range starting from 0. So, it is not absolutely possible to limit the reccurences with this Javascript method unless maybe I limit the range from 0 to 2 and restart the loop every 2 pushes while pushing them all to an array and popping the two that already pushed. I attempted to push a random number from [0 to desired length] to an array replace any additional copy until it is complete. It didn't work because it kept looping and crashed so I had to just let it go without stressin for unique returns only. A good way may be to generate a first half randomly, and then pull values from a duplicate array to randomize the remaining half using the original values
 
 let halfBoard = slotsLngth/2;
-for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need for the longer code I had before. It still does not give a perfect variety of random options between a set range, but I suppose this is something I cannot evaluate with this method.
+
+for (let x = 0; x < halfBoard; x++) {
     let w = randValue();
     randomLog.push(w); logs(randomLog + " random generated log.");
 
@@ -232,7 +233,9 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
 
     if (togameboard.length > 0 && getGameboard === false ) {
         continue;
+
       } else {
+
           togameboard.push(w);
           logs(togameboard + " all made it to the gameboard.");
           items[x].append(icons[w]);
@@ -241,8 +244,11 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
           while (x == (slotsLngth/2 - 1) && togameboard.length != slotsLngth) {
              togameboard.forEach((i) => {
                  togameboard.push(i);
+
              });
+
           }
+
     }
 
 }
@@ -251,8 +257,8 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
 for (let x = halfBoard; x < slotsLngth; x++) {
     let getRandom = randValueNi(x,(slotsLngth - slotsLngth));
     logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
-//    items[x].append(togameboard[getRandom] + 'temp');
-//    logs(getRandom);
+    //    items[x].append(togameboard[getRandom] + 'temp');
+    //    logs(getRandom);
 
 }
 
