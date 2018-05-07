@@ -141,11 +141,12 @@ const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
-    if ((moves < 1 || moves % 2 == 0) && moves < slotsLngth * 2) { // only if moves are 0 or even and less than the max
+    // only if moves are 0 or even, not yet played and total moves are less than the complete board
+    if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
         $('#timer').html(0); // to restart timer after each valid match plays
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
-        // playLog.push(item);
-        //        setTimer;
+        playLog.push(item);
+         // setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
       }/*
@@ -155,17 +156,16 @@ const newPlay = (x) => { // the play controls and points function
 
     }*/
 
-    if (moves < 1 /*2 && moves % 2 != 0*/) {
+    if (moves === 0) {
         logs(`First move now played... ${x}`)
 
         }
-      else {
-
-          while (moves < (slotsLngth * 2) && item.hasClass('newPlay') === false) { // moves less than complete board & not yet played
-              logs(`${item[0].id} is the current item value`)
+      else if (moves % 2 != 0 && moves < slotsLngth) {
+          // on odd moves, checks if not yet played and total moves is less than complete board
+          while (item.hasClass('newPlay') === false) {
+            logs(`${item[0].id} is the current item value`)
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
                 alert('invalid play');
-                // item.removeClass('newPlay');
 
             }
               else {
@@ -178,7 +178,7 @@ const newPlay = (x) => { // the play controls and points function
 
                           // alert('Two Matched *!');
 
-                          playLog.push(item);
+                          //playLog.push(item);
                           item.addClass('newPlay');
 
                           logs(scoreTrack + ' is what scoreTrack returned');
