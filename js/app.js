@@ -144,7 +144,7 @@ const newPlay = (x) => { // the play controls and points function
     if ((moves < 1 || moves % 2 == 0) && moves < slotsLngth * 2) { // only if moves are 0 or even and less than the max
         $('#timer').html(0); // to restart timer after each valid match plays
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
-        playLog.push(item);
+        // playLog.push(item);
         //        setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
