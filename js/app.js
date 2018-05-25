@@ -170,26 +170,29 @@ const newPlay = (x) => { // the play controls and points function
             }
               else {
 
+                playLog.push(item); // looks like it's this one
+
                   playLog.forEach( (i) => {
                       logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
-                          if (moves % 2 != 0 ) {
-                          clearInterval(setTimer);
+                          if (moves % 2 != 0) {
+                            clearInterval(setTimer);
 
-                          // alert('Two Matched *!');
+                            // alert('Two Matched *!');
 
-                          playLog.push(item);
-                          logs(playLog.length);
-                          item.addClass('newPlay');
+//                            playLog.push(item); // looks like it's this one
 
-                          logs(scoreTrack + ' is what scoreTrack returned');
-                          let x = document.getElementById('timer').innerText;
-                          x = x.value;
-                          logs(`The current value of timer... is ${x}`);
-                          let playPoints = $('#score').text(1000 - x*2);
-                          playPoints;
-                          totalPoints.push(1000-x*2);
-                          logs(`${totalPoints} is total point.`);
+                            logs(playLog.length);
+                            item.addClass('newPlay');
+
+                            logs(scoreTrack + ' is what scoreTrack returned');
+                            let x = document.getElementById('timer').innerText;
+                            x = x.value;
+                            logs(`The current value of timer... is ${x}`);
+                            let playPoints = $('#score').text(1000 - x*2);
+                            playPoints;
+                            totalPoints.push(1000-x*2);
+                            logs(`${totalPoints} is total point.`);
 
                           }
 
