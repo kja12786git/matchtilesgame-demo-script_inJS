@@ -173,12 +173,13 @@ const newPlay = (x) => { // the play controls and points function
                   playLog.forEach( (i) => {
                       logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
-                        if (moves % 2 != 0 ) {
+                          if (moves % 2 != 0 ) {
                           clearInterval(setTimer);
 
                           // alert('Two Matched *!');
 
-                          //playLog.push(item);
+                          playLog.push(item);
+                          logs(playLog.length);
                           item.addClass('newPlay');
 
                           logs(scoreTrack + ' is what scoreTrack returned');
@@ -190,7 +191,7 @@ const newPlay = (x) => { // the play controls and points function
                           totalPoints.push(1000-x*2);
                           logs(`${totalPoints} is total point.`);
 
-                        }
+                          }
 
                   }) // end of ForEach on playLog
 

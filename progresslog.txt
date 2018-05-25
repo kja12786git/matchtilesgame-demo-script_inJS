@@ -5,3 +5,5 @@ Want to change:
   - when the notification was fixed, the initial score went defunct... it was only counting points the first instance
   - button for new gameboard instead of just reset
   - it's not backwards compatible across browsers but works with webkit
+
+  - On the 4th move, the playLog counts too many times in the forloop.
