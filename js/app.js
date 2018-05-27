@@ -1,4 +1,4 @@
-//$('document').ready(() => { //unnecessary for now
+// $('document').ready(() => { // unnecessary for now
 // popup control functions
 let nameInputDiv = $('#name-input');
 let nameinput = $('form > input');
@@ -24,6 +24,7 @@ const randValue = () => {
     return x;
 
 };
+
 let randValueNi = (high, low) => {
     let xx = Math.floor((Math.random() * high) + low);
         return xx;
@@ -31,7 +32,6 @@ let randValueNi = (high, low) => {
 };
 
 const togameboard = []; //for use in generating gameboard on each load
-const firstZero = []; // *** I used this arr to limit 0 index from pushing more than once, it still did not work 100% with the randomValue ...
 const playLog = []; //for player in-game only
 const randomLog = []; //used for randomization checking
 const timerLog = []; //to accurately account for clicks similar to timestamp
@@ -42,7 +42,7 @@ nameInputDiv.toggleClass('popup');
 
 // both actions should return name input and remove popup
 nameinput.change(() => {
-//    nameInputDiv.toggleClass('hidden');
+    // nameInputDiv.toggleClass('hidden');
     nameInputDiv.toggleClass('popup');
     nameFeed[1].html(nameinput.val());
 
@@ -86,31 +86,23 @@ $('#reset').click(() => {
 
     $('#timer').text(0);
     $('#score').text(0);
-//    setTimer;
 
     while (playLog.length > 0) {
         playLog.pop();
 
     }
 
+    setTimer;
+
 });
 
-/*  set a timer after first click which resets to 0 on the second click && set the action & scoring logic for each two clicks */
-
-/*    let scoreCount = ScoreTrack. (timer) {
-        return .1 * this.moveTimespan();
-
-    }*/
-
 let startTimer = () => {
-    //  const d = new Date();
-    //  const n = d.getSeconds();
     let x = document.getElementById('timer');
     let y = x.innerHTML;
     let z = parseInt(y);
-    z+=1;
+    z+= 1;
     //   logs(y + ' is this giving me the 0?');
-    x.innerHTML= z;
+    x.innerHTML = z;
     //    x = parseInt(x);
 
 };
@@ -122,7 +114,7 @@ for (let i= 0; i <= items.length; i++) {
 
         });
 
-    }
+};
 
 //feed input name to display size as typing
 nameinput.on('keyup', () => {
@@ -140,6 +132,7 @@ const getGameboard = togameboard.forEach((ret) => {
                     return ret;
                 }
             return false;
+
         });
 
 const setTimer = setInterval(startTimer, 1000);
@@ -148,72 +141,78 @@ const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
-    if (moves < 1 || moves % 2 == 0) {
-        //restart timer for each play
-        $('#timer').html(0);
-
-        // mark this play as recorded
-        item.addClass('newPlay');
+    // only if moves are 0 or even, not yet played and total moves are less than the complete board
+    if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
+        $('#timer').html(0); // to restart timer after each valid match plays
+        item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
-        setTimer;
+         // setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
-      }
+      }/*
       else {
           clearInterval(setTimer);
+          setTimer;
 
-    }
+    }*/
 
-    if (moves < 1 /*2 && moves % 2 != 0*/) {
-        logs('First move now played...')
+    if (moves === 0) {
+        logs(`First move now played... ${x}`)
 
         }
-      else {
-        while (moves < items.length && (item.hasClass('newPlay') === false)) {
-                  playLog.forEach((i) => {
-                      logs(i['0'].id, item);
+      else if (moves % 2 != 0 && moves < slotsLngth) {
+          // on odd moves, checks if not yet played and total moves is less than complete board
+          while (item.hasClass('newPlay') === false) {
+            logs(`${item[0].id} is the current item value`)
+            if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) { // conditions to negate invalid plays
+                alert('invalid play');
 
-                      if (item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML) {
-                        alert('invalid play');
-                        item.removeClass('newPlay');
-                      }
-                      else {
-                        if (moves % 2 != 0) {
-                          clearInterval(setTimer);
+            }
+              else {
 
-                          alert('Two Matched *!');
+                playLog.push(item); // looks like it's this one
 
-                          playLog.push(item);
-                          item.addClass('newPlay');
+                  playLog.forEach( (i) => {
+                      logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
-                          logs(scoreTrack + ' is what scoreTrack returned');
-                          let x = document.getElementById('timer').innerText;
-                          x = x.value;
-                          logs(`The current value of timer... is ${x}`);
-                          let playPoints = $('#score').text(1000 - x*2);
-                          playPoints;
-                          totalPoints.push(1000-x*2);
-                          logs(`${totalPoints} is total point `);
+                          if (moves % 2 != 0) {
+                            clearInterval(setTimer);
 
-                        }
-                      }
+                            // alert('Two Matched *!');
 
+//                            playLog.push(item); // looks like it's this one
 
-                  });
+                            logs(playLog.length);
+                            item.addClass('newPlay');
 
-                  break;
+                            logs(scoreTrack + ' is what scoreTrack returned');
+                            let x = document.getElementById('timer').innerText;
+                            x = x.value;
+                            logs(`The current value of timer... is ${x}`);
+                            let playPoints = $('#score').text(1000 - x*2);
+                            playPoints;
+                            totalPoints.push(1000-x*2);
+                            logs(`${totalPoints} is total point.`);
 
-              };
+                          }
 
-          }
+                  }) // end of ForEach on playLog
 
-    };
+              }
 
-//timer is to start the count from the click and moveTimeSpan picks up after the second click to push time to the scoreCount calculator
+              break;
+
+            }; // end of while loop
+
+      }
+
+};
+
 class Get {
     constructor(timer, points) {
         this.timer = timer;
         this.points = points;
+
     }
 
 }
@@ -225,7 +224,8 @@ var scoreTrack = new Get('',''); // for to $('#timer').html()
 // append each of the given icons to a button on the gameboard twice in random sequence. The random return can only be controlled by a range starting from 0. So, it is not absolutely possible to limit the reccurences with this Javascript method unless maybe I limit the range from 0 to 2 and restart the loop every 2 pushes while pushing them all to an array and popping the two that already pushed. I attempted to push a random number from [0 to desired length] to an array replace any additional copy until it is complete. It didn't work because it kept looping and crashed so I had to just let it go without stressin for unique returns only. A good way may be to generate a first half randomly, and then pull values from a duplicate array to randomize the remaining half using the original values
 
 let halfBoard = slotsLngth/2;
-for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need for the longer code I had before. It still does not give a perfect variety of random options between a set range, but I suppose this is something I cannot evaluate with this method.
+
+for (let x = 0; x < halfBoard; x++) {
     let w = randValue();
     randomLog.push(w); logs(randomLog + " random generated log.");
 
@@ -233,21 +233,26 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
         togameboard.push(w);
         items[x].append(icons[w]);
         continue;
-    } // *** it worked perfectly one time but not consistently
+    }
 
     if (togameboard.length > 0 && getGameboard === false ) {
         continue;
+
       } else {
+
           togameboard.push(w);
           logs(togameboard + " all made it to the gameboard.");
           items[x].append(icons[w]);
 
-          //duplicate the values of the first half of the gameboard to create matches for the game to wor
-          while (x == (slotsLngth/2 - 1) && togameboard.length != slotsLngth) {
+          // duplicate the values of the first half of the gameboard to create matches for the game pattern
+          while (x == (halfBoard - 1) && togameboard.length != slotsLngth) {
              togameboard.forEach((i) => {
                  togameboard.push(i);
+
              });
+
           }
+
     }
 
 }
@@ -256,8 +261,8 @@ for (let x = 0; x < halfBoard; x++) { // ***I have simplified this without need 
 for (let x = halfBoard; x < slotsLngth; x++) {
     let getRandom = randValueNi(x,(slotsLngth - slotsLngth));
     logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
-//    items[x].append(togameboard[getRandom] + 'temp');
-//    logs(getRandom);
+    //    items[x].append(togameboard[getRandom] + 'temp');
+    //    logs(getRandom);
 
 }
 
