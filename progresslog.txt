@@ -1,7 +1,7 @@
 Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 
 Want to change:
-  - need to fine tune timer for desired accuracy on the DOM and ensure it is scoring accurate to user delay in between each play
+  - need to fine tune timer for desired accuracy on the DOM and ensure it is scoring accurate to user delay in between each play. There is something difficult about getting the timer to start only after first play.
   - needs its own music, similar stuff
   - button for new gameboard instead of just reset
   - it's not backwards compatible across browsers but works with webkit

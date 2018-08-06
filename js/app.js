@@ -10,7 +10,7 @@ const logs = console.log;
 const items = $('.item');
 const icons1 = ['☺','☺','☆','★','♡','❤'];
 const icons2 = ['1','2','3','4','5','6'];
-const icons = icons2;
+const icons = icons1;
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -88,7 +88,6 @@ const sumFunction = (total,num) => {
 // reset gameboard
 $('#reset').click(() => {
     items.removeClass('newPlay');
-//    clearInterval(setTimer);
 
     $('#timer').text(0);
     $('#score').text(0);
@@ -100,8 +99,6 @@ $('#reset').click(() => {
         totalPoints.pop();
 
     }
-
-    setTimer;
 
 });
 
@@ -162,22 +159,19 @@ const newPlay = (x) => { // the play controls and points function
 
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
-         // setTimer;
+
         logs(item['0'].id + ' console feed id# frm key data.');
 
-      }/*
-      else {
-          clearInterval(setTimer);
-          setTimer;
-
-    }*/
+      }
 
     if (moves === 0) {
         logs(`First move now played... ${x}`)
-
+        $('timer').html = -1;
+        setTimer;
 
         }
       else if (moves % 2 != 0 && moves < slotsLngth) {
+
       // on odd moves, checks if not yet played and total moves is less than complete board
           while (item.hasClass('newPlay') === false) {
             logs(`${item[0].id} is the current item value`)
@@ -192,7 +186,7 @@ const newPlay = (x) => { // the play controls and points function
                 playLog.push(item);
 
                 // alert and log points upon a match
-                alert('Two Matched *!');
+                // alert('Two Matched *!');
                 totalPoints.unshift(1000);
 
                 let x = document.getElementById('timer').innerHTML;
