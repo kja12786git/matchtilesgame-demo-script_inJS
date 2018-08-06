@@ -114,6 +114,7 @@ let startTimer = () => {
 
 };
 
+
 // add the onlcick function to the gameBoard elements
 for (let i= 0; i <= items.length; i++) {
         $('#'+i).click(() => {
@@ -143,6 +144,7 @@ const getGameboard = togameboard.forEach((ret) => {
         });
 
 const setTimer = setInterval(startTimer, 1000);
+const stopTimer = clearInterval(startTimer);
 
 const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
@@ -150,6 +152,7 @@ const newPlay = (x) => { // the play controls and points function
 
     // only if moves are 0 or even, not yet played and total moves are less than the complete board, log the play and disable block until reset
     if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
+          $('#timer').html(0);
 
           // to reset clock on the move after a valid pairs match
           if (moves != 0 && moves % 2 === 0) {
@@ -167,7 +170,6 @@ const newPlay = (x) => { // the play controls and points function
     if (moves === 0) {
         logs(`First move now played... ${x}`)
         $('timer').html = -1;
-        setTimer;
 
         }
       else if (moves % 2 != 0 && moves < slotsLngth) {
@@ -197,9 +199,7 @@ const newPlay = (x) => { // the play controls and points function
                       logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
                           if (moves % 2 != 0) {
-                            $('timer').html = -1;
-//                            clearInterval(setTimer);
-                          setTimer;
+//                            $('timer').html = -1;
 
                             logs(playLog.length);
                             item.addClass('newPlay');
