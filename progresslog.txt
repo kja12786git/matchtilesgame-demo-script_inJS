@@ -4,5 +4,4 @@ Want to change:
   - need to fine tune timer for desired accuracy on the DOM and ensure it is scoring accurate to user delay in between each play
   - needs its own music, similar stuff
   - button for new gameboard instead of just reset
-  - prospective reset or new gameboard button also needs to reset points and restart the timer properly
   - it's not backwards compatible across browsers but works with webkit

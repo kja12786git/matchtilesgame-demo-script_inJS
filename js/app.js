@@ -88,13 +88,16 @@ const sumFunction = (total,num) => {
 // reset gameboard
 $('#reset').click(() => {
     items.removeClass('newPlay');
-    clearInterval(setTimer);
+//    clearInterval(setTimer);
 
     $('#timer').text(0);
     $('#score').text(0);
 
+    setTimer;
+
     while (playLog.length > 0) {
         playLog.pop();
+        totalPoints.pop();
 
     }
 
@@ -214,16 +217,13 @@ const newPlay = (x) => { // the play controls and points function
                   // begin scoreTracker, attempting to do points under this condition
                   let xx = document.getElementById('score').innerHTML;
                   let xxxxx = document.getElementById('timer').innerHTML;
-                  let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 100); // reduce pts based on how many secs. user delays
+                  let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 109.67); // reduce pts based on how many secs. user delays
                   document.getElementById('score').innerHTML = xxxx;
-                  
+
                   logs(`${xx} is on the score on the DOM.`);
                   logs(`${xxxx} is current score count.`);
 
-
-
                   // end scoreTracker
-
 
               }
 
