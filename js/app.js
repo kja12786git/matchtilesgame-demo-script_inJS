@@ -191,6 +191,7 @@ const newPlay = (x) => { // the play controls and points function
                 // alert and log points upon a match
                 alert('Two Matched *!');
                 totalPoints.unshift(1000);
+                $('#score').addClass('scoreWobbActive');
 
                 let x = document.getElementById('timer').innerHTML;
                 x = x.value;
@@ -201,7 +202,7 @@ const newPlay = (x) => { // the play controls and points function
 
                           if (moves % 2 != 0) {
                             $('timer').html = -1;
-//                            clearInterval(setTimer);
+                            //  clearInterval(setTimer);
                           setTimer;
 
                             logs(playLog.length);
@@ -216,16 +217,15 @@ const newPlay = (x) => { // the play controls and points function
                   let xxxxx = document.getElementById('timer').innerHTML;
                   let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 100); // reduce pts based on how many secs. user delays
                   document.getElementById('score').innerHTML = xxxx;
-                  
+
                   logs(`${xx} is on the score on the DOM.`);
                   logs(`${xxxx} is current score count.`);
 
-
-
                   // end scoreTracker
-
+                  $('#score').remove('scoreWobbActive');                  
 
               }
+
 
               break;
 

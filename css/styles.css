@@ -23,7 +23,7 @@ header {
     background-color: rgba(100,200,100,0.567);
     color: #EEEFFF;
     height: 100px;
-//    margin-top: 1rem;
+    //  margin-top: 1rem;
     padding-top: 1rem;
     text-indent: 1rem;
 
@@ -214,17 +214,21 @@ footer {
 
 #tracker {
     position: relative;
+
 }
+
 #tracker > li {
-    display: block;
+  display: block;
+
 }
 
 #score,#timer {
-    position: relative;
+  position: relative;
+
 }
 
 #score {
-/*    top: 100px; */
+  /*    top: 100px; */
 }
 
 #score:before {
@@ -232,15 +236,37 @@ footer {
     position: absolute;
     left: -3rem;
     font-size: 66%;
+
 }
+
+.scoreWobbActive {
+  animation: scoreWobb 400ms ease-in-out 1;
+
+}
+
+/*animation styles */
+@keyframes scoreWobb {
+	0% {font-size: 100%;}
+	25% { font-size: 125%}
+	50% { font-size: 144%}
+	75% { font-size: 120%;}
+	100% { font-size: 100%;}
+
+}
+
+/* end animation styles */
+
 #timer:before {
     content: 'Time:';
     position: absolute;
     left: -2.1rem;
     font-size: 66%;
+
 }
+
 #ambientMusic {
     position: fixed;
     bottom: 0;
     right: 0;
+
 }
