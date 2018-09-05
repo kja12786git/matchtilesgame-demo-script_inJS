@@ -157,6 +157,8 @@ const newPlay = (x) => { // the play controls and points function
 
           }
 
+        $('#score').toggleClass('scoreWobbActive');
+
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
          // setTimer;
@@ -189,7 +191,7 @@ const newPlay = (x) => { // the play controls and points function
                 playLog.push(item);
 
                 // alert and log points upon a match
-                alert('Two Matched *!');
+                // alert('Two Matched *!');
                 totalPoints.unshift(1000);
                 $('#score').addClass('scoreWobbActive');
 
@@ -222,7 +224,6 @@ const newPlay = (x) => { // the play controls and points function
                   logs(`${xxxx} is current score count.`);
 
                   // end scoreTracker
-                  $('#score').remove('scoreWobbActive');                  
 
               }
 

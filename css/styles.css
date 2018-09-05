@@ -232,37 +232,38 @@ footer {
 }
 
 #score:before {
-    content:'ScoreX';
+    content:'score: ';
     position: absolute;
-    left: -3rem;
+    left: -2.1rem;
     font-size: 66%;
 
 }
 
 .scoreWobbActive {
-  animation: scoreWobb 400ms ease-in-out 1;
+  animation: scoreWobb 200ms ease-in-out 1;
+
+}
+
+
+#timer:before {
+    content: 'time:';
+    position: absolute;
+    left: -2.1rem;
+    font-size: 66%;
 
 }
 
 /*animation styles */
 @keyframes scoreWobb {
 	0% {font-size: 100%;}
-	25% { font-size: 125%}
-	50% { font-size: 144%}
+	25% { font-size: 120%;}
+	50% { font-size: 125%; color: purple; font-weight: bolder;}
 	75% { font-size: 120%;}
 	100% { font-size: 100%;}
 
 }
 
 /* end animation styles */
-
-#timer:before {
-    content: 'Time:';
-    position: absolute;
-    left: -2.1rem;
-    font-size: 66%;
-
-}
 
 #ambientMusic {
     position: fixed;
