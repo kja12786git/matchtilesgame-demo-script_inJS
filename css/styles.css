@@ -231,27 +231,33 @@ footer {
   /*    top: 100px; */
 }
 
-#score:before {
+/*#score:before {
     content:'score: ';
     position: absolute;
     left: -2.1rem;
     font-size: 66%;
 
-}
+}*/
 
 .scoreWobbActive {
   animation: scoreWobb 200ms ease-in-out 1;
 
 }
 
+.trackerTitle {
+  position: absolute;
+  font-size: .77rem;
+  left: -3rem;
 
-#timer:before {
+}
+
+/*#timer:before {
     content: 'time:';
     position: absolute;
     left: -2.1rem;
     font-size: 66%;
 
-}
+}*/
 
 /*animation styles */
 @keyframes scoreWobb {
