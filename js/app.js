@@ -195,6 +195,15 @@ const newPlay = (x) => { // the play controls and points function
                 totalPoints.unshift(1000);
                 $('#score').addClass('scoreWobbActive');
 
+                // don't show timer after last match is accounted for
+                if (playLog.length >= 12) {
+                  $('#timer').addClass('hidden');
+
+                  } else {
+                    $('#timer').removeClass('hidden');
+
+                }
+
                 let x = document.getElementById('timer').innerHTML;
                 x = x.value;
                 logs(`The current value of timer... is ${x}`);
@@ -204,8 +213,8 @@ const newPlay = (x) => { // the play controls and points function
 
                           if (moves % 2 != 0) {
                             $('timer').html = -1;
-                            //  clearInterval(setTimer);
-                          setTimer;
+                            // clearInterval(setTimer);
+                            setTimer;
 
                             logs(playLog.length);
                             item.addClass('newPlay');

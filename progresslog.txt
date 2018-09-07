@@ -1,6 +1,6 @@
 Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 
 Want to change:
-  - stop timer from starting too early before the user makes the first move, also need to stop it at the end of the last play
+  - stop timer from starting too early before the user makes the first move
   - needs its own music, similar stuff
   - button for new gameboard instead of just reset
