@@ -212,6 +212,13 @@ footer {
 
 }
 
+#audio {
+  visibility: hidden;
+  position: fixed;
+  z-index: -1;
+
+}
+
 #tracker {
     position: relative;
 

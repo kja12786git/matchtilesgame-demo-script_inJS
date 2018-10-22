@@ -185,10 +185,22 @@ const newPlay = (x) => { // the play controls and points function
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) {
                 alert('invalid play');
 
+                // code for audio on errenous play should initialize here
+                // ##############
+                // ##############
+
+                // end code for audio                
+
             }
               else {
 
                 playLog.push(item);
+
+                // code for audio on valid play should initialize here
+                // ##############
+                // ##############
+
+                // end code for audio
 
                 // alert and log points upon a match
                 // alert('Two Matched *!');
