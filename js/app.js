@@ -10,7 +10,7 @@ const logs = console.log;
 const items = $('.item');
 const icons1 = ['☺','☺','☆','★','♡','❤'];
 const icons2 = ['1','2','3','4','5','6'];
-const icons = icons1;
+const icons = icons2;
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -157,8 +157,6 @@ const newPlay = (x) => { // the play controls and points function
 
           }
 
-        $('#score').toggleClass('scoreWobbActive');
-
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
          // setTimer;
@@ -183,12 +181,6 @@ const newPlay = (x) => { // the play controls and points function
 
             // conditions to negate invalid plays
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) {
-
-                // code for audio on errenous play should initialize here
-                $('#movesaudio > #three').get(0).play();
-
-                // end code for audio
-
                 alert('invalid play');
 
             }
@@ -196,27 +188,9 @@ const newPlay = (x) => { // the play controls and points function
 
                 playLog.push(item);
 
-                // code for audio on valid play should initialize here
-                $('#movesaudio > #two').get(0).play();
-
-                // ##############
-
-                // end code for audio
-
                 // alert and log points upon a match
-                // alert('Two Matched *!');
+                alert('Two Matched *!');
                 totalPoints.unshift(1000);
-                $('#score').addClass('scoreWobbActive');
-
-                // don't show timer after last match is accounted for
-                if (playLog.length >= 12) {
-                  $('#timer').addClass('hidden');
-                  $('#movesaudio > #one').get(0).play();
-
-                  } else {
-                    $('#timer').removeClass('hidden');
-
-                }
 
                 let x = document.getElementById('timer').innerHTML;
                 x = x.value;
@@ -227,8 +201,8 @@ const newPlay = (x) => { // the play controls and points function
 
                           if (moves % 2 != 0) {
                             $('timer').html = -1;
-                            // clearInterval(setTimer);
-                            setTimer;
+//                            clearInterval(setTimer);
+                          setTimer;
 
                             logs(playLog.length);
                             item.addClass('newPlay');
@@ -242,14 +216,16 @@ const newPlay = (x) => { // the play controls and points function
                   let xxxxx = document.getElementById('timer').innerHTML;
                   let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 100); // reduce pts based on how many secs. user delays
                   document.getElementById('score').innerHTML = xxxx;
-
+                  
                   logs(`${xx} is on the score on the DOM.`);
                   logs(`${xxxx} is current score count.`);
 
+
+
                   // end scoreTracker
 
-              }
 
+              }
 
               break;
 
