@@ -186,10 +186,9 @@ const newPlay = (x) => { // the play controls and points function
                 alert('invalid play');
 
                 // code for audio on errenous play should initialize here
-                // ##############
-                // ##############
+                  $('#movesaudio > #three').get(0).play();
 
-                // end code for audio                
+                // end code for audio
 
             }
               else {
@@ -197,7 +196,8 @@ const newPlay = (x) => { // the play controls and points function
                 playLog.push(item);
 
                 // code for audio on valid play should initialize here
-                // ##############
+                $('#movesaudio > #two').get(0).play();
+
                 // ##############
 
                 // end code for audio
@@ -210,6 +210,7 @@ const newPlay = (x) => { // the play controls and points function
                 // don't show timer after last match is accounted for
                 if (playLog.length >= 12) {
                   $('#timer').addClass('hidden');
+                  $('#movesaudio > #one').get(0).play();
 
                   } else {
                     $('#timer').removeClass('hidden');
