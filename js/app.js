@@ -199,8 +199,6 @@ const newPlay = (x) => { // the play controls and points function
                 // code for audio on valid play should initialize here
                 $('#movesaudio > #two').get(0).play();
 
-                // ##############
-
                 // end code for audio
 
                 // alert and log points upon a match
