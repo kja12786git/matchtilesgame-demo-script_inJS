@@ -10,7 +10,7 @@ const logs = console.log;
 const items = $('.item');
 const icons1 = ['☺','☺','☆','★','♡','❤'];
 const icons2 = ['1','2','3','4','5','6'];
-const icons = icons2;
+const icons = icons1;
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -183,12 +183,13 @@ const newPlay = (x) => { // the play controls and points function
 
             // conditions to negate invalid plays
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) {
-                alert('invalid play');
 
                 // code for audio on errenous play should initialize here
-                  $('#movesaudio > #three').get(0).play();
+                $('#movesaudio > #three').get(0).play();
 
                 // end code for audio
+
+                alert('invalid play');
 
             }
               else {
