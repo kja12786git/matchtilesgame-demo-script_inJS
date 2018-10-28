@@ -10,7 +10,7 @@ const logs = console.log;
 const items = $('.item');
 const icons1 = ['☺','☺','☆','★','♡','❤'];
 const icons2 = ['1','2','3','4','5','6'];
-const icons = icons1;
+const icons = icons2;
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -88,17 +88,17 @@ const sumFunction = (total,num) => {
 // reset gameboard
 $('#reset').click(() => {
     items.removeClass('newPlay');
+    clearInterval(setTimer);
 
     $('#timer').text(0);
     $('#score').text(0);
 
-    setTimer;
-
     while (playLog.length > 0) {
         playLog.pop();
-        totalPoints.pop();
 
     }
+
+    setTimer;
 
 });
 
@@ -113,7 +113,6 @@ let startTimer = () => {
     //    x = parseInt(x);
 
 };
-
 
 // add the onlcick function to the gameBoard elements
 for (let i= 0; i <= items.length; i++) {
@@ -144,7 +143,6 @@ const getGameboard = togameboard.forEach((ret) => {
         });
 
 const setTimer = setInterval(startTimer, 1000);
-const stopTimer = clearInterval(startTimer);
 
 const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
@@ -152,7 +150,6 @@ const newPlay = (x) => { // the play controls and points function
 
     // only if moves are 0 or even, not yet played and total moves are less than the complete board, log the play and disable block until reset
     if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
-          $('#timer').html(0);
 
           // to reset clock on the move after a valid pairs match
           if (moves != 0 && moves % 2 === 0) {
@@ -160,20 +157,26 @@ const newPlay = (x) => { // the play controls and points function
 
           }
 
+        $('#score').toggleClass('scoreWobbActive');
+
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
-
+         // setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
-      }
+      }/*
+      else {
+          clearInterval(setTimer);
+          setTimer;
+
+    }*/
 
     if (moves === 0) {
         logs(`First move now played... ${x}`)
-        $('timer').html = -1;
+
 
         }
       else if (moves % 2 != 0 && moves < slotsLngth) {
-
       // on odd moves, checks if not yet played and total moves is less than complete board
           while (item.hasClass('newPlay') === false) {
             logs(`${item[0].id} is the current item value`)
@@ -182,14 +185,36 @@ const newPlay = (x) => { // the play controls and points function
             if (item[0].id === playLog[moves-1][0].id || item[0].innerHTML != playLog[moves-1][0].innerHTML) {
                 alert('invalid play');
 
+                // code for audio on errenous play should initialize here
+                // ##############
+                // ##############
+
+                // end code for audio
+
             }
               else {
 
                 playLog.push(item);
 
+                // code for audio on valid play should initialize here
+                // ##############
+                // ##############
+
+                // end code for audio
+
                 // alert and log points upon a match
                 // alert('Two Matched *!');
                 totalPoints.unshift(1000);
+                $('#score').addClass('scoreWobbActive');
+
+                // don't show timer after last match is accounted for
+                if (playLog.length >= 12) {
+                  $('#timer').addClass('hidden');
+
+                  } else {
+                    $('#timer').removeClass('hidden');
+
+                }
 
                 let x = document.getElementById('timer').innerHTML;
                 x = x.value;
@@ -199,7 +224,9 @@ const newPlay = (x) => { // the play controls and points function
                       logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
                           if (moves % 2 != 0) {
-//                            $('timer').html = -1;
+                            $('timer').html = -1;
+                            // clearInterval(setTimer);
+                            setTimer;
 
                             logs(playLog.length);
                             item.addClass('newPlay');
@@ -211,7 +238,7 @@ const newPlay = (x) => { // the play controls and points function
                   // begin scoreTracker, attempting to do points under this condition
                   let xx = document.getElementById('score').innerHTML;
                   let xxxxx = document.getElementById('timer').innerHTML;
-                  let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 109.67); // reduce pts based on how many secs. user delays
+                  let xxxx = totalPoints.reduce(sumFunction) - (xxxxx * 100); // reduce pts based on how many secs. user delays
                   document.getElementById('score').innerHTML = xxxx;
 
                   logs(`${xx} is on the score on the DOM.`);
@@ -220,6 +247,7 @@ const newPlay = (x) => { // the play controls and points function
                   // end scoreTracker
 
               }
+
 
               break;
 
