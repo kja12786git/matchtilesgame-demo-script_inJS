@@ -8,9 +8,9 @@ const logs = console.log;
 
 // Selected DOM gameboard items & items needed to feed to the gameboard buttons
 const items = $('.item');
-const icons1 = ['☺','☺','☆','★','♡','❤'];
-const icons2 = ['1','2','3','4','5','6'];
-const icons = icons1;
+const icons1 = ['5','1','3','4','6','2'];
+const icons2 = ['$','❤','☆','★','♡','☺'];
+const icons = icons2;
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
