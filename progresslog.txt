@@ -5,4 +5,4 @@ Want to change:
   - button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
   - timer still starts too early before first move
 
-  + add code to create extra point incentive with added detail matching
+  + add code to create extra point incentive with added detail matching << en progress

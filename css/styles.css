@@ -258,6 +258,11 @@ footer {
 
 }
 
+.multiscore {
+  background-color: pink;
+
+}
+
 /*#timer:before {
     content: 'time:';
     position: absolute;

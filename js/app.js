@@ -25,7 +25,7 @@ const randValue = () => {
 
 };
 
-const randValueNi = (high, low) => {
+let randValueNi = (high, low) => { // does this ought be a constant throughout?
     let xx = Math.floor((Math.random() * high) + low);
         return xx;
 
@@ -108,9 +108,7 @@ let startTimer = () => {
     let y = x.innerHTML;
     let z = parseInt(y);
     z+= 1;
-    //   logs(y + ' is this giving me the 0?');
     x.innerHTML = z;
-    //    x = parseInt(x);
 
 };
 
@@ -279,12 +277,17 @@ var scoreTrack = new Get('',''); // for to $('#timer').html()
 let halfBoard = slotsLngth/2;
 
 for (let x = 0; x < halfBoard; x++) {
-    let w = randValue();
-    randomLog.push(w); logs(randomLog + " random generated log.");
+    let y = randValue();
+    randomLog.push(y); logs(randomLog + " random generated log.");
+
+    if (y % 2 != 0) {     // add code for extra points multiplier
+      items[x].addClass('multiscore');
+
+    }
 
     if (togameboard.length == 0) {
-        togameboard.push(w);
-        items[x].append(icons[w]);
+        togameboard.push(y);
+        items[x].append(icons[y]);
         continue;
     }
 
@@ -293,9 +296,9 @@ for (let x = 0; x < halfBoard; x++) {
 
       } else {
 
-          togameboard.push(w);
+          togameboard.push(y);
           logs(togameboard + " all made it to the gameboard.");
-          items[x].append(icons[w]);
+          items[x].append(icons[y]);
 
           // duplicate the values of the first half of the gameboard to create matches for the game pattern
           while (x == (halfBoard - 1) && togameboard.length != slotsLngth) {
