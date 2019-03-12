@@ -25,7 +25,7 @@ const randValue = () => {
 
 };
 
-let randValueNi = (high, low) => {
+const randValueNi = (high, low) => {
     let xx = Math.floor((Math.random() * high) + low);
         return xx;
 
