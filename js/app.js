@@ -306,7 +306,7 @@ for (let x = 0; x < halfBoard; x++) {
 
     }
 
-    if (x % 2 != 0) {     // add code for extra points multiplier
+    if (x % 2 == 0 && x % 4 != 0) {     // add code for extra points multiplier
       var item = $('#'+x);
       logs(`${y} is the value of y`);
       item.addClass('multiscore'); // needs proper selector method for context jQuery or what?
