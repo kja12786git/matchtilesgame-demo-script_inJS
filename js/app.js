@@ -280,11 +280,6 @@ for (let x = 0; x < halfBoard; x++) {
     let y = randValue();
     randomLog.push(y); logs(randomLog + " random generated log.");
 
-    if (y % 2 != 0) {     // add code for extra points multiplier
-      items[x].addClass('multiscore');
-
-    }
-
     if (togameboard.length == 0) {
         togameboard.push(y);
         items[x].append(icons[y]);
@@ -308,6 +303,14 @@ for (let x = 0; x < halfBoard; x++) {
              });
 
           }
+
+    }
+
+    if (x % 2 != 0) {     // add code for extra points multiplier
+      var item = $('#'+x);
+      logs(`${y} is the value of y`);
+      item.addClass('multiscore'); // needs proper selector method for context jQuery or what?
+
 
     }
 
