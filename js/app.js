@@ -328,6 +328,20 @@ for (let x = halfBoard; x < slotsLngth; x++) {
 // use DOM instead of Math.Random to create matching items
 for (let i = 0; i < halfBoard; i++) {
     let x = halfBoard;
+    let item = $('#'+i);
+
+    // to duplicate the gameboard list item content
     items[i+x].append(items[i].innerText);
+
+      // to duplicate the added styles accurately
+      if (item.hasClass('multi')) {
+        logs('To do style copy...');
+        items[i+x].addClass('multiscore');
+        continue;
+
+      } else {
+        logs(`Style copies are not yet linking. ${item[0]} is element.`)
+
+      }
 
 }
