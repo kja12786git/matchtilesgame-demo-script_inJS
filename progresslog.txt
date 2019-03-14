@@ -4,6 +4,7 @@ Want to change:
   + sound effects are good, wants ambient music
   + button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
   + timer still starts too early before first move
+  + show the last play to player to make gameplay easier, maybe ommit on higher difficulty choice
 
   + add code to create extra point incentive with added detail matching << en progress
     - Last update worked well to add css class to selected list items, have to figure out how to get the 'halfBoard' duplicates to also take the same style codes.
