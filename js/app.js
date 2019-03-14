@@ -309,7 +309,7 @@ for (let x = 0; x < halfBoard; x++) {
     if (x % 2 == 0 && x % 4 != 0) {     // add code for extra points multiplier
       var item = $('#'+x);
       logs(`${y} is the value of y`);
-      item.addClass('multiscore'); // needs proper selector method for context jQuery or what?
+      item.addClass('multiscore');
 
 
     }
@@ -340,7 +340,7 @@ for (let i = 0; i < halfBoard; i++) {
         continue;
 
       } else {
-        logs(`Style copies are not yet linking. ${item[0]} is element.`)
+        logs(`Style copies are not yet linking. ${item} is element inner value. If ${items[i+x].innerText} is displayed...`)
 
       }
 
