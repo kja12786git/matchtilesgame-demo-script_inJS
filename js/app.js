@@ -8,9 +8,17 @@ const logs = console.log;
 
 // Selected DOM gameboard items & items needed to feed to the gameboard buttons
 const items = $('.item');
+const itemsnative = [...new Set(items)];
 const icons1 = ['5','1','3','4','6','2'];
 const icons2 = ['$','❤','☆','★','♡','☺'];
 const icons = icons2;
+const hasMultiscore = [];
+const dup_multiscore = [];
+const addMultiscore = (x) => {
+  this.addClass('multiscore');
+
+}
+
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -278,7 +286,7 @@ let halfBoard = slotsLngth/2;
 
 for (let x = 0; x < halfBoard; x++) {
     let y = randValue();
-    randomLog.push(y); logs(randomLog + " random generated log.");
+    //** randomLog.push(y); logs(randomLog + " random generated log.");
 
     if (togameboard.length == 0) {
         togameboard.push(y);
@@ -292,7 +300,7 @@ for (let x = 0; x < halfBoard; x++) {
       } else {
 
           togameboard.push(y);
-          logs(togameboard + " all made it to the gameboard.");
+          //**  logs(togameboard + " all made it to the gameboard.");
           items[x].append(icons[y]);
 
           // duplicate the values of the first half of the gameboard to create matches for the game pattern
@@ -306,11 +314,13 @@ for (let x = 0; x < halfBoard; x++) {
 
     }
 
-    if (x % 2 == 0 && x % 4 != 0) {     // add code for extra points multiplier
+    // add code for extra point matches multiplier
+    let colorpattern = x % 2 == 0 && x % 4 != 0;
+    if (colorpattern) {
       var item = $('#'+x);
-      logs(`${y} is the value of y`);
+//      logs(`${y} is the value of y`);
       item.addClass('multiscore');
-
+      hasMultiscore.push(item); // log item to array
 
     }
 
@@ -319,7 +329,7 @@ for (let x = 0; x < halfBoard; x++) {
 // to create second half of gameboard and randomize I will pull from the previous for loop which this will be dependent on because the values were already duplicated for use in the gameboard
 for (let x = halfBoard; x < slotsLngth; x++) {
     let getRandom = randValueNi(x,(slotsLngth - slotsLngth));
-    logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
+    //**logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
     //    items[x].append(togameboard[getRandom] + 'temp');
     //    logs(getRandom);
 
@@ -327,21 +337,64 @@ for (let x = halfBoard; x < slotsLngth; x++) {
 
 // use DOM instead of Math.Random to create matching items
 for (let i = 0; i < halfBoard; i++) {
-    let x = halfBoard;
-    let item = $('#'+i);
+    let n = halfBoard;
+    let item = $('#'+i+1); // within loop selector for DOM buttons
 
     // to duplicate the gameboard list item content
-    items[i+x].append(items[i].innerText);
+    items[i+n].append(items[i].innerText); // plural selecting from the global
 
-      // to duplicate the added styles accurately
-      if (item.hasClass('multi')) {
-        logs('To do style copy...');
-        items[i+x].addClass('multiscore');
-        continue;
+}
 
-      } else {
-        logs(`Style copies are not yet linking. ${item} is element inner value. If ${items[i+x].innerText} is displayed...`)
+////////////////////////////////////////
+// FOR MULTIPLIER WITH COLORED MATCHES
+///////////////////////////////////////
+    // to add multiplier styles to duplicates accurately on matching blocks and same amount only
+    hasMultiscore.forEach( (item) => { //buttons with multiplier are dynamically fed in randomly by the colorpattern code so this has to be dependent
+    //  logs(`${item[0].innerText} testing...`);
+      let orig_multi = item[0].innerText;
+
+      for (x = 0; x < slotsLngth; x++) {
+          let find_dup = items[x];
+          find_dup = find_dup.innerText;
+
+          if (find_dup === orig_multi) {
+            dup_multiscore.push(find_dup);
+            logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
+
+          }
 
       }
 
-}
+
+    });
+
+    // remove extra duplicates from dup_multiscore
+    const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
+    logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
+
+    // this could be used to match the dup_multiscore inversely if deemed...
+    let thisaction = () => {
+
+      itemsnative.forEach( (item) => {
+//          a = 0;
+          b = reduceit;
+          for (a=0; a < b.length; a++) {
+            if (item.innerText === b[a] && item.id > halfBoard) {
+              logs(`${item.id}`);
+              $('#'+item.id).addClass("multiscore");
+
+            }
+//            logs(`${b[a]} ... alright...`);
+
+          }
+
+      });
+
+
+    }
+
+    thisaction();
+
+/////////////////////////////////////////////
+// END - FOR MULTIPLIER WITH COLORED MATCHES
+/////////////////////////////////////////////
