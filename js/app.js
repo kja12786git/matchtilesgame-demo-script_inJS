@@ -373,15 +373,15 @@ for (let i = 0; i < halfBoard; i++) {
     logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
 
     // this could be used to match the dup_multiscore inversely if deemed...
-    let thisaction = () => {
 
       itemsnative.forEach( (item) => {
-//          a = 0;
           b = reduceit;
           for (a=0; a < b.length; a++) {
             if (item.innerText === b[a] && item.id > halfBoard) {
               logs(`${item.id}`);
-              $('#'+item.id).addClass("multiscore");
+
+              // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
+              $('#'+item.id).addClass("multiscore"); // << easy does it
 
             }
 //            logs(`${b[a]} ... alright...`);
@@ -391,9 +391,8 @@ for (let i = 0; i < halfBoard; i++) {
       });
 
 
-    }
 
-    thisaction();
+
 
 /////////////////////////////////////////////
 // END - FOR MULTIPLIER WITH COLORED MATCHES
