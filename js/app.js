@@ -372,16 +372,17 @@ for (let i = 0; i < halfBoard; i++) {
     const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
     logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
 
-    // this could be used to match the dup_multiscore inversely if deemed...
-
+    // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
       itemsnative.forEach( (item) => {
           b = reduceit;
+          logs(`${b.length} is the length of reduceit array.`)
           for (a=0; a < b.length; a++) {
             if (item.innerText === b[a] && item.id > halfBoard) {
               logs(`${item.id}`);
 
               // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
               $('#'+item.id).addClass("multiscore"); // << easy does it
+              // maybe push this to empty array then add a conditional above to filter present after the loop
 
             }
 //            logs(`${b[a]} ... alright...`);
