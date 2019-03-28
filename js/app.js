@@ -1,4 +1,3 @@
-// $('document').ready(() => { // unnecessary for now
 // popup control functions
 let nameInputDiv = $('#name-input');
 let nameinput = $('form > input');
@@ -371,30 +370,38 @@ for (let i = 0; i < halfBoard; i++) {
     // remove extra duplicates from dup_multiscore
     const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
     // logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
-
     // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
+
+      let c = []; // an empty array for use to acct for duplicates on multiscore
+
       itemsnative.forEach( (item) => {
           let b = reduceit;
           logs(`${b.length} is the length of reduceit array.`)
-          let c = []; // an empty array
 
           for (a=0; a < b.length; a++) {
-            logs(`${c[a]} is already a multiscore duplicate on the 2nd halfBoard.`);
-            if (item.innerText === b[a] && item.id > halfBoard) {
+            let e = a;
+            let ce = c[e];
+            logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
+            if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
               logs(`${item.id} is current loop focus.`);
               // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-              if (item.innerText != c[a]) { // << error doesn't throw but filter results are the same
-                logs(`${a} ought to be matching the c[] array log`);
+              if (item.innerText != ce && c.length < b.length) {
+                logs(`${a} ought to be matching the ${ce} array log`);
                 $('#'+item.id).addClass("multiscore"); // << easy does it
                 // maybe push this to empty array then add a conditional above to filter present after the loop
                 c.push(`${item.innerText}`);
 
               }
+/*              else {
+                $('#'+item.id).removeClass("multiscore");
+                logs(`Essentially should not need to occur...`);
+
+              } */
 
             }
-//            logs(`${b[a]} ... alright...`);
 
           }
+//          logs(`${c} & ${c.length} ... alright...`);
 
       });
 
