@@ -162,7 +162,8 @@ const newPlay = (x) => { // the play controls and points function
 
           }
 
-        $('#score').toggleClass('scoreWobbActive');
+        $('#score').removeClass('scoreWobbActive');
+        $('#score').removeClass('scoreWobbDblActive');
 
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
@@ -210,11 +211,11 @@ const newPlay = (x) => { // the play controls and points function
                 // alert('Two Matched *!');
                 if (item.hasClass('multiscore')) {
                   totalPoints.unshift(2000);
-                  $('#score').addClass('scoreWobbDblActive');
+                  $('#score').toggleClass('scoreWobbDblActive');
 
                 } else {
                   totalPoints.unshift(1000);
-                  $('#score').addClass('scoreWobbActive');
+                  $('#score').toggleClass('scoreWobbActive');
 
                 }
 
