@@ -7,4 +7,5 @@ Want to change:
   + show the last play to player to make gameplay easier, maybe omit on higher difficulty choice
 
   + add code to create extra point incentive with added detail matching << en progress
-    - have to watch native and library syntax differences... took too long to get this to work, however, this is more on the duplicates... want to limit to exact amount.
+    - have to make sure multiscore duplication does exact amount for each occurrence now since
+      the filter works to stop it from doing too many now
