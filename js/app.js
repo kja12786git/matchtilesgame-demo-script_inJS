@@ -208,8 +208,16 @@ const newPlay = (x) => { // the play controls and points function
 
                 // alert and log points upon a match
                 // alert('Two Matched *!');
-                totalPoints.unshift(1000);
-                $('#score').addClass('scoreWobbActive');
+                if (item.hasClass('multiscore')) {
+                  totalPoints.unshift(2000);
+                  $('#score').addClass('scoreWobbDblActive');
+
+                } else {
+                  totalPoints.unshift(1000);
+                  $('#score').addClass('scoreWobbActive');
+
+                }
+
 
                 // don't show timer after last match is accounted for
                 if (playLog.length >= togameboard.length) {
@@ -388,7 +396,7 @@ for (let i = 0; i < halfBoard; i++) {
               if (item.innerText != ce && c.length < b.length) {
                 logs(`${a} ought to be matching the ${ce} array log`);
                 $('#'+item.id).addClass("multiscore"); // << easy does it
-                // maybe push this to empty array then add a conditional above to filter present after the loop
+                // push this to empty array then add a conditional above to filter present after the loop
                 c.push(`${item.innerText}`);
 
               }

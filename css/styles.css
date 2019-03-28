@@ -251,6 +251,11 @@ footer {
 
 }
 
+.scoreWobbDblActive {
+  animation: scoreWobb2 200ms ease-in-out 1;
+
+}
+
 .trackerTitle {
   position: absolute;
   font-size: .77rem;
@@ -277,6 +282,15 @@ footer {
 	25% { font-size: 120%;}
 	50% { font-size: 125%; color: purple; font-weight: bolder;}
 	75% { font-size: 120%;}
+	100% { font-size: 100%;}
+
+}
+
+@keyframes scoreWobb2 {
+	0% {font-size: 100%;}
+	25% { font-size: 123%;}
+	50% { font-size: 137%; color: pink; font-weight: bolder;}
+	75% { font-size: 123%;}
 	100% { font-size: 100%;}
 
 }
