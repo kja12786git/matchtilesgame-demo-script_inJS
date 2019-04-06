@@ -323,7 +323,7 @@ for (let x = 0; x < halfBoard; x++) {
     }
 
     // add code for extra point matches multiplier
-    let colorpattern = x % 2 == 0 && x % 4 != 0;
+    let colorpattern = x % 2 == 0 && x % 4 != 0 || y % 3 == 0;
     if (colorpattern) {
       var item = $('#'+x);
 //      logs(`${y} is the value of y`);
@@ -394,7 +394,7 @@ for (let i = 0; i < halfBoard; i++) {
             if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
               logs(`${item.id} is current loop focus.`);
               // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-              if (item.innerText != ce && c.length < b.length) {
+              if (item.innerText != ce && c.length <= b.length) {
                 logs(`${a} ought to be matching the ${ce} array log`);
                 $('#'+item.id).addClass("multiscore"); // << easy does it
                 // push this to empty array then add a conditional above to filter present after the loop
