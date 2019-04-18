@@ -271,21 +271,6 @@ const newPlay = (x) => { // the play controls and points function
 
 };
 
-/* This may no longer be necessary.
-
- class Get {
-    constructor(timer, points) {
-        this.timer = timer;
-        this.points = points;
-
-    }
-
-}
-
-var scoreTrack = new Get('',''); // for to $('#timer').html()
-
-*/
-
 //$(document).ready(() => { // unnecessary when embedded
 
 // append each of the given icons to a button on the gameboard twice in random sequence. The random return can only be controlled by a range starting from 0. So, it is not absolutely possible to limit the reccurences with this Javascript method unless maybe I limit the range from 0 to 2 and restart the loop every 2 pushes while pushing them all to an array and popping the two that already pushed. I attempted to push a random number from [0 to desired length] to an array replace any additional copy until it is complete. It didn't work because it kept looping and crashed so I had to just let it go without stressin for unique returns only. A good way may be to generate a first half randomly, and then pull values from a duplicate array to randomize the remaining half using the original values
@@ -377,46 +362,49 @@ for (let i = 0; i < halfBoard; i++) {
     });
 
     // remove extra duplicates from dup_multiscore
-    const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
+          // >>>>> this will not be necessary if the filter happens before pushing to array <<<<<
+            const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
+          // const reduceit = dup_multiscore; <<<<<
+
     // logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
     // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
 
-      let c = []; // an empty array for use to acct for duplicates on multiscore
+    let c = []; // an empty array for use to acct for duplicates on multiscore
 
-      itemsnative.forEach( (item) => {
-          let b = reduceit;
-          logs(`${b.length} is the length of reduceit array.`)
+    const retDupAmount = () => {
+      
+      logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
+      logs(`${c.length} is the length of c array.`);
 
-          for (a=0; a < b.length; a++) {
-            let e = a;
-            let ce = c[e];
-            logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
-            if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
-              logs(`${item.id} is current loop focus.`);
-              // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-              if (item.innerText != ce && c.length <= b.length) {
-                logs(`${a} ought to be matching the ${ce} array log`);
-                $('#'+item.id).addClass("multiscore"); // << easy does it
-                // push this to empty array then add a conditional above to filter present after the loop
-                c.push(`${item.innerText}`);
+    }
 
-              }
-/*              else {
-                $('#'+item.id).removeClass("multiscore");
-                logs(`Essentially should not need to occur...`);
+    itemsnative.forEach( (item) => {
+        let b = reduceit;
+        logs(`${b.length} is the length of reduceit array.`)
 
-              } */
+
+        for (a=0; a < b.length; a++) {
+          let e = a;
+          let ce = c[e];
+          logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
+          if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
+            logs(`${item.id} is current loop focus.`);
+
+            // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
+            if (item.innerText != ce && c.length <= b.length) {
+              logs(`${a} ought to be matching the ${ce} array log`);
+              $('#'+item.id).addClass("multiscore"); // << easy does it
+              // push this to empty array then add a conditional above to filter present after the loop
+              c.push(`${item.innerText}`);
 
             }
 
           }
+
+        }
 //          logs(`${c} & ${c.length} ... alright...`);
 
-      });
-
-
-
-
+    });
 
 /////////////////////////////////////////////
 // END - FOR MULTIPLIER WITH COLORED MATCHES
