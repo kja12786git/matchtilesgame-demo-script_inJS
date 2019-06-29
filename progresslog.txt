@@ -9,3 +9,7 @@ Want to change:
   + add code to create extra point incentive with added detail matching << en progress
     - multiscore exact amounts is optional due to favor of random pattern on the first halfBoard.
     The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
+
+
+
+  + create a separate competition mode  which will make the algorithm render an even amount of extra points blocks to create a fair chance of total points for each render.

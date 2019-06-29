@@ -372,7 +372,7 @@ for (let i = 0; i < halfBoard; i++) {
     let c = []; // an empty array for use to acct for duplicates on multiscore
 
     const retDupAmount = () => {
-      
+
       logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
       logs(`${c.length} is the length of c array.`);
 
