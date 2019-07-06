@@ -195,7 +195,7 @@ const newPlay = (x) => { // the play controls and points function
 
                 // end code for audio
 
-                alert('invalid play');
+                alert(`invalid play ${item[0].innerText}, to continue find another ${playLog[moves-1][0].innerText} on the gameboard.`);
 
             }
               else {
