@@ -4,7 +4,7 @@ Want to change:
   + sound effects are good, wants ambient music
   + button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
   + timer still starts too early before first move
-  + show the last play to player to make gameplay easier, maybe omit on higher difficulty choice
+  - alert popup now contains the last play after invalid play. Furthermore the last play should display on DOM immediately because it's easier for regular play.
 
   + add code to create extra point incentive with added detail matching << en progress
     - multiscore exact amounts is optional due to favor of random pattern on the first halfBoard.
@@ -12,4 +12,4 @@ Want to change:
 
 
 
-  + create a separate competition mode  which will make the algorithm render an even amount of extra points blocks to create a fair chance of total points for each render.
+  + create a separate competition mode which will make the algorithm render an even amount of extra points blocks to create a fair chance of total points for each render.
