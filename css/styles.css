@@ -135,7 +135,7 @@ ul li {
 }
 
 #pregame > section {
-  width: 400px;
+  width: 500px;
 /*  flex-direction: column; */
   display: inline-flex;
   padding: 0 .20rem;
