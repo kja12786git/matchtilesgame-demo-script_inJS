@@ -189,6 +189,11 @@ const newPlay = (x) => { // the play controls and points function
         displayPrevPlay.text(`${playLog[0][0].innerHTML}`);
 
         }
+      else if (moves > 0 && moves % 2 === 0) {
+        // for upon first move of all other pairs, not for first move or matching move
+        displayPrevPlay.text(`${playLog[moves][0].innerHTML}`);
+
+      }
       else if (moves % 2 != 0 && moves < slotsLngth) {
 
       // on odd moves, checks if not yet played and total moves is less than complete board

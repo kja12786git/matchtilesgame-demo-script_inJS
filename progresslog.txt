@@ -5,9 +5,6 @@ Want to change:
     - multiscore pairs in consistent amount is optional due to favor of random pattern on the first halfBoard.
 
   + the displayPrevPlay was added to the DOM for easier gameplay
-    - currently it doesn't work on every iteration, it works great on first move and along with invalid play alerts
-    - an insert should work under a conditional after the conditional which checks if the play is valid
-      it ran errors conflicting with the already existing conditionals.
 
   + sound effects are good, wants ambient music
   + button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
