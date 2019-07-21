@@ -1,5 +1,5 @@
 body {
-    background-image: url('../imgs/beautiful-valley-24724-myedit.jpg');
+    background-color: teal;
     background-size: cover;
     background-position: top;
     position: relative;
@@ -92,6 +92,14 @@ ul li {
     color: #222;
 
 }
+#displayPrevPlay {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    font-size: 1rem;
+    font-size: 1em;
+
+}
 
 #gamearea {
     list-style: none;
@@ -151,7 +159,7 @@ ul li {
 section#gameRules {
     background-color: #EEECCC;
     color: #020202;
-    font-size: 52%;
+    font-size: 58%;
     width: 100%;
     overflow: none;
 
@@ -292,6 +300,11 @@ footer {
 
 .multiscore {
   background-color: skyblue !important;
+
+}
+
+.popmultiscore {
+  background-color: pink !important;
 
 }
 
