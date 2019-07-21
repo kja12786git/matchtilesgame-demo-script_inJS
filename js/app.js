@@ -7,6 +7,7 @@ const logs = console.log;
 
 // Selected DOM gameboard items & items needed to feed to the gameboard buttons
 const items = $('.item');
+const displayPrevPlay = $('#displayPrevPlay > span');
 const itemsnative = [...new Set(items)];
 const icons1 = ['5','1','3','4','6','2'];
 const icons2 = ['$','❤','☆','★','♡','☺'];
@@ -69,6 +70,7 @@ $('#s1').click(() => {
     $('#gamearea').removeClass('style2');
     $('#gamearea > div').removeClass('style2');
     $('#gamearea > div > div').removeClass('style3');
+    $('.multiscore').removeClass('popmultiscore');
 
 });
 
@@ -76,6 +78,7 @@ $('#s2').click(() => {
     $('#gamearea > div > div').removeClass('style3');
     $('#gamearea').addClass('style2');
     $('#gamearea > div').addClass('style2');
+    $('.multiscore').removeClass('popmultiscore');
 
 });
 
@@ -84,6 +87,7 @@ $('#s3').click(() => {
     $('#gamearea').removeClass('style2');
     $('#gamearea > div').removeClass('style2');
     $('#gamearea > div > div').addClass('style3');
+    $('.multiscore').addClass('popmultiscore');
 
 });
 
@@ -99,6 +103,7 @@ $('#reset').click(() => {
 
     $('#timer').text(0);
     $('#score').text(0);
+    displayPrevPlay.text(`no plays made`);
 
     while (playLog.length > 0) {
         playLog.pop();
@@ -167,6 +172,7 @@ const newPlay = (x) => { // the play controls and points function
 
         item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
+
          // setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
@@ -178,11 +184,13 @@ const newPlay = (x) => { // the play controls and points function
     }*/
 
     if (moves === 0) {
+        // upon the first valid move...
         logs(`First move now played... ${x}`)
-
+        displayPrevPlay.text(`${playLog[0][0].innerHTML}`);
 
         }
       else if (moves % 2 != 0 && moves < slotsLngth) {
+
       // on odd moves, checks if not yet played and total moves is less than complete board
           while (item.hasClass('newPlay') === false) {
             logs(`${item[0].id} is the current item value`)
@@ -195,12 +203,16 @@ const newPlay = (x) => { // the play controls and points function
 
                 // end code for audio
 
+                // on invalid and odd plays change the prev play displayed for easier user gameplay
+                displayPrevPlay.text(`${playLog[moves-1][0].innerHTML}`);
                 alert(`invalid play ${item[0].innerText}, to continue find another ${playLog[moves-1][0].innerText} on the gameboard.`);
 
             }
               else {
 
                 playLog.push(item);
+                // on valid plays change the prev play displayed for easier user gameplay
+                displayPrevPlay.text(`${playLog[moves-1][0].innerHTML}`);
 
                 // code for audio on valid play should initialize here
                 $('#movesaudio > #two').get(0).play();
