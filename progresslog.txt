@@ -1,15 +1,17 @@
 Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 
 Want to change:
+  + code to create extra point incentive with added detail matching
+    - multiscore pairs in consistent amount is optional due to favor of random pattern on the first halfBoard.
+
+  + the displayPrevPlay was added to the DOM for easier gameplay
+    - currently it doesn't work on every iteration, it works great on first move and along with invalid play alerts
+    - an insert should work under a conditional after the conditional which checks if the play is valid
+      it ran errors conflicting with the already existing conditionals.
+
   + sound effects are good, wants ambient music
   + button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
   + timer still starts too early before first move
-  - alert popup now contains the last play after invalid play. Furthermore the last play should display on DOM immediately because it's easier for regular play.
 
-  + add code to create extra point incentive with added detail matching << en progress
-    - multiscore exact amounts is optional due to favor of random pattern on the first halfBoard.
-    The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
-
-
-
-  + create a separate competition mode which will make the algorithm render an even amount of extra points blocks to create a fair chance of total points for each render.
+  + create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
+    - The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
