@@ -28,10 +28,12 @@ header {
     text-indent: 1rem;
 
 }
+
 header > h1:before {
   content: '['
 
 }
+
 header > h1:after {
   content: ']'
 
@@ -64,8 +66,8 @@ ul {
 }
 
 ul li {
-    display: inline-block;
     margin: .33rem;
+    display: inline-block;
 
 }
 

@@ -114,6 +114,11 @@ $('#reset').click(() => {
 
 });
 
+// new gameboard
+$('#newgmbrd').click(() => {
+  location.reload(true);
+
+});
 // starts the timer
 let startTimer = () => {
     let x = document.getElementById('timer');
