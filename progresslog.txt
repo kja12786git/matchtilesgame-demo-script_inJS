@@ -1,14 +1,20 @@
 Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 
-Want to change:
+For upgrades:
+
   + code to create extra point incentive with added detail matching
     - multiscore pairs in consistent amount is optional due to favor of random pattern on the first halfBoard.
 
+  + new gameboard button added, refreshes entire page build
+
   + the displayPrevPlay was added to the DOM for easier gameplay
 
-  + sound effects are good, wants ambient music
-  + button for new gameboard instead of just reset, new gameboard button also needs to reset points and restart the timer properly
-  + timer still starts too early before first move
+  + sound effects are good
+    - wants unique new ambient music
+
+  - timer still starts too early before first move
+
+  - quality testing on cell phone reveals it gets difficult to function 100% at zoom levels below 100%, but this even smaller because within Codepen iframe which is half the mobile screen.
 
   + create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
     - The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
