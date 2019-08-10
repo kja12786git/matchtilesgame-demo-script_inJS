@@ -15,10 +15,9 @@ const icons = icons2;
 const hasMultiscore = [];
 const dup_multiscore = [];
 const addMultiscore = (x) => {
-  this.addClass('multiscore');
+  x.addClass('multiscore');
 
 }
-
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -119,6 +118,7 @@ $('#newgmbrd').click(() => {
   location.reload(true);
 
 });
+
 // starts the timer
 let startTimer = () => {
     let x = document.getElementById('timer');
@@ -334,7 +334,7 @@ for (let x = 0; x < halfBoard; x++) {
     if (colorpattern) {
       var item = $('#'+x);
 //      logs(`${y} is the value of y`);
-      item.addClass('multiscore');
+      addMultiscore(item);
       hasMultiscore.push(item); // log item to array
 
     }
