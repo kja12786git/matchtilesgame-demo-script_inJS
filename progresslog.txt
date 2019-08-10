@@ -12,9 +12,13 @@ For upgrades:
   + sound effects are good
     - wants unique new ambient music
 
-  - timer still starts too early before first move
+  - timer still starts too early before first move.
+  - if reset button is hit it cannot reset timer... this may be unfixable in same page load of Javascript..? iFraming the gameboard area may be a solution. There is something about refreshing a div, maybe this can have some power.
 
   - quality testing on cell phone reveals it gets difficult to function 100% at zoom levels below 100%, but this even smaller because within Codepen iframe which is half the mobile screen.
 
-  + create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
+  + upon reaching to a scope of server logging of scores for highscores... create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
     - The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
+
+  + the comp mode is in now work in progress which will design a limit and set specific multiscore chance for every build.
+    - the uneven amount of duplicate multiscore is due to the random graphic type count on the first halfBoard which may be less than amount of multiscore limit... it will throw off the matching duplicate filter on some builds.
