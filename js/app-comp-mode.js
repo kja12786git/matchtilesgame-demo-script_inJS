@@ -11,14 +11,13 @@ const displayPrevPlay = $('#displayPrevPlay > span');
 const itemsnative = [...new Set(items)];
 const icons1 = ['5','1','3','4','6','2'];
 const icons2 = ['$','❤','☆','★','♡','☺'];
-const icons = icons2;
+const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
 const addMultiscore = (x) => {
   x.addClass('multiscore');
 
 }
-
 
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
@@ -332,6 +331,7 @@ for (let x = 0; x < halfBoard; x++) {
 
     // add code for extra point matches multiplier
     let colorpattern = x % 2 == 0 && x % 4 != 0;
+
     if (colorpattern) {
       var item = $('#'+x);
 //      logs(`${y} is the value of y`);
@@ -365,6 +365,7 @@ for (let i = 0; i < halfBoard; i++) {
 ////////////////////////////////////////
 // FOR MULTIPLIER WITH COLORED MATCHES
 ///////////////////////////////////////
+
     // to add multiplier styles to duplicates accurately on matching blocks and same amount only
     hasMultiscore.forEach( (item) => { // buttons with multiplier are dynamically fed in randomly by the colorpattern code so this has to be dependent
     //  logs(`${item[0].innerText} testing...`);
@@ -389,23 +390,38 @@ for (let i = 0; i < halfBoard; i++) {
             const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
           // const reduceit = dup_multiscore; <<<<<
 
+
     // logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
     // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
 
     let c = []; // an empty array for use to acct for duplicates on multiscore
+
+    const lngth_orig_multscore = () => {
+      return hasMultiscore.length;
+
+    }
 
     const retDupAmount = () => {
 
       logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
       logs(`${c.length} is the length of c array.`);
 
+      return c.length;
+
+    }
+
+    const evenDups = () => { // useful towards getting exact amount of duplicate multiscore
+      return lngth_orig_multscore === retDupAmount();
+
     }
 
     itemsnative.forEach( (item) => {
         let b = reduceit;
-        logs(`${b.length} is the length of reduceit array.`)
+
+        logs(`${b.length} is the length of reduceit array.`);
 
         for (a = 0; a < b.length; a++) {
+
           let e = a;
           let ce = c[e];
           // logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
@@ -413,7 +429,7 @@ for (let i = 0; i < halfBoard; i++) {
             logs(`${item.id} is current loop focus.`);
 
             // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-            if (item.innerText != ce && c.length < 4) {
+            if (item.innerText != ce && retDupAmount() < lngth_orig_multscore()) {
               // push this to empty array then add a conditional above to filter present after the loop
               c.push(`${item.innerText}`);
 
@@ -428,6 +444,10 @@ for (let i = 0; i < halfBoard; i++) {
 //          logs(`${c} & ${c.length} ... alright...`);
 
     });
+    if (reduceit.length < lngth_orig_multscore()) {
+      alert(`The reduction code is not smart enough to match.`)
+
+    }
 
 /////////////////////////////////////////////
 // END - FOR MULTIPLIER WITH COLORED MATCHES
