@@ -14,6 +14,22 @@ const icons2 = ['$','❤','☆','★','♡','☺'];
 const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
+const dup_limiter = () => { // not yet complete
+  var length = hasMultiscore.length;
+
+  dup_multiscore.forEach = (x) => {
+    for (a = 0; a < length; a++) {
+      if (x === hasMultiscore[a]) {
+        // push to another array to account for dup_multiscore amount
+
+      }
+    }
+  }
+
+  return newarray.length > 1;
+
+}
+
 const addMultiscore = (x) => {
   x.addClass('multiscore');
 
@@ -362,21 +378,22 @@ for (let i = 0; i < halfBoard; i++) {
 
 }
 
-////////////////////////////////////////
+///////////////////////////////////////
 // FOR MULTIPLIER WITH COLORED MATCHES
 ///////////////////////////////////////
 
     // to add multiplier styles to duplicates accurately on matching blocks and same amount only
     hasMultiscore.forEach( (item) => { // buttons with multiplier are dynamically fed in randomly by the colorpattern code so this has to be dependent
-    //  logs(`${item[0].innerText} testing...`);
+      //  logs(`${item[0].innerText} testing...`);
       let orig_multi = item[0].innerText;
 
-      for (x = 0; x < slotsLngth; x++) {
+      for (x = 0; x < halfBoard; x++) { // halfBoard = slotsLngth / 2
           let find_dup = items[x];
           find_dup = find_dup.innerText;
 
           if (find_dup === orig_multi) { // recurrence limit should work here
-            dup_multiscore.push(find_dup); // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
+            // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
+            dup_multiscore.push(find_dup);
             logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
 
           }
@@ -420,7 +437,7 @@ for (let i = 0; i < halfBoard; i++) {
 
         logs(`${b.length} is the length of reduceit array.`);
 
-        for (a = 0; a < b.length; a++) {
+        for (a = 0; a < hasMultiscore.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
           let e = a;
           let ce = c[e];
