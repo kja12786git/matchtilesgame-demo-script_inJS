@@ -14,7 +14,7 @@ const icons2 = ['$','❤','☆','★','♡','☺'];
 const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
-const dup_limiter = () => { // not yet complete
+const dup_limiter = () => { // not yet complete >> essentially will replace reduceit code for smarter filter
   var length = hasMultiscore.length;
 
   dup_multiscore.forEach = (x) => {
