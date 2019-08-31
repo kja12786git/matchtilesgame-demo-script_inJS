@@ -376,7 +376,7 @@ for (let i = 0; i < halfBoard; i++) {
           find_dup = find_dup.innerText;
 
           if (find_dup === orig_multi) { // recurrence limit should work here
-            dup_multiscore.push(find_dup);
+            dup_multiscore.push(find_dup); // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
             logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
 
           }
@@ -445,7 +445,7 @@ for (let i = 0; i < halfBoard; i++) {
 
     });
     if (reduceit.length < lngth_orig_multscore()) {
-      alert(`The reduction code is not smart enough to match.`)
+      alert(`The reduction code in this build may not be smart enough.`)
 
     }
 
