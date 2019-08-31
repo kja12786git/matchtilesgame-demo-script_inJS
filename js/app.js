@@ -368,7 +368,7 @@ for (let i = 0; i < halfBoard; i++) {
     //  logs(`${item[0].innerText} testing...`);
       let orig_multi = item[0].innerText;
 
-      for (x = 0; x < slotsLngth; x++) {
+      for (x = 0; x < halfBoard; x++) { // halfBoard = slotsLngth / 2
           let find_dup = items[x];
           find_dup = find_dup.innerText;
 
