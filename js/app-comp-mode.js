@@ -14,24 +14,28 @@ const icons2 = ['$','❤','☆','★','♡','☺'];
 const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
-const dup_limiter = () => { // not yet complete >> essentially will replace reduceit code for smarter filter
+let dup_limit = [];
+const dup_limiter = (cb1) => { // not yet complete >> essentially will replace reduceit code for smarter filter
   var length = hasMultiscore.length;
+  var first = cb1;
 
   dup_multiscore.forEach = (x) => {
     for (a = 0; a < length; a++) {
       if (x === hasMultiscore[a]) {
         // push to another array to account for dup_multiscore amount
+        logs(`This will return true. This instance of ${x} is already on second half for exact amount.`);
+        dup_limit.push(x);
 
       }
     }
   }
 
-  return newarray.length > 1;
+  return dup_limit.length > 1;
 
 }
 
 const addMultiscore = (x) => {
-  x.addClass('multiscore');
+  x.addClass('multiscore'); // #DOMinsert
 
 }
 
@@ -191,7 +195,7 @@ const newPlay = (x) => { // the play controls and points function
         $('#score').removeClass('scoreWobbActive');
         $('#score').removeClass('scoreWobbDblActive');
 
-        item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
+        item.addClass('newPlay'); // #DOMinsert to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
 
          // setTimer;
@@ -391,12 +395,20 @@ for (let i = 0; i < halfBoard; i++) {
           let find_dup = items[x];
           find_dup = find_dup.innerText;
 
-          if (find_dup === orig_multi) { // recurrence limit should work here
+//          dup_limiter(find_dup); // pre #DOMinsert
+
+          if (find_dup === orig_multi && dup_limiter(find_dup) === false) { // recurrence limit should work here
             // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
             dup_multiscore.push(find_dup);
             logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
 
           }
+          else {
+            logs(`${dup_limit} shows this would be more than desired multiscore amount.`);
+
+          }
+
+        dup_limit = []; // ideally resets per loop
 
       }
 
@@ -427,7 +439,8 @@ for (let i = 0; i < halfBoard; i++) {
 
     }
 
-    const evenDups = () => { // useful towards getting exact amount of duplicate multiscore
+    const evenDups = () => { // useful for console logs and getting exact amount of duplicate multiscore
+
       return lngth_orig_multscore === retDupAmount();
 
     }
@@ -451,7 +464,7 @@ for (let i = 0; i < halfBoard; i++) {
               c.push(`${item.innerText}`);
 
               logs(`${a} ought to be matching the ${ce} array log`);
-              $('#'+item.id).addClass("multiscore"); // is insert of the matching multiscore match
+              $('#'+item.id).addClass("multiscore"); // is insert of the matching multiscore match #DOMinsert
 
             }
 
@@ -461,7 +474,8 @@ for (let i = 0; i < halfBoard; i++) {
 //          logs(`${c} & ${c.length} ... alright...`);
 
     });
-    if (reduceit.length < lngth_orig_multscore()) {
+
+    if (reduceit.length < lngth_orig_multscore()) { // will not need this after dup_limiter works
       alert(`The reduction code in this build may not be smart enough.`)
 
     }
