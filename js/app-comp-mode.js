@@ -446,11 +446,12 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     itemsnative.forEach( (item) => {
-        let b = reduceit;
+      let b = reduceit;
+      //  var b = hasMultiscore;
 
         logs(`${b.length} is the length of reduceit array.`);
 
-        for (a = 0; a < hasMultiscore.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
+        for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
           let e = a;
           let ce = c[e];
@@ -475,10 +476,10 @@ for (let i = 0; i < halfBoard; i++) {
 
     });
 
-    if (reduceit.length < lngth_orig_multscore()) { // will not need this after dup_limiter works
+/*    if (reduceit.length < lngth_orig_multscore()) { // will not need this after dup_limiter works
       alert(`The reduction code in this build may not be smart enough.`)
 
-    }
+    } */
 
 /////////////////////////////////////////////
 // END - FOR MULTIPLIER WITH COLORED MATCHES

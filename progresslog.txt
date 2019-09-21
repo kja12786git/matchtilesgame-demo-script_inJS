@@ -7,6 +7,8 @@ For upgrades:
 
   + new gameboard button added, refreshes entire page build
 
+  - something changed with either jQuery or browsers which is not display the typed nameInputDiv to nameFeed.
+
   + the displayPrevPlay was added to the DOM for easier gameplay
 
   + sound effects are good
@@ -22,3 +24,4 @@ For upgrades:
 
   + the comp mode is in now work in progress which will design a limit and set specific multiscore chance for every build.
     - the uneven amount of duplicate multiscore is due to the random graphic type count on the first halfBoard which may be less than amount of multiscore limit... it will throw off the matching duplicate filter on some builds.
+    - ** reduceit should no longer be necessary code it should just use hasMultiscore once the array can be accessed the correct key method.
