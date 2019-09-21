@@ -30,7 +30,7 @@ const dup_limiter = (cb1) => { // not yet complete >> essentially will replace r
     }
   }
 
-  return dup_limit.length > 1;
+  return dup_limit.length === 0;
 
 }
 
@@ -397,7 +397,7 @@ for (let i = 0; i < halfBoard; i++) {
 
 //          dup_limiter(find_dup); // pre #DOMinsert
 
-          if (find_dup === orig_multi && dup_limiter(find_dup) === false) { // recurrence limit should work here
+          if (find_dup === orig_multi && dup_limiter(find_dup)) { // recurrence limit should work here
             // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
             dup_multiscore.push(find_dup);
             logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
