@@ -395,7 +395,7 @@ for (let i = 0; i < halfBoard; i++) {
           let find_dup = items[x];
           find_dup = find_dup.innerText;
 
-//          dup_limiter(find_dup); // pre #DOMinsert
+          // dup_limiter(find_dup); // pre #DOMinsert
 
           if (find_dup === orig_multi && dup_limiter(find_dup)) { // recurrence limit should work here
             // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
@@ -446,8 +446,8 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     itemsnative.forEach( (item) => {
-      let b = reduceit;
-      //  var b = hasMultiscore;
+//      let b = reduceit;
+      var b = hasMultiscore;
 
         logs(`${b.length} is the length of reduceit array.`);
 
@@ -455,8 +455,9 @@ for (let i = 0; i < halfBoard; i++) {
 
           let e = a;
           let ce = c[e];
+          b = b[e];
           // logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
-          if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
+          if (item.innerText === b[a].innerText && item.id > halfBoard && b[a].innerText != ce) {
             logs(`${item.id} is current loop focus.`);
 
             // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
