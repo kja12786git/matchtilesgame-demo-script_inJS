@@ -14,6 +14,8 @@ const icons2 = ['$','❤','☆','★','♡','☺'];
 const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
+
+// ## var works = dup_limit.filter(duplicates); // if only using numbers as content can this be used for easier results....
 let dup_limit = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
   var length = hasMultiscore.length;
@@ -30,10 +32,6 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
         logs(`dup_limit returns ${dup_limit}`);
         break;
-        
-      }
-      else {
-        dup_limit = [];
 
       }
 
