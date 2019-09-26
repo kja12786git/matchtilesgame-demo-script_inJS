@@ -20,9 +20,9 @@ let dup_limit = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
   var length = hasMultiscore.length;
   var cb1 = x;
-  logs(`first duplicate is ${cb1}.`);
-
   var ret = dup_limit.length;
+
+  logs(`first duplicate is ${cb1}.`);
 
     for (a = 0; a < length; a++) {
       if (cb1 === hasMultiscore[a][0].innerText) {
@@ -31,7 +31,6 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
         dup_limit.push(cb1);
 
         logs(`dup_limit returns ${dup_limit}`);
-        break;
 
       }
 
@@ -401,7 +400,7 @@ for (let i = 0; i < halfBoard; i++) {
       for (x = 0; x < halfBoard; x++) { // halfBoard = slotsLngth / 2
           let find_dup = items[x];
           find_dup = find_dup.innerText;
-//          logs(`${find_dup} is content of find_dup.`);
+          // logs(`${find_dup} is content of find_dup.`);
 
           // dup_limiter(find_dup); // pre #DOMinsert
 
@@ -455,11 +454,10 @@ for (let i = 0; i < halfBoard; i++) {
           let e = a;
           b = b[e];
           let c = dup_multiscore;
-
           let domObj = $('#'+item.id);
           // logs(`${domObj[0].innerText} is innerText of domObj.`);
 
-          if (item.id > halfBoard && item.innerText === b[e].innerText) { // ## dup_limiter ought to affect this
+          if (item.id > halfBoard && item.innerText === b[e].innerText && a < retDupAmount()) { // ## dup_limiter ought to affect this
             logs(`${item.id} is current loop focus.`);
 
             addMultiscore(domObj);
