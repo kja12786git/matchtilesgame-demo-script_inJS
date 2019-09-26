@@ -415,6 +415,8 @@ for (let i = 0; i < halfBoard; i++) {
         for (a=0; a < b.length; a++) {
           let e = a;
           let ce = c[e];
+          let domObj = $('#'+item.id);
+
           logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
           if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
             logs(`${item.id} is current loop focus.`);
@@ -422,7 +424,7 @@ for (let i = 0; i < halfBoard; i++) {
             // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
             if (item.innerText != ce && c.length <= b.length) {
               logs(`${a} ought to be matching the ${ce} array log`);
-              $('#'+item.id).addClass("multiscore"); // << easy does it
+              addMultiscore(domObj);
               // push this to empty array then add a conditional above to filter present after the loop
               c.push(`${item.innerText}`);
 
@@ -431,7 +433,6 @@ for (let i = 0; i < halfBoard; i++) {
           }
 
         }
-//          logs(`${c} & ${c.length} ... alright...`);
 
     });
 

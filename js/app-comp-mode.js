@@ -15,22 +15,31 @@ const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
 let dup_limit = [];
-const dup_limiter = (cb1) => { // not yet complete >> essentially will replace reduceit code for smarter filter
+const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
   var length = hasMultiscore.length;
-  var first = cb1;
+  var cb1 = x;
+  logs(`first duplicate is ${cb1}.`);
 
-  dup_multiscore.forEach = (x) => {
+  var ret = dup_limit.length;
+
     for (a = 0; a < length; a++) {
-      if (x === hasMultiscore[a]) {
+      if (cb1 === hasMultiscore[a][0].innerText) {
         // push to another array to account for dup_multiscore amount
-        logs(`This will return true. This instance of ${x} is already on second half for exact amount.`);
-        dup_limit.push(x);
+        logs(`This will return true. This instance of ${cb1} is already on second half for exact amount.`);
+        dup_limit.push(cb1);
+
+        logs(`dup_limit returns ${dup_limit}`);
+        break;
+        
+      }
+      else {
+        dup_limit = [];
 
       }
-    }
-  }
 
-  return dup_limit.length === 0;
+    }
+
+  return ret === 0; //?
 
 }
 
@@ -394,36 +403,29 @@ for (let i = 0; i < halfBoard; i++) {
       for (x = 0; x < halfBoard; x++) { // halfBoard = slotsLngth / 2
           let find_dup = items[x];
           find_dup = find_dup.innerText;
+//          logs(`${find_dup} is content of find_dup.`);
 
           // dup_limiter(find_dup); // pre #DOMinsert
 
           if (find_dup === orig_multi && dup_limiter(find_dup)) { // recurrence limit should work here
             // make and use a function to skip pushing based on frequency of orig_multi can work to filter here instead of having to use the reduceit code
             dup_multiscore.push(find_dup);
+
             logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
+            logs(`${dup_limit.length} is dup_limit instance.`);
 
           }
           else {
-            logs(`${dup_limit} shows this would be more than desired multiscore amount.`);
+            logs(`${dup_limit.length} shows this would be more than desired multiscore amount.`);
 
           }
 
-        dup_limit = []; // ideally resets per loop
+//          dup_limit = []; // ideally resets per loop
 
       }
 
+
     });
-
-    // remove extra duplicates from dup_multiscore
-          // >>>>> this will not be necessary if the filter happens before pushing to array <<<<<
-            const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
-          // const reduceit = dup_multiscore; <<<<<
-
-
-    // logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
-    // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
-
-    let c = []; // an empty array for use to acct for duplicates on multiscore
 
     const lngth_orig_multscore = () => {
       return hasMultiscore.length;
@@ -433,9 +435,8 @@ for (let i = 0; i < halfBoard; i++) {
     const retDupAmount = () => {
 
       logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
-      logs(`${c.length} is the length of c array.`);
 
-      return c.length;
+      return hasMultiscore.length;
 
     }
 
@@ -446,38 +447,34 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     itemsnative.forEach( (item) => {
-//      let b = reduceit;
+      // var b = reduceit;
       var b = hasMultiscore;
 
-        logs(`${b.length} is the length of reduceit array.`);
+        logs(`${b.length} is the length of hasMultiscore array.`);
 
-        for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
+      for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
           let e = a;
-          let ce = c[e];
           b = b[e];
-          // logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
-          if (item.innerText === b[a].innerText && item.id > halfBoard && b[a].innerText != ce) {
+          let c = dup_multiscore;
+
+          let domObj = $('#'+item.id);
+          // logs(`${domObj[0].innerText} is innerText of domObj.`);
+
+          if (item.id > halfBoard && item.innerText === b[e].innerText) { // ## dup_limiter ought to affect this
             logs(`${item.id} is current loop focus.`);
 
-            // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-            if (item.innerText != ce && retDupAmount() < lngth_orig_multscore()) {
-              // push this to empty array then add a conditional above to filter present after the loop
-              c.push(`${item.innerText}`);
-
-              logs(`${a} ought to be matching the ${ce} array log`);
-              $('#'+item.id).addClass("multiscore"); // is insert of the matching multiscore match #DOMinsert
-
-            }
+            addMultiscore(domObj);
 
           }
 
         }
-//          logs(`${c} & ${c.length} ... alright...`);
+
+        //  logs(`${c} & ${c.length} ... alright...`);
 
     });
 
-/*    if (reduceit.length < lngth_orig_multscore()) { // will not need this after dup_limiter works
+    /*    if (reduceit.length < lngth_orig_multscore()) { // will not need this after dup_limiter works
       alert(`The reduction code in this build may not be smart enough.`)
 
     } */
