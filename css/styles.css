@@ -327,9 +327,11 @@ footer {
 }
 
 .popmultiscore {
-  background-color: pink !important;
+  background-color: rgba(0,0,0,128) !important;
+  color: lime !important;
 
 }
+
 
 /*#timer:before {
     content: 'time:';
