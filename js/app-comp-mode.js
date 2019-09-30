@@ -24,34 +24,43 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
   let length = hasMultiscore.length;
   const cb1 = x;
 
+
   logs(`first duplicate is ${cb1}.`);
 
     for (a = 0; a < length; a++) {
-      if (dup_multiscore.includes(cb1) != true && cb1 === hasMultiscore[a][0].innerText) {
-        dup_multiscore.push(cb1);
-        dup_limit.push(cb1);
-        logs(`${dup_limit.length} length of instance of dup_limit push.`);
+      let verCb1 = cb1 === hasMultiscore[a][0].innerText;
+      let verCb2 = dup_multiscore.includes(cb1);
+      var ce = dup_multiscore.length < length;
 
-      } else {
-        if (dup_multiscore.length + newarr.length < length && dup_multiscore.includes(cb1) && cb1 === hasMultiscore[a][0].innerText) {
-        logs(`This will return true. This instance of ${cb1} is already matching to ${hasMultiscore[a][0].innerText} on the second halfBoard.`);
-        dup_multiscore.push(`${cb1} additional copy of ${cb1} instance in original...`);
-//        dup_limit.push(cb1);
-        logs(`${dup_limit.length} current length dup_limit for additional instance.`);
+      if (ce && verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
+        if (verCb2 != true) {
+          logs(`${verCb1} copy of ${cb1} is in qeue....`);
+          dup_multiscore.push(cb1);
+          dup_limit.push(cb1);
+          logs(`${dup_limit.length} length of instance of dup_limit push.`);
+
+        }
+        else if (verCb2 && a === length < 1) { // not additional copy verified for push to display
+          dup_multiscore.push(cb1);
+          dup_limit.push(cb1);
+          logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length} packet size is ${ce}.`);
+          logs(`This will return true. This instance of ${cb1} is already matching to ${hasMultiscore[a][0].innerText} on the second halfBoard.`);
+          logs(`${dup_limit.length} length of instance of dup_limit push.`);
+
+        }
 
       }
-    }
 
-  }
+    }
 
 
   const ret = dup_limit.length;
   const packetsize = length - ret; // diff between amount of duplicates and length limit
   if (newarr.length < length) { newarr.push(packetsize) }
 
-    logs(`dup_limit returns ${dup_limit} and packetsize check shows ${packetsize}.`);
+  logs(`dup_limit returns ${dup_limit.length} and packetsize check shows ${packetsize}.`);
 
-    return packetsize < length && newarr.length <= length; // return is not exceeding length of hasMultiscore
+  return packetsize + 1 <= length && newarr.length <= length; // return is not exceeding length of hasMultiscore
 
 }
 
@@ -431,7 +440,7 @@ for (let i = 0; i < halfBoard; i++) {
 
       // logs(`${b.length} is the length of hasMultiscore array.`);
 
-    if (item.id > halfBoard && dup_limiter(item.innerText)) { // ## dup_limiter ought to affect this
+    if (item.id > halfBoard && dup_limiter(item.innerText)) {
 
       for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
