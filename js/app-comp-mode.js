@@ -24,41 +24,60 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
   let length = hasMultiscore.length;
   const cb1 = x;
 
-
-  logs(`first duplicate is ${cb1}.`);
-
     for (a = 0; a < length; a++) {
       let verCb1 = cb1 === hasMultiscore[a][0].innerText;
       let verCb2 = dup_multiscore.includes(cb1);
       var ce = dup_multiscore.length < length;
+      var that = (length - a) < newarr[newarr.length-1];
 
       if (ce && verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
         if (verCb2 != true) {
+          logs(`first duplicate is ${cb1}.`);
           logs(`${verCb1} copy of ${cb1} is in qeue....`);
-          dup_multiscore.push(cb1);
-          dup_limit.push(cb1);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
+            dup_limit.push(cb1);
+            dup_multiscore.push(cb1);
+            logs(`${dup_limit.length} length of instance of dup_limit push.`);
 
-        }
-        else if (verCb2 && a === length < 1) { // not additional copy verified for push to display
-          dup_multiscore.push(cb1);
-          dup_limit.push(cb1);
+        } else if (verCb2 && that) { // additional copy verification for push to display
+          logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
+          logs(`${dup_limit.length} length of instance of dup_limit push.`);
           logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length} packet size is ${ce}.`);
-          logs(`This will return true. This instance of ${cb1} is already matching to ${hasMultiscore[a][0].innerText} on the second halfBoard.`);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
 
-        }
+//          let iterator = () => { // iteration slowdown
+            for (c = 0; c < newarr.length; c++) {
+/*              setTimeout(function () {
+                          iterator(++c);
+                      }, length);*/
+              if (that) { // bounce off the number of more slots left for duplicates
+                dup_limit.push(cb1);
+                if (dup_multiscore < length) {
+                  dup_multiscore.push(cb1);
+                }
+                logs(`${dup_limit.length} length of instance of dup_limit push.`);
+
+              }
+
+            }
+
+          }
+
+/*          iterator(0);
+
+        }*/
 
       }
 
     }
 
-
   const ret = dup_limit.length;
   const packetsize = length - ret; // diff between amount of duplicates and length limit
-  if (newarr.length < length) { newarr.push(packetsize) }
+  for (c = 0; c < ret; c++) {
+    if (newarr.length < length) { newarr.push(packetsize) }
+
+  }
 
   logs(`dup_limit returns ${dup_limit.length} and packetsize check shows ${packetsize}.`);
+  logs(`newarr length is ${newarr.length}.`);
 
   return packetsize + 1 <= length && newarr.length <= length; // return is not exceeding length of hasMultiscore
 
@@ -445,12 +464,11 @@ for (let i = 0; i < halfBoard; i++) {
       for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
           let e = a;
-          b = b[e];
+//          b = b[e];
           c = dup_multiscore;
           let domObj = $('#'+item.id);
 
             logs(`${item.id} is current loop focus.`);
-
             addMultiscore(domObj);
 
         }
