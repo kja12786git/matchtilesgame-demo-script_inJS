@@ -463,13 +463,10 @@ for (let i = 0; i < halfBoard; i++) {
 
       for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
 
-          let e = a;
-//          b = b[e];
-          c = dup_multiscore;
           let domObj = $('#'+item.id);
+          logs(`${item.id} is current loop focus.`);
 
-            logs(`${item.id} is current loop focus.`);
-            addMultiscore(domObj);
+          addMultiscore(domObj);
 
         }
       }

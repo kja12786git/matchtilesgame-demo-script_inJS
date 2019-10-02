@@ -23,5 +23,3 @@ For upgrades:
     - The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
 
   + the comp mode is in now work in progress which will design a limit and set specific multiscore chance for every build.
-    - the uneven amount of duplicate multiscore is due to the random graphic type count on the first halfBoard which may be less than amount of multiscore limit... it will throw off the matching duplicate filter on some builds.
-    - ** reduceit should no longer be necessary code it should just use hasMultiscore once the array can be accessed the correct key method.
