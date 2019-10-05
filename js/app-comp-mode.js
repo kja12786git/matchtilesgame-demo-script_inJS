@@ -487,18 +487,33 @@ for (let i = 0; i < halfBoard; i++) {
 
           logs(`dup_limiter func() returns true on ${grab[0].innerText}.`);
 
+            if (thiscount[thiscount.length -1] != false && thiscount[0] != false) {
+                let c = thiscount.length;
+                if (thiscount[c-1] === undefined) {
+                  thiscount.pop(); // leaves it to luck the instance on next loop
+
+                } else {
+
+                logs(`Works... add another instance for ${thiscount[c]}.`);
+                // manually correct here if it doesn't return undefined
+
+                }
+
+            }
+
             if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
               logs(`${dup_multiscore} is well returned from dup_limiter.`);
 
                 addMultiscore(grab);
                 grab.addClass('duplicate_multiscore');
-                if (dup_limiter(item) > 1) {
-                  logs(`dup_limiter reads ${dup_limiter(item)}... more than one duplicate. So add another before next loop. .`);
-                  addMultiscore(grab);
-                  grab.addClass('duplicate_multiscore');
+                if (dup_limiter(item) > 1 && thiscount[0] != false) {
+                  logs(`dup_limiter reads ${dup_limiter(item)} for this is more than 1 duplicate. So add style or space for another ${item} before next loop. .`);
+                  for (c= 0; c < dup_limiter(item); c++) {
+                    thiscount.push(item.innerText); // makes space for the next instance to get multiscore before tertiary duplicate takes place
+
+                  }
 
                 }
-
                 thiscount.push(has); logs(`${thiscount.length} towards multiscore limit...`);
 
             };
