@@ -21,49 +21,45 @@ const newarr = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
 
   dup_limit = [];
+
   let length = hasMultiscore.length;
-  const cb1 = x;
+  let length_dup = dup_multiscore.length;
+  const cb1 = x.innerText;
+  let verCb2 = dup_multiscore.includes(cb1);
 
     for (a = 0; a < length; a++) {
-      let verCb1 = cb1 === hasMultiscore[a][0].innerText;
-      let verCb2 = dup_multiscore.includes(cb1);
-      var ce = dup_multiscore.length < length;
-      var that = (length - a) < newarr[newarr.length-1];
+      verCb1 = cb1 === hasMultiscore[a][0].innerText;
+      // let verCb2 = dup_multiscore.includes(cb1);
+      var that = (length - a) <= newarr[newarr.length-1];
 
-      if (ce && verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
+      if (verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
+
         if (verCb2 != true) {
           logs(`first duplicate is ${cb1}.`);
           logs(`${verCb1} copy of ${cb1} is in qeue....`);
             dup_limit.push(cb1);
             dup_multiscore.push(cb1);
             logs(`${dup_limit.length} length of instance of dup_limit push.`);
+            //addMultiscore(grab);
 
         } else if (verCb2 && that) { // additional copy verification for push to display
           logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
           logs(`${dup_limit.length} length of instance of dup_limit push.`);
-          logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length} packet size is ${ce}.`);
+          logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
+          //if (that && verCb2 != true) { addMultiscore(grab);}
+          dup_limit.push(cb1);
 
-//          let iterator = () => { // iteration slowdown
-            for (c = 0; c < newarr.length; c++) {
-/*              setTimeout(function () {
-                          iterator(++c);
-                      }, length);*/
-              if (that) { // bounce off the number of more slots left for duplicates
-                dup_limit.push(cb1);
-                if (dup_multiscore < length) {
-                  dup_multiscore.push(cb1);
-                }
-                logs(`${dup_limit.length} length of instance of dup_limit push.`);
+          // dup_multiscore.push(cb1);
+          logs(`${dup_limit.length} length of instance of dup_limit push.`);
 
-              }
+        } else if (that && verCb1) {
 
-            }
+          logs(`no conditional met yet...`);
+          //addMultiscore(grab);
+          dup_limit.push(cb1);
+          dup_multiscore.push(cb1);
 
-          }
-
-/*          iterator(0);
-
-        }*/
+        }
 
       }
 
@@ -75,11 +71,21 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
     if (newarr.length < length) { newarr.push(packetsize) }
 
   }
-
   logs(`dup_limit returns ${dup_limit.length} and packetsize check shows ${packetsize}.`);
   logs(`newarr length is ${newarr.length}.`);
 
-  return packetsize + 1 <= length && newarr.length <= length; // return is not exceeding length of hasMultiscore
+  const diff = length - newarr.length;
+  logs (`diff is ${diff}`);
+
+
+  const grab = $('#'+x.id);
+  logs(`the grab is id#${grab[0].id} which contains ${grab[0].innerText}`);
+
+  // <<<>>>
+  if (packetsize + diff === length && that) { // return is not exceeding length of hasMultiscore
+    return x.innerText === cb1;
+
+  }
 
 }
 
@@ -456,20 +462,24 @@ for (let i = 0; i < halfBoard; i++) {
 
     itemsnative.forEach( (item) => {
       var b = hasMultiscore;
+      let domObj = document.getElementById(item.id);
+      let grab = $('#'+item.id);
 
-      // logs(`${b.length} is the length of hasMultiscore array.`);
+      if (item.id > halfBoard && dup_limiter(item)) {
 
-    if (item.id > halfBoard && dup_limiter(item.innerText)) {
+            logs(`${item.id} is current loop focus. && ${dup_limiter(item)} returned on ${grab[0].innerText}.`);
+            logs(`div# is ${domObj.id} & ${domObj.innerText} is content of domObj... ${domObj.id} mirrors ${grab[0].id}`);
 
-      for (a = 0; a < b.length; a++) { // b.length reduceit and hasMultiscore.length ought be the same
+            logs(`Dup_limiter returns true on ${grab[0].innerText}.`);
+            addMultiscore(grab);
 
-          let domObj = $('#'+item.id);
-          logs(`${item.id} is current loop focus.`);
+      } else if (item.id > halfBoard) {
+        logs(`Dup_limiter returned false on ${grab[0].innerText}.`);
+        //addMultiscore(grab);
 
-          addMultiscore(domObj);
+      };
 
-        }
-      }
+
 
     });
 
