@@ -17,10 +17,11 @@ const dup_multiscore = [];
 
 // ## var works = dup_limit.filter(duplicates); // if only using numbers as content can this be used for easier results....
 let dup_limit = [];
+let ce = [];
 const newarr = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
 
-  dup_limit = [];
+  dup_limit = []; // reset
 
   let length = hasMultiscore.length;
   let length_dup = dup_multiscore.length;
@@ -48,9 +49,16 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
           logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
           //if (that && verCb2 != true) { addMultiscore(grab);}
           dup_limit.push(cb1);
-
           // dup_multiscore.push(cb1);
           logs(`${dup_limit.length} length of instance of dup_limit push.`);
+
+                  if (dup_limit.length > 1) {
+                    // ce = [];
+                    ce.push(cb1);
+                    logs(`${ce.length} is inside array for showing multiple duplicates. Its content displays ${ce} as gfx.`);
+                    logs(`got it... adjust for displaying multiple after this.`);
+
+                  }
 
         } else if (that && verCb1) {
 
@@ -65,7 +73,7 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
     }
 
-  const ret = dup_limit.length;
+  const ret = dup_limit.length; // dup_limit usage changed since its inception cross referencing with dup_multiscore usage change
   const packetsize = length - ret; // diff between amount of duplicates and length limit
   for (c = 0; c < ret; c++) {
     if (newarr.length < length) { newarr.push(packetsize) }
@@ -77,15 +85,18 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
   const diff = length - newarr.length;
   logs (`diff is ${diff}`);
 
-
   const grab = $('#'+x.id);
   logs(`the grab is id#${grab[0].id} which contains ${grab[0].innerText}`);
 
   // <<<>>>
-  if (packetsize + diff === length && that) { // return is not exceeding length of hasMultiscore
-    return x.innerText === cb1;
+    if (newarr.length + diff === length && dup_multiscore.length != 0 && dup_multiscore.length <= length) {
+      return ret;
 
-  }
+    }
+    else {
+      return false;
+
+    }
 
 }
 
@@ -449,7 +460,7 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     const retDupAmount = () => {
-      logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
+      logs(`${dup_multiscore.length} mirrors ${hasMultiscore.length} >> make this the unique amount of duplicates per play.`);
 
       return hasMultiscore.length;
 
@@ -460,26 +471,39 @@ for (let i = 0; i < halfBoard; i++) {
 
     }
 
+    let thiscount = [];
     itemsnative.forEach( (item) => {
+
       var b = hasMultiscore;
       let domObj = document.getElementById(item.id);
       let grab = $('#'+item.id);
+      let has = grab.hasClass('duplicate_multiscore');
 
-      if (item.id > halfBoard && dup_limiter(item)) {
+        if (item.id > halfBoard) {
+          dup_limiter(item);
 
-            logs(`${item.id} is current loop focus. && ${dup_limiter(item)} returned on ${grab[0].innerText}.`);
-            logs(`div# is ${domObj.id} & ${domObj.innerText} is content of domObj... ${domObj.id} mirrors ${grab[0].id}`);
+          logs(`${item.id} or ${domObj.id} is current loop focus &&  returned on ${grab[0].innerText}.`);
+          logs(`div# is ${domObj.id} & ${domObj.innerText} is content of domObj... ${domObj.id} mirrors ${grab[0].id}`);
 
-            logs(`Dup_limiter returns true on ${grab[0].innerText}.`);
-            addMultiscore(grab);
+          logs(`dup_limiter func() returns true on ${grab[0].innerText}.`);
 
-      } else if (item.id > halfBoard) {
-        logs(`Dup_limiter returned false on ${grab[0].innerText}.`);
-        //addMultiscore(grab);
+            if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
+              logs(`${dup_multiscore} is well returned from dup_limiter.`);
 
-      };
+                addMultiscore(grab);
+                grab.addClass('duplicate_multiscore');
+                if (dup_limiter(item) > 1) {
+                  logs(`dup_limiter reads ${dup_limiter(item)}... more than one duplicate. So add another before next loop. .`);
+                  addMultiscore(grab);
+                  grab.addClass('duplicate_multiscore');
 
+                }
 
+                thiscount.push(has); logs(`${thiscount.length} towards multiscore limit...`);
+
+            };
+
+        }
 
     });
 
