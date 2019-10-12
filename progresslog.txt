@@ -23,3 +23,4 @@ For upgrades:
     - The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
 
   + the comp mode is in now work in progress which will design a limit and set specific multiscore chance for every build.
+    - comp mode has made progress. There is still undesired logic chance for inaccurate duplicate gameboard generation. Debugging for renders which may not generate desired amount every render if containing more than one instance.

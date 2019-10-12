@@ -489,8 +489,9 @@ for (let i = 0; i < halfBoard; i++) {
 
             if (thiscount[thiscount.length -1] != false && thiscount[0] != false) {
                 let c = thiscount.length;
-                if (thiscount[c-1] === undefined) {
+                if (thiscount[c-1] === undefined && isNaN(thiscount[c-1]) ) {
                   thiscount.pop(); // leaves it to luck the instance on next loop
+                  logs(`Works... popping this... ${thiscount[c-1]}.`);
 
                 } else {
 
