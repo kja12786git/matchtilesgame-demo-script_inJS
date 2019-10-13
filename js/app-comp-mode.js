@@ -416,7 +416,8 @@ for (let x = 0; x < halfBoard; x++) {
     }
 
     // add code for extra point matches multiplier
-    let colorpattern = x % 2 == 0 && x % 4 != 0;
+//    let colorpattern = x % 2 == 0 && x % 4 != 0;
+    let colorpattern = x % 2 == 0 && x % 4 != 0 || x * 2 > halfBoard && x % 2 != 0;
 
     if (colorpattern) {
       var item = $('#'+x);
