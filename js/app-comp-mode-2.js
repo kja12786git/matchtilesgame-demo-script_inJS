@@ -19,86 +19,6 @@ const dup_multiscore = [];
 let dup_limit = [];
 let ce = [];
 const newarr = [];
-const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
-
-  dup_limit = []; // reset
-
-  let length = hasMultiscore.length;
-  let length_dup = dup_multiscore.length;
-  const cb1 = x.innerText;
-  let verCb2 = dup_multiscore.includes(cb1);
-
-    for (a = 0; a < length; a++) {
-      verCb1 = cb1 === hasMultiscore[a][0].innerText;
-      // let verCb2 = dup_multiscore.includes(cb1);
-      var that = (length - a) <= newarr[newarr.length-1];
-
-      if (verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
-
-        if (verCb2 != true) {
-          logs(`first duplicate is ${cb1}.`);
-          logs(`${verCb1} copy of ${cb1} is in qeue....`);
-            dup_limit.push(cb1);
-            //dup_multiscore.push(cb1);
-            logs(`${dup_limit.length} length of instance of dup_limit push.`);
-            //addMultiscore(grab);
-
-        } else if (verCb2 && that) { // additional copy verification for push to display
-          logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
-          logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
-          //if (that && verCb2 != true) { addMultiscore(grab);}
-          dup_limit.push(cb1);
-          // dup_multiscore.push(cb1);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
-
-                  if (dup_limit.length > 1) {
-                    // ce = [];
-                    ce.push(cb1);
-                    logs(`${ce.length} is inside array for showing multiple duplicates. Its content displays ${ce} as gfx.`);
-                    logs(`got it... adjust for displaying multiple after this.`);
-
-                  }
-
-        } else if (that && verCb1) {
-
-          logs(`no conditional met yet...`);
-          //addMultiscore(grab);
-          dup_limit.push(cb1);
-          //dup_multiscore.push(cb1);
-
-        }
-
-      }
-
-    }
-
-  const ret = dup_limit.length; // dup_limit usage changed since its inception cross referencing with dup_multiscore usage change
-  const packetsize = length - ret; // diff between amount of duplicates and length limit
-  for (c = 0; c < ret; c++) {
-    if (newarr.length < length) { newarr.push(packetsize) }
-
-  }
-  logs(`dup_limit returns ${dup_limit.length} and packetsize check shows ${packetsize}.`);
-  logs(`newarr length is ${newarr.length}.`);
-
-  const diff = length - newarr.length;
-  logs (`diff is ${diff}`);
-
-  const grab = $('#'+x.id);
-  logs(`the grab is id#${grab[0].id} which contains ${grab[0].innerText}`);
-
-  // <<<>>>
-    if (newarr.length + diff === length && dup_multiscore.length != 0 && dup_multiscore.length <= length) {
-      return ret;
-
-    }
-    else {
-      return false;
-
-    }
-
-}
 
 const addMultiscore = (x) => {
   x.addClass('multiscore'); // #DOMinsert
@@ -410,8 +330,8 @@ for (let x = 0; x < halfBoard; x++) {
                  togameboard.push(i);
 
              });
-
           }
+
 
     }
 
@@ -473,55 +393,46 @@ for (let i = 0; i < halfBoard; i++) {
 
     }
 
-    let thiscount = [];
-    itemsnative.forEach( (item) => {
+    let thiscount = []; // doubles dup_multiscore count
+    let thiscount2 = []; // array for making another duplicate limiter.
+    dup_multiscore.forEach( (item) => {
 
-      var b = hasMultiscore;
-      let domObj = document.getElementById(item.id);
-      let grab = $('#'+item.id);
-      let has = grab.hasClass('duplicate_multiscore');
+      let total = items.length; // global
+      logs(`${item} is item.`); // local
+      logs(`dup_multiscore loop count accurate ${thiscount}`);
+      logs(`${thiscount2.length} is length of thiscount2 array.`);
 
-        if (item.id > halfBoard) {
-//          dup_limiter(item);
+      thiscount2 = []; // funny I used pop() before?
+      logs(`${thiscount2.length} is thiscount2 length at reset`);
 
-          logs(`${item.id} or ${domObj.id} is current loop focus &&  returned on ${grab[0].innerText}.`);
-          logs(`div# is ${domObj.id} & ${domObj.innerText} is content of domObj... ${domObj.id} mirrors ${grab[0].id}`);
+      for (y = total/2; y < total; y++) {
+        let grab = items[y].id;
+        let grab_doms = items[y].innerText;
+        let grab_obj = items[y];
+        let countce = y - total/2;
+        logs(`${countce} is loop countup @ id #${grab}.`);
+        //logs(`${grab} is now item in focus and has ${grab_doms}.`);
 
-          logs(`dup_limiter func() returns true on ${grab[0].innerText}.`);
+        if (grab_doms === item) {
+          logs(`${item} is given item as matching ${grab_doms}.`);
+          thiscount2.push(grab_doms); logs(`Just pushed ${grab_doms} to thiscount2.`);
 
-            if (thiscount[thiscount.length -1] != false && thiscount[0] != false) {
-                let c = thiscount.length;
-                if (thiscount[c-1] === undefined && isNaN(thiscount[c-1]) ) {
-                  // thiscount.pop(); // leaves it to luck the instance on next loop
-                  logs(`Works... not currently popping this... ${thiscount[c-1]}.`);
+          let multiple = thiscount2.length > 1;
+          if (multiple != true) { ;
+            addMultiscore($(grab_obj));
 
-                } else {
+          } else {
+            logs(`${thiscount2.length} is amount of instances for ${grab_doms} @ loop ${y}.`);
 
-                logs(`Works... add another instance for ${thiscount[c]}.`);
-                // manually correct here if it doesn't return undefined
-
-                }
-
-            }
-
-            if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
-              logs(`${dup_multiscore} is well returned from dup_limiter.`);
-
-                addMultiscore(grab);
-                grab.addClass('duplicate_multiscore');
-                if (dup_limiter(item) > 1 && thiscount[0] != false) {
-                  logs(`dup_limiter reads ${dup_limiter(item)} for this is more than 1 duplicate. So add style or space for another ${item} before next loop. .`);
-                  for (c= 0; c < dup_limiter(item); c++) {
-                    thiscount.push(item.innerText); // makes space for the next instance to get multiscore before tertiary duplicate takes place
-
-                  }
-
-                }
-                thiscount.push(has); logs(`${thiscount.length} towards multiscore limit...`);
-
-            };
+          }
 
         }
+
+
+      }
+
+      thiscount.push(item);
+      logs(`${thiscount2.length} is length of thiscount2 array.`);
 
     });
 
