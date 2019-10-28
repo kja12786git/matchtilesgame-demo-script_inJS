@@ -336,7 +336,7 @@ for (let x = 0; x < halfBoard; x++) {
     }
 
     // add code for extra point matches multiplier
-//    let colorpattern = x % 2 == 0 && x % 4 != 0;
+    // let colorpattern = x % 2 == 0 && x % 4 != 0;
     let colorpattern = x % 2 == 0 && x % 4 != 0 || x * 2 > halfBoard && x % 2 != 0;
 
     if (colorpattern) {
@@ -402,7 +402,7 @@ for (let i = 0; i < halfBoard; i++) {
       logs(`dup_multiscore loop count accurate ${thiscount}`);
       logs(`${thiscount2.length} is length of thiscount2 array.`);
 
-      thiscount2 = []; // funny I used pop() before?
+      thiscount2 = []; // reset
       logs(`${thiscount2.length} is thiscount2 length at reset`);
 
       for (y = total/2; y < total; y++) {
@@ -410,19 +410,39 @@ for (let i = 0; i < halfBoard; i++) {
         let grab_doms = items[y].innerText;
         let grab_obj = items[y];
         let countce = y - total/2;
+
         logs(`${countce} is loop countup @ id #${grab}.`);
         //logs(`${grab} is now item in focus and has ${grab_doms}.`);
 
         if (grab_doms === item) {
           logs(`${item} is given item as matching ${grab_doms}.`);
           thiscount2.push(grab_doms); logs(`Just pushed ${grab_doms} to thiscount2.`);
+            var instancecount = thiscount2.length;
+            logs(`${instancecount} is first log of instances for ${grab_doms} @ loop ${y}.`);
+            logs(`${thiscount2} is thiscount2.`);
 
           let multiple = thiscount2.length > 1;
           if (multiple != true) { ;
             addMultiscore($(grab_obj));
 
-          } else {
-            logs(`${thiscount2.length} is amount of instances for ${grab_doms} @ loop ${y}.`);
+          } else if (multiple === true) {
+
+              let hasAmount = () => { // modify to check for how many grabs already on dom with multiscore
+                var a = items.hasClass("multiscore");
+                var b = (a && this === true); // modify to a function seeking instance count for condition
+                var c1 = a.length - dup_multiscore.length; (`${ca} returns how many items already have multiscore displayed on secondth half.`);
+                var c2 = (b) => { };
+                var e = c2 - c1; // modify get the difference based on var a & b & c
+
+                var xe = e;
+
+                return xe;
+
+              }
+
+              // hasAmount();
+
+              logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
 
           }
 
