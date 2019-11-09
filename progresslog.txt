@@ -26,7 +26,7 @@ For upgrades:
     - comp mode has made progress. There is still undesired logic chance for inaccurate duplicate gameboard generation. Debugging for renders which may not generate desired amount every render if containing more than one instance.
 
   + comp-mode-2 reorganize the comp-mode
+    + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
+    + make a dup_multiscore forloop from colorpattern definition and retune from parts of dup_limiter and itemsnative loop to verify instance counts
     - to perform faster and allow for any amount of multiscore the colorpattern includes...
-    - eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
-    - make a dup_multiscore forloop from colorpattern definition and retune from parts of dup_limiter and itemsnative loop to verify instance counts
     - fix inconsistant halfBoard pairing no matter how many blocks the colorpattern includes.
