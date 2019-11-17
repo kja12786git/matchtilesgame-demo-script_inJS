@@ -421,26 +421,39 @@ for (let i = 0; i < halfBoard; i++) {
             logs(`${instancecount} is first log of instances for ${grab_doms} @ loop ${y}.`);
             logs(`${thiscount2} is thiscount2.`);
 
-          let multiple = thiscount2.length > 1;
+          let multiple = instancecount > 1;
           if (multiple != true) { ;
             addMultiscore($(grab_obj));
 
           } else if (multiple === true) {
-
+              let count = [];
               let hasAmount = () => { // modify to check for how many grabs already on dom with multiscore
-                var a = items.hasClass("multiscore");
-                var b = (a && this === true); // modify to a function seeking instance count for condition
-                var c1 = a.length - dup_multiscore.length; (`${ca} returns how many items already have multiscore displayed on secondth half.`);
-                var c2 = (b) => { };
-                var e = c2 - c1; // modify get the difference based on var a & b & c
+                var a = () => {
+                  for(c = 0; c < y; c++) {
+                    let x = $('#'+c);
+                    let postcount = x.hasClass('multiscore') === true;
 
-                var xe = e;
+                    if (postcount && grab_doms === x[0].innerText) {
+                      count.push(item);
+                      logs(`hasAmount loop is at ${c} and ${x[0].innerText} has class multiscore is true.`);
 
-                return xe;
+                    }
+
+                  };
+
+                }
+                //var b = (a === true); // modify to a function seeking instance count for condition
+                //var c1 = a - dup_multiscore.length; logs(`${c1} returns how many items already have multiscore displayed on secondth half.`);
+                //var c2 = (b) => { };
+                //var d = c2 - c1; // modify get the difference based on var a & b & c
+                a(); logs(`${count.length -1} is a() count for ${grab_doms}`);
+//                var xe = a();
+
+//                logs(`${xe} ought to be recurrence count for ${grab_doms}`);
 
               }
 
-              // hasAmount();
+              hasAmount();
 
               logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
 
