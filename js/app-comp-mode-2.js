@@ -433,7 +433,7 @@ for (let i = 0; i < halfBoard; i++) {
                     let x = $('#'+c);
                     let postcount = x.hasClass('multiscore') === true;
 
-                    if (postcount && grab_doms === x[0].innerText) {
+                    if (postcount && grab_doms === x[0].innerText) { // secondary conditional needed in this loop replaces former variable ideas
                       count.push(item);
                       logs(`hasAmount loop is at ${c} and ${x[0].innerText} has class multiscore is true.`);
 
@@ -442,14 +442,15 @@ for (let i = 0; i < halfBoard; i++) {
                   };
 
                 }
-                //var b = (a === true); // modify to a function seeking instance count for condition
-                //var c1 = a - dup_multiscore.length; logs(`${c1} returns how many items already have multiscore displayed on secondth half.`);
-                //var c2 = (b) => { };
-                //var d = c2 - c1; // modify get the difference based on var a & b & c
-                a(); logs(`${count.length -1} is a() count for ${grab_doms}`);
-//                var xe = a();
 
-//                logs(`${xe} ought to be recurrence count for ${grab_doms}`);
+                a(); logs(`${count.length -1} is a() count for ${grab_doms}`); // -1 offset removes overflow
+
+                // var b = (a === true); // modify to a function seeking instance count for condition
+                // var c1 = a - dup_multiscore.length; logs(`${c1} returns how many items already have multiscore displayed on secondth half.`);
+                // var c2 = (b) => { };
+                // var d = c2 - c1; // modify get the difference based on var a & b & c
+                // var xe = a();
+                // logs(`${xe} ought to be recurrence count for ${grab_doms}`);
 
               }
 
