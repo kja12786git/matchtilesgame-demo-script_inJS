@@ -429,7 +429,7 @@ for (let i = 0; i < halfBoard; i++) {
               let count = [];
               let hasAmount = () => { // modify to check for how many grabs already on dom with multiscore
                 var a = () => {
-                  for(c = 0; c < y; c++) {
+                  for (c = 0; c < y; c++) {
                     let x = $('#'+c);
                     let postcount = x.hasClass('multiscore') === true;
 
@@ -440,6 +440,26 @@ for (let i = 0; i < halfBoard; i++) {
                     }
 
                   };
+                  // #### renders additional instances on DOM based on account from above
+                    let b = count.length;
+                    let yy = y;
+                    for (c = 0; c < b-1; c++) {
+                      if (c == b) { logs(`B IS ONLY ${b}!+#`) };
+                      yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y}`)
+                      var grab_doms_2 = items[yy]; /**/
+                      var grab_obj_2 = items[yy]; /**/
+                      logs(`${count[b-1]} is count array's current feed.`);
+                      logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
+
+                      if (count[b-1] == grab_doms_2.innerHTML ) { // modify conditional or verify thiscount array, somewhere it allows more than known amount
+                        addMultiscore($(grab_obj_2));
+                        logs(`selector additional multiscore instance will add >> ${grab_obj_2.innerHTML}.`);
+
+                      }
+
+                    }
+
+                  // ########
 
                 }
 
@@ -461,7 +481,6 @@ for (let i = 0; i < halfBoard; i++) {
           }
 
         }
-
 
       }
 
