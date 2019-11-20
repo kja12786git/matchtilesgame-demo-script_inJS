@@ -399,78 +399,87 @@ for (let i = 0; i < halfBoard; i++) {
 
       let total = items.length; // global
       logs(`${item} is item.`); // local
-      logs(`dup_multiscore loop count accurate ${thiscount}`);
+      logs(`dup_multiscore loop count accurate to ${thiscount} && ${thiscount2.length}`);
       logs(`${thiscount2.length} is length of thiscount2 array.`);
 
       thiscount2 = []; // reset
       logs(`${thiscount2.length} is thiscount2 length at reset`);
 
-      for (y = total/2; y < total; y++) {
-        let grab = items[y].id;
-        let grab_doms = items[y].innerText;
-        let grab_obj = items[y];
-        let countce = y - total/2;
+        for (y = total/2+1; y < total; y++) {
+          let grab = items[y].id;
+          let grab_doms = items[y].innerText;
+          let grab_obj = items[y];
+          let countce = y - total/2;
+          let loopset = total/2+1;
 
-        logs(`${countce} is loop countup @ id #${grab}.`);
-        //logs(`${grab} is now item in focus and has ${grab_doms}.`);
+          logs(`${countce} is loop countup @ id #${grab}.`);
 
-        if (grab_doms === item) {
-          logs(`${item} is given item as matching ${grab_doms}.`);
-          thiscount2.push(grab_doms); logs(`Just pushed ${grab_doms} to thiscount2.`);
-            var instancecount = thiscount2.length;
+          if (grab_doms === item) {
+            logs(`${item} is given item as matching ${grab_doms}.`);
+            thiscount2.push(grab_doms);
+            logs(`Just pushed ${grab_doms} to thiscount2.`);
+            let instancecount = thiscount2.length;
+
             logs(`${instancecount} is first log of instances for ${grab_doms} @ loop ${y}.`);
             logs(`${thiscount2} is thiscount2.`);
 
-          let multiple = instancecount > 1;
-          if (multiple != true) { ;
-            addMultiscore($(grab_obj));
+            // ******************************
+            let count = []; // local count for multiple instances -1 if non-multiple already set
+            let multiple = instancecount > 1;
+            let count2 = instancecount + count.length; logs(`${count2} is count2`);
+            // let hasClassAlr = x.hasClass('multiscore') === true;
 
-          } else if (multiple === true) {
-              let count = [];
-              let hasAmount = () => { // modify to check for how many grabs already on dom with multiscore
+            if (multiple != true) {
+                  addMultiscore($(grab_obj));
+                  count.push(item);
+                  logs(`${count.length} ought to be 1 here...`);
+
+            } else if (multiple === true) {
+
+              let hasAmount = () => {
                 var a = () => {
-                  for (c = 0; c < y; c++) {
+                  for (c = 0; c < loopset; c++) { // finds original multiscore amounts ranging first halfBoard
                     let x = $('#'+c);
-                    let postcount = x.hasClass('multiscore') === true;
+                    let hasClassAlr = x.hasClass('multiscore') === true;
 
-                    if (postcount && grab_doms === x[0].innerText) { // secondary conditional needed in this loop replaces former variable ideas
+                    if (hasClassAlr && grab_doms === x[0].innerText) {
                       count.push(item);
+                      logs(`Current count ought to be ${count2} here...`);
                       logs(`hasAmount loop is at ${c} and ${x[0].innerText} has class multiscore is true.`);
 
                     }
 
                   };
-                  // #### renders additional instances on DOM based on account from above
-                    let b = count.length;
-                    let yy = y;
-                    for (c = 0; c < b-1; c++) {
-                      if (c == b) { logs(`B IS ONLY ${b}!+#`) };
-                      yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y}`)
-                      var grab_doms_2 = items[yy]; /**/
-                      var grab_obj_2 = items[yy]; /**/
-                      logs(`${count[b-1]} is count array's current feed.`);
-                      logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
 
-                      if (count[b-1] == grab_doms_2.innerHTML ) { // modify conditional or verify thiscount array, somewhere it allows more than known amount
-                        addMultiscore($(grab_obj_2));
-                        logs(`selector additional multiscore instance will add >> ${grab_obj_2.innerHTML}.`);
+                  // ********** renders additional instances on DOM based on previous account for variable b
+                  let b = count.length; logs(`${b} is count.length for ${item}`);
+                  let yy = y; /**/
+                  let limit = b*-1;
+                  logs(`limit is ${limit}`)
 
-                      }
+                  for (c = loopset; c < total; c++) {
+                    yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y} @ loop #${y}`)
+                    var grab_doms_2 = items[yy]; /**/
+                    var grab_obj_2 = items[yy]; /**/
+                    logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
+
+                    if (count[b-1] == grab_doms_2.innerHTML && c - total > limit) {
+                      logs(`${instancecount} is instancecount for ${grab_doms_2.innerHTML} at loop ${y}.`);
+
+                      addMultiscore($(grab_obj_2));
+
+                      logs(`selector additional multiscore instance will add >> ${grab_obj_2.innerHTML}.`);
+                      logs(`${count.length} is local count for ${grab_obj_2.innerHTML} and ${thiscount2} is thiscount2.`);
 
                     }
 
-                  // ########
+                  }
+
+                  // **********
 
                 }
 
-                a(); logs(`${count.length -1} is a() count for ${grab_doms}`); // -1 offset removes overflow
-
-                // var b = (a === true); // modify to a function seeking instance count for condition
-                // var c1 = a - dup_multiscore.length; logs(`${c1} returns how many items already have multiscore displayed on secondth half.`);
-                // var c2 = (b) => { };
-                // var d = c2 - c1; // modify get the difference based on var a & b & c
-                // var xe = a();
-                // logs(`${xe} ought to be recurrence count for ${grab_doms}`);
+                a(); logs(`${count.length} is a() count for ${grab_doms}`); // -1 offset removes overflow
 
               }
 
@@ -478,14 +487,15 @@ for (let i = 0; i < halfBoard; i++) {
 
               logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
 
+            }
+
           }
 
-        }
 
       }
-
       thiscount.push(item);
-      logs(`${thiscount2.length} is length of thiscount2 array.`);
+
+      logs(`${thiscount2.length} is length of thiscount2 array & thiscount is at ${thiscount.length}`);
 
     });
 
