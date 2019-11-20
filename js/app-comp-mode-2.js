@@ -398,6 +398,7 @@ for (let i = 0; i < halfBoard; i++) {
     dup_multiscore.forEach( (item) => {
 
       let total = items.length; // global
+      let loopset = total/2+1;
       logs(`${item} is item.`); // local
       logs(`dup_multiscore loop count accurate to ${thiscount} && ${thiscount2.length}`);
       logs(`${thiscount2.length} is length of thiscount2 array.`);
@@ -405,36 +406,33 @@ for (let i = 0; i < halfBoard; i++) {
       thiscount2 = []; // reset
       logs(`${thiscount2.length} is thiscount2 length at reset`);
 
-        for (y = total/2+1; y < total; y++) {
+      for (y = loopset; y < total; y++) { // loops through entire 2nd halfBoard
           let grab = items[y].id;
           let grab_doms = items[y].innerText;
           let grab_obj = items[y];
           let countce = y - total/2;
-          let loopset = total/2+1;
 
           logs(`${countce} is loop countup @ id #${grab}.`);
 
-          if (grab_doms === item) {
+          if (grab_doms === item) { // dup_multiscore loop item matches 2nd halfBoard item
             logs(`${item} is given item as matching ${grab_doms}.`);
             thiscount2.push(grab_doms);
             logs(`Just pushed ${grab_doms} to thiscount2.`);
             let instancecount = thiscount2.length;
 
-            logs(`${instancecount} is first log of instances for ${grab_doms} @ loop ${y}.`);
-            logs(`${thiscount2} is thiscount2.`);
+            //logs(`${thiscount2} is object of instancecount.`);
+            logs(`${instancecount} is first log of instances for ${grab_doms} or ${item} @ loop ${y}.`);
 
             // ******************************
             let count = []; // local count for multiple instances -1 if non-multiple already set
             let multiple = instancecount > 1;
             let count2 = instancecount + count.length; logs(`${count2} is count2`);
-            // let hasClassAlr = x.hasClass('multiscore') === true;
 
-            if (multiple != true) {
-                  addMultiscore($(grab_obj));
-                  count.push(item);
-                  logs(`${count.length} ought to be 1 here...`);
+            if (!multiple) { // logic fails yet still adds 1 of a multiple here...
+              logs(`${multiple} is result of multiple for ${instancecount} is instancecount.`);
+              addMultiscore($(grab_obj));
 
-            } else if (multiple === true) {
+            } else if (multiple == 0) { // logic from first part has to work 100% for this to be 100%...
 
               let hasAmount = () => {
                 var a = () => {
@@ -444,7 +442,7 @@ for (let i = 0; i < halfBoard; i++) {
 
                     if (hasClassAlr && grab_doms === x[0].innerText) {
                       count.push(item);
-                      logs(`Current count ought to be ${count2} here...`);
+                      logs(`Current count is ${count2} here...`);
                       logs(`hasAmount loop is at ${c} and ${x[0].innerText} has class multiscore is true.`);
 
                     }
@@ -457,13 +455,13 @@ for (let i = 0; i < halfBoard; i++) {
                   let limit = b*-1;
                   logs(`limit is ${limit}`)
 
-                  for (c = loopset; c < total; c++) {
+                  for (c = loopset; c < total - b && count2 > c - total; c++) {
                     yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y} @ loop #${y}`)
                     var grab_doms_2 = items[yy]; /**/
                     var grab_obj_2 = items[yy]; /**/
                     logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
 
-                    if (count[b-1] == grab_doms_2.innerHTML && c - total > limit) {
+                    if (count[b-1] == grab_doms_2.innerHTML) {
                       logs(`${instancecount} is instancecount for ${grab_doms_2.innerHTML} at loop ${y}.`);
 
                       addMultiscore($(grab_obj_2));
@@ -493,6 +491,7 @@ for (let i = 0; i < halfBoard; i++) {
 
 
       }
+
       thiscount.push(item);
 
       logs(`${thiscount2.length} is length of thiscount2 array & thiscount is at ${thiscount.length}`);
