@@ -428,11 +428,11 @@ for (let i = 0; i < halfBoard; i++) {
             let multiple = instancecount > 1;
             let count2 = instancecount + count.length; logs(`${count2} is count2`);
 
-            if (!multiple) { // logic fails yet still adds 1 of a multiple here...
+            if (!multiple && instancecount == 1) { // logic fails yet still adds 1 of a multiple here...
               logs(`${multiple} is result of multiple for ${instancecount} is instancecount.`);
               addMultiscore($(grab_obj));
 
-            } else if (multiple == 0) { // logic from first part has to work 100% for this to be 100%...
+            } else if (multiple == 0) { // set 0 = off logic from first part has to work 100% for this to be 100%...
 
               let hasAmount = () => {
                 var a = () => {
