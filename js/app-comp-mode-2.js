@@ -395,106 +395,69 @@ for (let i = 0; i < halfBoard; i++) {
 
     let thiscount = []; // doubles dup_multiscore count
     let thiscount2 = []; // array for making another duplicate limiter.
+    //let thiscount3 = [];
+
     dup_multiscore.forEach( (item) => {
 
       let total = items.length; // global
-      let loopset = total/2+1;
+      let loopset = total/2;
       logs(`${item} is item.`); // local
       logs(`dup_multiscore loop count accurate to ${thiscount} && ${thiscount2.length}`);
-      logs(`${thiscount2.length} is length of thiscount2 array.`);
 
       thiscount2 = []; // reset
       logs(`${thiscount2.length} is thiscount2 length at reset`);
+      //logs(`${thiscount3.length} is thiscount 3 length.`)
 
-      for (y = loopset; y < total; y++) { // loops through entire 2nd halfBoard
+        for (y = 0; y < loopset; y++) { // loops through entire 1st halfBoard
           let grab = items[y].id;
           let grab_doms = items[y].innerText;
           let grab_obj = items[y];
-          let countce = y - total/2;
+          let xx = y;
+          let x = $('#'+(xx++));
+          let hasClassAlr = x.hasClass('multiscore') === true;
 
-          logs(`${countce} is loop countup @ id #${grab}.`);
-
-          if (grab_doms === item) { // dup_multiscore loop item matches 2nd halfBoard item
+          if (grab_doms == item && hasClassAlr) { // to get instancecount
+            logs(`${x[0].innerText} has styleclass 'multiscore' is ${hasClassAlr}.`);            
             logs(`${item} is given item as matching ${grab_doms}.`);
             thiscount2.push(grab_doms);
-            logs(`Just pushed ${grab_doms} to thiscount2.`);
+            logs(`Just pushed ${grab_doms} to thiscount2 within inner loop @ ${y}.`);
             let instancecount = thiscount2.length;
-
-            //logs(`${thiscount2} is object of instancecount.`);
-            logs(`${instancecount} is first log of instances for ${grab_doms} or ${item} @ loop ${y}.`);
 
             // ******************************
             let count = []; // local count for multiple instances -1 if non-multiple already set
-            let multiple = instancecount > 1;
             let count2 = instancecount + count.length; logs(`${count2} is count2`);
 
-            if (!multiple && instancecount == 1) { // logic fails yet still adds 1 of a multiple here...
-              logs(`${multiple} is result of multiple for ${instancecount} is instancecount.`);
-              addMultiscore($(grab_obj));
+            let hasAmount = () => {
 
-            } else if (multiple == 0) { // set 0 = off logic from first part has to work 100% for this to be 100%...
+              var a = () => {
+                let yy = y;
+                for (c = loopset; c < total; c++) {
+                  // let countce = c - total/2;
+                  // logs(`${countce} is loop countup @ id #${grab}.`);
 
-              let hasAmount = () => {
-                var a = () => {
-                  for (c = 0; c < loopset; c++) { // finds original multiscore amounts ranging first halfBoard
-                    let x = $('#'+c);
-                    let hasClassAlr = x.hasClass('multiscore') === true;
+                  yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y} @ loop #${y}`)
+                  var grab_doms_2 = items[yy]; /**/
+                  var grab_obj_2 = items[yy]; /**/
+                  logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
 
-                    if (hasClassAlr && grab_doms === x[0].innerText) {
-                      count.push(item);
-                      logs(`Current count is ${count2} here...`);
-                      logs(`hasAmount loop is at ${c} and ${x[0].innerText} has class multiscore is true.`);
-
-                    }
-
-                  };
-
-                  // ********** renders additional instances on DOM based on previous account for variable b
-                  let b = count.length; logs(`${b} is count.length for ${item}`);
-                  let yy = y; /**/
-                  let limit = b*-1;
-                  logs(`limit is ${limit}`)
-
-                  for (c = loopset; c < total - b && count2 > c - total; c++) {
-                    yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y} @ loop #${y}`)
-                    var grab_doms_2 = items[yy]; /**/
-                    var grab_obj_2 = items[yy]; /**/
-                    logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
-
-                    if (count[b-1] == grab_doms_2.innerHTML) {
-                      logs(`${instancecount} is instancecount for ${grab_doms_2.innerHTML} at loop ${y}.`);
-
-                      addMultiscore($(grab_obj_2));
-
-                      logs(`selector additional multiscore instance will add >> ${grab_obj_2.innerHTML}.`);
-                      logs(`${count.length} is local count for ${grab_obj_2.innerHTML} and ${thiscount2} is thiscount2.`);
-
-                    }
-
-                  }
-
-                  // **********
-
-                }
-
-                a(); logs(`${count.length} is a() count for ${grab_doms}`); // -1 offset removes overflow
+                } // end of manual for loop (c)
 
               }
 
-              hasAmount();
-
-              logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
+              a(); // logs(`${count.length} is a() count for ${grab_doms}`); // -1 offset removes overflow
 
             }
 
+            //hasAmount();
+            logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
+
           }
 
-
-      }
+        } /* end manual forloop (y) */
 
       thiscount.push(item);
 
-      logs(`${thiscount2.length} is length of thiscount2 array & thiscount is at ${thiscount.length}`);
+      logs(`entire forloop @ loop ${thiscount.length}... ${thiscount2.length} is length of thiscount2 array containing ${thiscount2} >> for 'thiscount' is accurate @ loop ${thiscount.length}`);
 
     });
 
