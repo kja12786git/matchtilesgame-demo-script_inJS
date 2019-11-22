@@ -400,7 +400,7 @@ for (let i = 0; i < halfBoard; i++) {
     dup_multiscore.forEach( (item) => {
 
       let total = items.length; // global
-      let loopset = total/2;
+      let loopset = total/2+1;
       logs(`${item} is item.`); // local
       logs(`dup_multiscore loop count accurate to ${thiscount} && ${thiscount2.length}`);
 
@@ -408,12 +408,12 @@ for (let i = 0; i < halfBoard; i++) {
       logs(`${thiscount2.length} is thiscount2 length at reset`);
       //logs(`${thiscount3.length} is thiscount 3 length.`)
 
-        for (y = 0; y < loopset+1; y++) { // loops through entire 1st halfBoard
+        for (y = 0; y < loopset; y++) { // loops through entire 1st halfBoard
           let grab = items[y].id;
           let grab_doms = items[y].innerText;
           let grab_obj = items[y];
-          let xx = y;
-          let x = $('#'+(xx++));
+          let xx = y+1;
+          let x = $('#'+(xx));
           let hasClassAlr = x.hasClass('multiscore') === true;
 
           if (grab_doms == item && hasClassAlr) { // to get instancecount
