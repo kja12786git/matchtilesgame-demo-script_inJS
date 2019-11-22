@@ -408,7 +408,7 @@ for (let i = 0; i < halfBoard; i++) {
       logs(`${thiscount2.length} is thiscount2 length at reset`);
       //logs(`${thiscount3.length} is thiscount 3 length.`)
 
-        for (y = 0; y < loopset; y++) { // loops through entire 1st halfBoard
+        for (y = 0; y < loopset+1; y++) { // loops through entire 1st halfBoard
           let grab = items[y].id;
           let grab_doms = items[y].innerText;
           let grab_obj = items[y];
@@ -417,7 +417,7 @@ for (let i = 0; i < halfBoard; i++) {
           let hasClassAlr = x.hasClass('multiscore') === true;
 
           if (grab_doms == item && hasClassAlr) { // to get instancecount
-            logs(`${x[0].innerText} has styleclass 'multiscore' is ${hasClassAlr}.`);            
+            logs(`${x[0].innerText} has styleclass 'multiscore' is ${hasClassAlr}.`);
             logs(`${item} is given item as matching ${grab_doms}.`);
             thiscount2.push(grab_doms);
             logs(`Just pushed ${grab_doms} to thiscount2 within inner loop @ ${y}.`);
