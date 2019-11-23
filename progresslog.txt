@@ -1,8 +1,30 @@
 Codepen copy - https://codepen.io/kjerrya/pen/ypBomO
 
-Want to change:
-  - need to fine tune timer for desired accuracy on the DOM and ensure it is scoring accurate to user delay in between each play
-  - needs its own music, similar stuff
-  - button for new gameboard instead of just reset
-  - prospective reset or new gameboard button also needs to reset points and restart the timer properly
-  - it's not backwards compatible across browsers but works with webkit
+For upgrades:
+
+  + code to create extra point incentive with added detail matching
+    + multiscore pairs in consistent amount is optional due to favor of random pattern on the first halfBoard. #non-comp-mode
+
+  + new gameboard button added, refreshes entire page build
+
+  + the displayPrevPlay was added to the DOM for easier gameplay
+
+  + sound effects are good
+    - wants unique new ambient music
+
+  - timer still starts too early before first move.
+  - if reset button is hit it cannot reset timer... this may be unfixable in same page load of Javascript..? iFraming the gameboard area may be a solution. There is something about refreshing a div, maybe this can have some power.
+
+  - quality testing on cell phone reveals it gets difficult to function 100% at zoom levels below 100%, but this even smaller because within Codepen iframe which is half the mobile screen.
+
+  + upon reaching to a scope of server logging of scores for highscores... create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
+    + The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
+
+  + comp-mode-2 reorganize the comp-mode
+    + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
+    + make a dup_multiscore forloop from colorpattern definition and retune from parts of dup_limiter and itemsnative loop to verify instance counts
+    + to perform faster and allow for any amount of multiscore the colorpattern includes...
+    + fix inconsistant halfBoard pairing no matter how many blocks the colorpattern includes.
+
+  + comp-mode-2 now renders great
+    - give variation to colorpattern code so it will have a different wave upon every render

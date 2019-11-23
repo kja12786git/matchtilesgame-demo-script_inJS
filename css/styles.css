@@ -1,11 +1,11 @@
 body {
-    background-image: url('../imgs/beautiful-valley-24724-myedit.jpg');
+    background-color: teal;
     background-size: cover;
     background-position: top;
     position: relative;
     cursor: default;
     font-family: sans-serif;
-    min-width: 480px;
+    min-width: 521px;
     overflow-x: scroll;
 
 }
@@ -29,6 +29,16 @@ header {
 
 }
 
+header > h1:before {
+  content: '['
+
+}
+
+header > h1:after {
+  content: ']'
+
+}
+
 header > aside {
     position: absolute;
     float: right;
@@ -39,7 +49,7 @@ header > aside {
 
 header > h1 {
     text-indent: 1rem;
-    font-size: 300%;
+    font-size: 200%;
 
 }
 
@@ -56,8 +66,8 @@ ul {
 }
 
 ul li {
-    display: inline-block;
     margin: .33rem;
+    display: inline-block;
 
 }
 
@@ -88,8 +98,28 @@ ul li {
 }
 
 .nameFeed:before {
-    content: 'Player Name: ';
+    content: '[';
     color: #222;
+
+}
+
+.nameFeed:after {
+    content: ']';
+    color: #222;
+
+}
+
+#displayPrevPlay {
+    position: fixed;
+    right: 0;
+    top: 80px;
+    font-size: .67rem;
+    background: black;
+    padding: .20rem;
+
+}
+#displayPrevPlay > span {
+  font-size: 1rem;
 
 }
 
@@ -112,9 +142,9 @@ ul li {
 
 #gamearea .item {
     flex-direction: column;
-    height: 66px;
+    height: 35px;
     background: white;
-    margin: 1rem;
+    margin: .23rem;
     border-radius: 2%;
 
 }
@@ -122,23 +152,50 @@ ul li {
 .item {
     text-align: center;
     font-family: Arial, sans-serif;
-    font-size: 3rem;
+    font-size: 1.45rem;
+
+}
+
+#pregame {
+  position: relative;
+  padding: 0;
+  display: flex;
+  height: 100px;
+
+}
+
+#pregame > section {
+  width: 500px;
+/*  flex-direction: column; */
+  display: inline-flex;
+  padding: 0 .20rem;
+  border: 1px 0 #010101 solid;
+
+}
+
+#pregame * {
+    list-style: circle;
 
 }
 
 section#gameRules {
-    padding: 10px;
-    background: #EEECCC;
+    background-color: #EEECCC;
     color: #020202;
-    text-align: center;
+    font-size: 58%;
+    width: 100%;
+    overflow: scroll;
+    overflow-x: hidden;
+
+}
+#gameRules > ol {
+    padding: 0 1rem;
 
 }
 
 section#options {
-    height: 77px;
     background-color: yellow;
     background-color: rgba(255,255,77, .7);
-    padding: 1rem 10%;
+    font-size: 67%;
 
 }
 
@@ -147,6 +204,7 @@ footer {
     color: #EEEFFF;
     padding: .25rem;
     text-indent: 1rem;
+    font-size: 12px;
 
 }
 
@@ -165,12 +223,12 @@ footer {
 
 .style3:after {
     content: '';
-    background: rgb(255,255,200);
-    background: rgba(255,255,255,1);
+    background: skyblue;
     box-shadow: 3px 3px 2px black;
-    opacity: .98;
+    opacity: .90;
     border: 1px white solid;
     width: 100%;
+
     height: 100%;
     top: 0;
     left: 0;
@@ -251,12 +309,29 @@ footer {
 
 }
 
+.scoreWobbDblActive {
+  animation: scoreWobb2 200ms ease-in-out 1;
+
+}
+
 .trackerTitle {
   position: absolute;
   font-size: .77rem;
   left: -3rem;
 
 }
+
+.multiscore {
+  background-color: skyblue !important;
+
+}
+
+.popmultiscore {
+  background-color: rgba(0,0,0,128) !important;
+  color: yellow !important;
+
+}
+
 
 /*#timer:before {
     content: 'time:';
@@ -272,6 +347,15 @@ footer {
 	25% { font-size: 120%;}
 	50% { font-size: 125%; color: purple; font-weight: bolder;}
 	75% { font-size: 120%;}
+	100% { font-size: 100%;}
+
+}
+
+@keyframes scoreWobb2 {
+	0% {font-size: 100%;}
+	25% { font-size: 123%;}
+	50% { font-size: 137%; color: pink; font-weight: bolder;}
+	75% { font-size: 123%;}
 	100% { font-size: 100%;}
 
 }

@@ -11,11 +11,17 @@ const displayPrevPlay = $('#displayPrevPlay > span');
 const itemsnative = [...new Set(items)];
 const icons1 = ['5','1','3','4','6','2'];
 const icons2 = ['$','❤','☆','★','♡','☺'];
-const icons = icons2;
+const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
+
+// ## var works = dup_limit.filter(duplicates); // if only using numbers as content can this be used for easier results....
+let dup_limit = [];
+let ce = [];
+const newarr = [];
+
 const addMultiscore = (x) => {
-  x.addClass('multiscore');
+  x.addClass('multiscore'); // #DOMinsert
 
 }
 
@@ -175,7 +181,7 @@ const newPlay = (x) => { // the play controls and points function
         $('#score').removeClass('scoreWobbActive');
         $('#score').removeClass('scoreWobbDblActive');
 
-        item.addClass('newPlay'); // to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
+        item.addClass('newPlay'); // #DOMinsert to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
 
          // setTimer;
@@ -324,18 +330,24 @@ for (let x = 0; x < halfBoard; x++) {
                  togameboard.push(i);
 
              });
-
           }
+
 
     }
 
     // add code for extra point matches multiplier
-    let colorpattern = x % 2 == 0 && x % 4 != 0 || y % 3 == 0;
+    // let colorpattern = x % 2 == 0 && x % 4 != 0;
+    let colorpattern = x % 2 == 0 && x % 4 != 0 || x * 2 > halfBoard && x % 2 != 0;
+
     if (colorpattern) {
       var item = $('#'+x);
-//      logs(`${y} is the value of y`);
-      addMultiscore(item);
-      hasMultiscore.push(item); // log item to array
+      var xx = items.length;
+      // var item2 = $('#'+x+xx); // #c2 possible if after generated
+
+      addMultiscore(item); // item.addClass('multiscore');
+      // addMultiscore(item2); // #c2
+      hasMultiscore.push(item);
+      dup_multiscore.push(item[0].innerText);
 
     }
 
@@ -344,9 +356,6 @@ for (let x = 0; x < halfBoard; x++) {
 // to create second half of gameboard and randomize I will pull from the previous for loop which this will be dependent on because the values were already duplicated for use in the gameboard
 for (let x = halfBoard; x < slotsLngth; x++) {
     let getRandom = randValueNi(x,(slotsLngth - slotsLngth));
-    //**logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
-    //    items[x].append(togameboard[getRandom] + 'temp');
-    //    logs(getRandom);
 
 }
 
@@ -360,38 +369,11 @@ for (let i = 0; i < halfBoard; i++) {
 
 }
 
-////////////////////////////////////////
+///////////////////////////////////////
 // FOR MULTIPLIER WITH COLORED MATCHES
 ///////////////////////////////////////
+
     // to add multiplier styles to duplicates accurately on matching blocks and same amount only
-    hasMultiscore.forEach( (item) => { //buttons with multiplier are dynamically fed in randomly by the colorpattern code so this has to be dependent
-    //  logs(`${item[0].innerText} testing...`);
-      let orig_multi = item[0].innerText;
-
-      for (x = 0; x < halfBoard; x++) { // halfBoard = slotsLngth / 2
-          let find_dup = items[x];
-          find_dup = find_dup.innerText;
-
-          if (find_dup === orig_multi) {
-            dup_multiscore.push(find_dup);
-            logs(`${find_dup} && ${orig_multi} is matching duplicates to squares that are already with the color class.`);
-
-          }
-
-      }
-
-
-    });
-
-    // remove extra duplicates from dup_multiscore
-          // >>>>> this will not be necessary if the filter happens before pushing to array <<<<<
-            const reduceit = [dup_multiscore][0].reduce((x, y) => x.includes(y) ? x : [...x, y], []);
-          // const reduceit = dup_multiscore; <<<<<
-
-    // logs(`${reduceit} ought to be accurate pull of dynamic changes.`);
-    // does the operation to add the duplicate of the colored blocks to the 2nd halfBoard
-
-    let c = []; // an empty array for use to acct for duplicates on multiscore
 
     const lngth_orig_multscore = () => {
       return hasMultiscore.length;
@@ -399,40 +381,108 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     const retDupAmount = () => {
+      logs(`${dup_multiscore.length} mirrors ${hasMultiscore.length} >> make this the unique amount of duplicates per play.`);
 
-      logs(`${dup_multiscore.length} >> want to make this the unique amount of duplicates per play.`);
-      logs(`${c.length} is the length of c array.`);
-
-      return c.length;
+      return hasMultiscore.length;
 
     }
 
-    itemsnative.forEach( (item) => {
-        let b = reduceit;
-        logs(`${b.length} is the length of reduceit array.`)
+    const evenDups = () => { // useful for console logs and getting exact amount of duplicate multiscore
+      return lngth_orig_multscore === retDupAmount();
 
+    }
 
-        for (a=0; a < b.length; a++) {
-          let e = a;
-          let ce = c[e];
-          let domObj = $('#'+item.id);
+    let thiscount = []; // doubles dup_multiscore count
+    let thiscount2 = []; // array for making another duplicate limiter.
+    //let thiscount3 = [];
 
-          logs(`${ce} is already a multiscore duplicate on the 2nd halfBoard.`);
-          if (item.innerText === b[e] && item.id > halfBoard && b[e] != ce) {
-            logs(`${item.id} is current loop focus.`);
+    dup_multiscore.forEach( (item) => {
 
-            // make a conditional to filter addClass if there is already a duplicate on the 2nd halfBoard
-            if (item.innerText != ce && c.length <= b.length) {
-              logs(`${a} ought to be matching the ${ce} array log`);
-              addMultiscore(domObj);
-              // push this to empty array then add a conditional above to filter present after the loop
-              c.push(`${item.innerText}`);
+      let total = items.length; // global
+      let loopset = total/2+1;
+      logs(`${item} is item.`); // local
+      logs(`dup_multiscore loop count accurate to ${thiscount} && ${thiscount2.length}`);
 
-            }
+      thiscount2 = []; // reset
+      logs(`${thiscount2.length} is thiscount2 length at reset`);
+      // logs(`${thiscount3.length} is thiscount 3 length.`)
+
+        for (y = 0; y < loopset; y++) { // loops through entire 1st halfBoard
+          let grab = items[y].id;
+          let grab_doms = items[y].innerText;
+          let grab_obj = items[y];
+          let xx = y+1;
+          let x = $('#'+(xx));
+          let hasClassAlr = x.hasClass('multiscore') === true;
+
+          if (grab_doms == item && hasClassAlr) { // to get instancecount
+            logs(`${x[0].innerText} has styleclass 'multiscore' is ${hasClassAlr}.`);
+            logs(`${item} is given item as matching ${grab_doms}.`);
+            thiscount2.push(grab_doms);
+            logs(`Just pushed ${grab_doms} to thiscount2 within inner loop @ ${y}.`);
+            instancecount = thiscount2.length;
+
+            logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}. Transposal should be to id#${loopset+y}`);
+
+            renderAmount(instancecount);
 
           }
 
-        }
+          /* render accurate multiscore styles for 2nd halfBoard. */
+          renderAmount = (num) => {
+
+            let count = []; // local count for multiple instances -1 if non-multiple already set
+            let count2 = num + count.length;
+            let offset = thiscount.length - 1;
+            logs(`${count2} is count2 && offset is ${offset}.`);
+
+            var a = () => {
+                for (c = loopset; c < total || offset == retDupAmount(); c++) {
+                  let ly = loopset + y - 1;
+                  let skiploop = []; // continue; can't work because using manual loops within forLoop
+                  logs(`a() loop is at >> id#${c} @ y loop >> #${y}`);
+                  let grab_doms_2 = items[ly].innerText; /**/
+                  let grab_obj_2 = items[ly]; /**/
+                  logs(`${grab_doms_2.innerText} is grab_doms_2.`);
+
+                  count.forEach( (x) => {
+
+                    if (skiploop.length == 0 && x.innerHTML === grab_obj_2.innerHTML) {
+                      logs(`${x} is already contained in count.`);
+                      skiploop.push(x)
+
+                    }
+
+                  })
+
+                  if (skiploop.length == 0) {
+                    addMultiscore($(grab_obj_2));
+                    logs(`Added multiscore style to DOM for ${grab_obj_2.innerText}.`);
+                    count.push(grab_obj_2);
+
+                    logs(`Count is @ ${count.length} @ id#${c} displaying ${grab_obj_2.innerText}`);
+
+                  } else {
+
+                    logs(`${skiploop} is skiploop. ${skiploop.length}`);
+
+                  }
+
+                } // end of manual for loop (c)
+
+            }
+
+            a();
+
+          }
+          /* end render sequence ************** */
+
+
+        } /* end manual forloop (y) */
+
+      thiscount.push(item);
+
+      logs(`entire forloop @ loop ${thiscount.length}... ${thiscount2.length} is length of thiscount2 array containing ${thiscount2} >> for 'thiscount' is accurate @ loop ${thiscount.length}`);
 
     });
 

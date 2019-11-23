@@ -1,17 +1,19 @@
+<doctype html>
+<meta charset="utf8"/>
 <html>
 <head>
-  <title>Matching Tiles [working title]</title>
+  <title>Pairedo [working title]</title>
   <link type="text/css" rel="stylesheet" href="css/styles.css">
 
 </head>
 <body>
   <header>
-    <h1>[working title]</h1>
+    <h1>Pairedo</h1>
     <div id="name-input">
       <h2>Enter Your Name: </h2>
       <form>
-        <input type="text" placeholder="Enter Your Name" maxlength="30">
-        <button>Submit &#x263a;</button>
+        <input type="text" placeholder="Enter Your Name" maxlength="100">
+        <button>Play</button>
 
       </form>
 
@@ -20,7 +22,7 @@
       <h3 style="font-size: 360%; text-align:center;">Add your name above to start!</h3>
 
     </div>
-
+    <div id="displayPrevPlay">Previous Play: <span>x</span></div>
     <h2 class="nameFeed"></h2>
     <aside>
       <ul id="tracker">
@@ -33,6 +35,30 @@
 
   </header>
   <main>
+    <div id="pregame">
+      <section id="options">
+        <ul><h3>Settings & Options:</h3>
+          <li><button id="s1">ESY</button></li>
+          <li><button id="s2">MDM</button></li>
+          <li><button id="s3">HRD</button></li>
+          <li><button id="reset">Reset</button></li>
+          <li><button id="newgmbrd">New</button></li>
+
+        </ul>
+
+      </section>
+      <section id="gameRules">
+        <h3>Game Rules:</h3>
+        <ol>
+          <li>Press 2 blocks or tiles consecutively that contain the same graphic to score.</li>
+          <li>More point are granted on pair if the 2nd matching block has colored background.</li>
+          <li>You also get more points based on how fast you hit each matching pair.</li>
+
+        </ol>
+
+      </section>
+    </div>
+
     <section>
       <div id="gamearea">
           <!--  <audio id="ambientMusic" controls autoplay>
@@ -45,43 +71,57 @@
             <div class="item" id="2"></div>
             <div class="item" id="3"></div>
             <div class="item" id="4"></div>
+            <div class="item" id="5"></div>
+            <div class="item" id="6"></div>
 
           </div>
           <div class="column02">
-            <div class="item" id="5"></div>
-            <div class="item" id="6"></div>
             <div class="item" id="7"></div>
             <div class="item" id="8"></div>
-
-          </div>
-          <div class="column03">
             <div class="item" id="9"></div>
             <div class="item" id="10"></div>
             <div class="item" id="11"></div>
             <div class="item" id="12"></div>
 
           </div>
+          <div class="column03">
+            <div class="item" id="13"></div>
+            <div class="item" id="14"></div>
+            <div class="item" id="15"></div>
+            <div class="item" id="16"></div>
+            <div class="item" id="17"></div>
+            <div class="item" id="18"></div>
+
+          </div>
+          <div class="column04">
+            <div class="item" id="19"></div>
+            <div class="item" id="20"></div>
+            <div class="item" id="21"></div>
+            <div class="item" id="22"></div>
+            <div class="item" id="23"></div>
+            <div class="item" id="24"></div>
+
+          </div>
+          <div class="column05">
+            <div class="item" id="25"></div>
+            <div class="item" id="26"></div>
+            <div class="item" id="27"></div>
+            <div class="item" id="28"></div>
+            <div class="item" id="29"></div>
+            <div class="item" id="30"></div>
+
+          </div>
+          <div class="column06">
+            <div class="item" id="31"></div>
+            <div class="item" id="32"></div>
+            <div class="item" id="33"></div>
+            <div class="item" id="34"></div>
+            <div class="item" id="35"></div>
+            <div class="item" id="36"></div>
+
+          </div>
 
         </div>
-
-      </section>
-      <section id="gameRules">
-        <h3>Game Rules:</h3>
-        <ol>
-          <li>Hit two tiles that contain the same graphic to score!</li>
-          <li>The total amount of points is calculated based on how fast you hit matching pairs!</li>
-
-        </ol>
-
-      </section>
-      <section id="options">
-        <ul><h3>Difficulty Settings:</h3>
-          <li><button id="s1">Easy</button></li>
-          <li><button id="s2">Medium</button></li>
-          <li><button id="s3">Hard</button></li>
-          <li><button id="reset">Reset</button></li>
-
-        </ul>
 
       </section>
 
@@ -99,11 +139,14 @@
       </section>
 
   </main>
-  <footer>A game like Majhong and similar tile-based games.</footer>
+  <footer>Positive coupling scores points in the gameboard.</footer>
 
-<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<!--<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>-->
+<!--<script type="text/javascript" src="js/app.js"></script>-->
+<!--<script type="text/javascript" src="js/app-comp-mode.js"></script>-->
+<script type="text/javascript" src="js/app-comp-mode-2.js"></script>
+
 </body>
 
 </html>
