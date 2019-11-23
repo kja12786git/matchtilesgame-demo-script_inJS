@@ -433,15 +433,15 @@ for (let i = 0; i < halfBoard; i++) {
 
             let count = []; // local count for multiple instances -1 if non-multiple already set
             let count2 = num + count.length;
-            let offset = thiscount.length;
+            let offset = thiscount.length - 1;
             logs(`${count2} is count2 && offset is ${offset}.`);
 
             var a = () => {
-                for (c = loopset; c < total && offset < retDupAmount(); c++) {
-                  let ly = loopset+y;
+                for (c = loopset; c < total || offset == retDupAmount(); c++) {
+                  let ly = loopset + y - 1;
                   let skiploop = []; // continue; can't work because using manual loops within forLoop
                   logs(`a() loop is at >> id#${c} @ y loop >> #${y}`);
-                  let grab_doms_2 = items[ly]; /**/
+                  let grab_doms_2 = items[ly].innerText; /**/
                   let grab_obj_2 = items[ly]; /**/
                   logs(`${grab_doms_2.innerText} is grab_doms_2.`);
 
