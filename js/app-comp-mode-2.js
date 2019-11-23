@@ -341,7 +341,11 @@ for (let x = 0; x < halfBoard; x++) {
 
     if (colorpattern) {
       var item = $('#'+x);
+      var xx = items.length;
+      // var item2 = $('#'+x+xx); // #c2 possible if after generated
+
       addMultiscore(item); // item.addClass('multiscore');
+      // addMultiscore(item2); // #c2
       hasMultiscore.push(item);
       dup_multiscore.push(item[0].innerText);
 
@@ -352,9 +356,6 @@ for (let x = 0; x < halfBoard; x++) {
 // to create second half of gameboard and randomize I will pull from the previous for loop which this will be dependent on because the values were already duplicated for use in the gameboard
 for (let x = halfBoard; x < slotsLngth; x++) {
     let getRandom = randValueNi(x,(slotsLngth - slotsLngth));
-    //**logs(getRandom + ' current random from togameboard'); // since this random value return does not work well I may have to feed the values from the ones already pushed to the DOM
-    //    items[x].append(togameboard[getRandom] + 'temp');
-    //    logs(getRandom);
 
 }
 
@@ -421,7 +422,9 @@ for (let i = 0; i < halfBoard; i++) {
             logs(`Just pushed ${grab_doms} to thiscount2 within inner loop @ ${y}.`);
             instancecount = thiscount2.length;
 
-            logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
+            logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}. Transposal should be to id#${loopset+y}`);
+
+            renderAmount(instancecount);
 
           }
 
@@ -430,24 +433,42 @@ for (let i = 0; i < halfBoard; i++) {
 
             let count = []; // local count for multiple instances -1 if non-multiple already set
             let count2 = num + count.length;
-            logs(`${count2} is count2.`);
+            let offset = thiscount.length;
+            logs(`${count2} is count2 && offset is ${offset}.`);
 
             var a = () => {
-              for (c = loopset; c < total && c < (loopset + count2); c++) {
+                for (c = loopset; c < total && offset < retDupAmount(); c++) {
+                  let ly = loopset+y;
+                  let skiploop = []; // continue; can't work because using manual loops within forLoop
+                  logs(`a() loop is at >> id#${c} @ y loop >> #${y}`);
+                  let grab_doms_2 = items[ly]; /**/
+                  let grab_obj_2 = items[ly]; /**/
+                  logs(`${grab_doms_2.innerText} is grab_doms_2.`);
 
-                logs(`a() loop is at >> id#${c} @ y loop >> #${y}`);
-                var grab_doms_2 = items[c]; /**/
-                var grab_obj_2 = items[c]; /**/
-                logs(`${grab_doms_2.innerText} is grab_doms_2`);
+                  count.forEach( (x) => {
 
-                addMultiscore($(grab_obj_2));
-                logs(`Added multiscore style to DOM for ${grab_obj_2.innerText}.`);
+                    if (skiploop.length == 0 && x.innerHTML === grab_obj_2.innerHTML) {
+                      logs(`${x} is already contained in count.`);
+                      skiploop.push(x)
 
-                count.push(grab_obj_2);
-                logs(`Count is @ ${count.length} @ loop #${c} displaying ${grab_obj_2.innerText}`);
-                logs(`${c < (loopset + count2)} for limit setting.`);
+                    }
 
-              } // end of manual for loop (c)
+                  })
+
+                  if (skiploop.length == 0) {
+                    addMultiscore($(grab_obj_2));
+                    logs(`Added multiscore style to DOM for ${grab_obj_2.innerText}.`);
+                    count.push(grab_obj_2);
+
+                    logs(`Count is @ ${count.length} @ id#${c} displaying ${grab_obj_2.innerText}`);
+
+                  } else {
+
+                    logs(`${skiploop} is skiploop. ${skiploop.length}`);
+
+                  }
+
+                } // end of manual for loop (c)
 
             }
 
@@ -459,7 +480,6 @@ for (let i = 0; i < halfBoard; i++) {
 
         } /* end manual forloop (y) */
 
-      renderAmount(instancecount);
       thiscount.push(item);
 
       logs(`entire forloop @ loop ${thiscount.length}... ${thiscount2.length} is length of thiscount2 array containing ${thiscount2} >> for 'thiscount' is accurate @ loop ${thiscount.length}`);
