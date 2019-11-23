@@ -7,8 +7,6 @@ For upgrades:
 
   + new gameboard button added, refreshes entire page build
 
-  - something changed with either jQuery or browsers which is not display the typed nameInputDiv to nameFeed.
-
   + the displayPrevPlay was added to the DOM for easier gameplay
 
   + sound effects are good
