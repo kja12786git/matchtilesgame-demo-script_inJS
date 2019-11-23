@@ -341,10 +341,8 @@ for (let x = 0; x < halfBoard; x++) {
 
     if (colorpattern) {
       var item = $('#'+x);
-      //      logs(`${y} is the value of y`);
-      //      item.addClass('multiscore');
-      addMultiscore(item);
-      hasMultiscore.push(item); // log item to array
+      addMultiscore(item); // item.addClass('multiscore');
+      hasMultiscore.push(item);
       dup_multiscore.push(item[0].innerText);
 
     }
@@ -406,7 +404,7 @@ for (let i = 0; i < halfBoard; i++) {
 
       thiscount2 = []; // reset
       logs(`${thiscount2.length} is thiscount2 length at reset`);
-      //logs(`${thiscount3.length} is thiscount 3 length.`)
+      // logs(`${thiscount3.length} is thiscount 3 length.`)
 
         for (y = 0; y < loopset; y++) { // loops through entire 1st halfBoard
           let grab = items[y].id;
@@ -421,40 +419,47 @@ for (let i = 0; i < halfBoard; i++) {
             logs(`${item} is given item as matching ${grab_doms}.`);
             thiscount2.push(grab_doms);
             logs(`Just pushed ${grab_doms} to thiscount2 within inner loop @ ${y}.`);
-            let instancecount = thiscount2.length;
+            instancecount = thiscount2.length;
 
-            // ******************************
-            let count = []; // local count for multiple instances -1 if non-multiple already set
-            let count2 = instancecount + count.length; logs(`${count2} is count2`);
-
-            let hasAmount = () => {
-
-              var a = () => {
-                let yy = y;
-                for (c = loopset; c < total; c++) {
-                  // let countce = c - total/2;
-                  // logs(`${countce} is loop countup @ id #${grab}.`);
-
-                  yy = yy++; /**/ logs(`yy value >> ${yy} and y value >> ${y} @ loop #${y}`)
-                  var grab_doms_2 = items[yy]; /**/
-                  var grab_obj_2 = items[yy]; /**/
-                  logs(`${grab_doms_2.innerHTML} is grab_doms_2`);
-
-                } // end of manual for loop (c)
-
-              }
-
-              a(); // logs(`${count.length} is a() count for ${grab_doms}`); // -1 offset removes overflow
-
-            }
-
-            //hasAmount();
             logs(`${instancecount} is amount of instances for ${grab_doms} @ loop ${y}.`);
 
           }
 
+          /* render accurate multiscore styles for 2nd halfBoard. */
+          renderAmount = (num) => {
+
+            let count = []; // local count for multiple instances -1 if non-multiple already set
+            let count2 = num + count.length;
+            logs(`${count2} is count2.`);
+
+            var a = () => {
+              for (c = loopset; c < total && c < (loopset + count2); c++) {
+
+                logs(`a() loop is at >> id#${c} @ y loop >> #${y}`);
+                var grab_doms_2 = items[c]; /**/
+                var grab_obj_2 = items[c]; /**/
+                logs(`${grab_doms_2.innerText} is grab_doms_2`);
+
+                addMultiscore($(grab_obj_2));
+                logs(`Added multiscore style to DOM for ${grab_obj_2.innerText}.`);
+
+                count.push(grab_obj_2);
+                logs(`Count is @ ${count.length} @ loop #${c} displaying ${grab_obj_2.innerText}`);
+                logs(`${c < (loopset + count2)} for limit setting.`);
+
+              } // end of manual for loop (c)
+
+            }
+
+            a();
+
+          }
+          /* end render sequence ************** */
+
+
         } /* end manual forloop (y) */
 
+      renderAmount(instancecount);
       thiscount.push(item);
 
       logs(`entire forloop @ loop ${thiscount.length}... ${thiscount2.length} is length of thiscount2 array containing ${thiscount2} >> for 'thiscount' is accurate @ loop ${thiscount.length}`);
