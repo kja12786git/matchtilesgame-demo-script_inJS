@@ -20,7 +20,9 @@ For upgrades:
   + upon reaching to a scope of server logging of scores for highscores... create a separate competition mode which will make the algorithm render a consistent amount of extra points blocks to create a fair chance of total points for each render.
     + The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
 
-  + comp-mode-2 reorganize the comp-mode
+  + comp-mode colorpattern multiscore increased for more dynamic gameboard.
+
+  + comp-mode-2 reorganizes the comp-mode
     + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
     + make a dup_multiscore forloop from colorpattern definition and retune from parts of dup_limiter and itemsnative loop to verify instance counts
     + to perform faster and allow for any amount of multiscore the colorpattern includes...
