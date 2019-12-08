@@ -21,6 +21,7 @@ For upgrades:
     + The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
 
   + comp-mode colorpattern multiscore increased for more dynamic gameboard.
+    - comp-mode update using a skiploop logic like comp-mode-2. However, leaving the post-render as is instead of transposing comp-mode-2's dual colorpattern render.
 
   + comp-mode-2 reorganizes the comp-mode
     + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
