@@ -506,8 +506,7 @@ for (let i = 0; i < halfBoard; i++) {
             if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
               logs(`${dup_multiscore} is well returned from dup_limiter.`);
 
-                addMultiscore(grab);
-                grab.addClass('duplicate_multiscore');
+                addMultiscore(grab); // grab.addClass('duplicate_multiscore');
                 if (dup_limiter(item) > 1 && thiscount[0] != false) {
                   logs(`dup_limiter reads ${dup_limiter(item)} for this is more than 1 duplicate. So add style or space for another ${item} before next loop. .`);
                   for (c= 0; c < dup_limiter(item); c++) {
