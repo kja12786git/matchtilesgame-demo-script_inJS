@@ -17,7 +17,6 @@ const dup_multiscore = [];
 
 // ## var works = dup_limit.filter(duplicates); // if only using numbers as content can this be used for easier results....
 let dup_limit = [];
-let ce = [];
 const newarr = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
 
@@ -29,8 +28,7 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
   let verCb2 = dup_multiscore.includes(cb1);
 
     for (a = 0; a < length; a++) {
-      verCb1 = cb1 === hasMultiscore[a][0].innerText;
-      // let verCb2 = dup_multiscore.includes(cb1);
+      var verCb1 = cb1 === hasMultiscore[a][0].innerText;
       var that = (length - a) <= newarr[newarr.length-1];
 
       if (verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
@@ -41,31 +39,18 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
             dup_limit.push(cb1);
             dup_multiscore.push(cb1);
             logs(`${dup_limit.length} length of instance of dup_limit push.`);
-            //addMultiscore(grab);
 
         } else if (verCb2 && that) { // additional copy verification for push to display
           logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
           logs(`${dup_limit.length} length of instance of dup_limit push.`);
           logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
-          //if (that && verCb2 != true) { addMultiscore(grab);}
           dup_limit.push(cb1);
-          // dup_multiscore.push(cb1);
           logs(`${dup_limit.length} length of instance of dup_limit push.`);
-
-                  if (dup_limit.length > 1) {
-                    // ce = [];
-                    ce.push(cb1);
-                    logs(`${ce.length} is inside array for showing multiple duplicates. Its content displays ${ce} as gfx.`);
-                    logs(`got it... adjust for displaying multiple after this.`);
-
-                  }
 
         } else if (that && verCb1) {
 
           logs(`no conditional met yet...`);
-          //addMultiscore(grab);
           dup_limit.push(cb1);
-          dup_multiscore.push(cb1);
 
         }
 
