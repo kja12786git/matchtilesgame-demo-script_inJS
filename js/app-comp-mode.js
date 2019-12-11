@@ -34,23 +34,37 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
       if (verCb1) { logs(`multiscore limit is not yet filled... valid for proceed.`);
 
         if (verCb2 != true) {
-          logs(`first duplicate is ${cb1}.`);
-          logs(`${verCb1} copy of ${cb1} is in qeue....`);
+            logs(`first duplicate is ${cb1}.`);
+            logs(`${verCb1} copy of ${cb1} is in qeue....`);
             dup_limit.push(cb1);
             dup_multiscore.push(cb1);
             logs(`${dup_limit.length} length of instance of dup_limit push.`);
 
         } else if (verCb2 && that) { // additional copy verification for push to display
-          logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
-          logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
-          dup_limit.push(cb1);
-          logs(`${dup_limit.length} length of instance of dup_limit push.`);
+            logs(`${cb1} duplicate & ${dup_multiscore.length} is dup_multiscore length.`);
+            logs(`${dup_limit.length} length of instance of dup_limit push.`);
+            logs(`Additional duplicate exception possible for ${cb1} at ${cb1.length}.`);
+            dup_limit.push(cb1);
+            logs(`${dup_limit.length} length of instance of dup_limit push.`);
+
+            var count = [];
+
+            hasMultiscore.forEach ( (i) => { // how many instances are there to bring over?
+              let a = i[0].innerText;
+              logs(`${a} is 'a' in instancecount check.`);
+
+              if (a == cb1) {
+                count.push(a);
+
+              }
+
+            })
+
+            logs(`${cb1} has ${count.length} original instances.`);
 
         } else if (that && verCb1) {
-
-          logs(`no conditional met yet...`);
-          dup_limit.push(cb1);
+            logs(`no conditional met yet...`);
+            dup_limit.push(cb1);
 
         }
 
@@ -78,8 +92,7 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
     if (newarr.length + diff === length && dup_multiscore.length != 0 && dup_multiscore.length <= length) {
       return ret;
 
-    }
-    else {
+    } else {
       return false;
 
     }
