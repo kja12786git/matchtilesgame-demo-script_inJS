@@ -21,6 +21,7 @@ const newarr = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
 
   dup_limit = []; // reset
+  dl2 = []; // without conflicting previous array method
 
   let length = hasMultiscore.length;
   let length_dup = dup_multiscore.length;
@@ -51,7 +52,7 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
             hasMultiscore.forEach ( (i) => { // how many instances are there to bring over?
               let a = i[0].innerText;
-              logs(`${a} is 'a' in instancecount check.`);
+              // logs(`${a} is 'a' in instancecount check.`);
 
               if (a == cb1) {
                 count.push(a);
@@ -60,7 +61,16 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
             })
 
-            logs(`${cb1} has ${count.length} original instances.`);
+
+
+            if (count.length > 1) {
+
+              logs(`${cb1} has ${count.length} original instances.`);
+              let a = count.length;
+              dl2.push(a);
+              logs(`dl2 is ${dl2}`);
+
+            }
 
         } else if (that && verCb1) {
             logs(`no conditional met yet...`);
@@ -72,7 +82,8 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
     }
 
-  const ret = dup_limit.length; // dup_limit usage changed since its inception cross referencing with dup_multiscore usage change
+  var ret = dup_limit.length; // dup_limit usage changed since its inception cross referencing with dup_multiscore usage change
+  //ret = dl2[0];
   const packetsize = length - ret; // diff between amount of duplicates and length limit
   for (c = 0; c < ret; c++) {
     if (newarr.length < length) { newarr.push(packetsize) }
@@ -502,9 +513,8 @@ for (let i = 0; i < halfBoard; i++) {
             }
 
             if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
-              logs(`${dup_multiscore} is well returned from dup_limiter.`);
 
-                addMultiscore(grab); // grab.addClass('duplicate_multiscore');
+                addMultiscore(grab);
                 if (dup_limiter(item) > 1 && thiscount[0] != false) {
                   logs(`dup_limiter reads ${dup_limiter(item)} for this is more than 1 duplicate. So add style or space for another ${item} before next loop. .`);
                   for (c= 0; c < dup_limiter(item); c++) {
