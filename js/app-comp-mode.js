@@ -15,13 +15,12 @@ const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
 
-// ## var works = dup_limit.filter(duplicates); // if only using numbers as content can this be used for easier results....
 let dup_limit = [];
 const newarr = [];
 const dup_limiter = (x) => { // not yet complete >> essentially will replace reduceit code for smarter filter
 
   dup_limit = []; // reset
-  dl2 = []; // without conflicting previous array method
+  download2 = []; // without conflicting previous array method
 
   let length = hasMultiscore.length;
   let length_dup = dup_multiscore.length;
@@ -59,16 +58,15 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
 
               }
 
-            })
-
+            });
 
 
             if (count.length > 1) {
 
               logs(`${cb1} has ${count.length} original instances.`);
               let a = count.length;
-              dl2.push(a);
-              logs(`dl2 is ${dl2}`);
+              download2.push(a);
+              logs(`download2 is ${download2}`);
 
             }
 
@@ -83,7 +81,7 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
     }
 
   var ret = dup_limit.length; // dup_limit usage changed since its inception cross referencing with dup_multiscore usage change
-  //ret = dl2[0];
+
   const packetsize = length - ret; // diff between amount of duplicates and length limit
   for (c = 0; c < ret; c++) {
     if (newarr.length < length) { newarr.push(packetsize) }
@@ -100,7 +98,9 @@ const dup_limiter = (x) => { // not yet complete >> essentially will replace red
   logs(`the grab is id#${grab[0].id} which contains ${grab[0].innerText}`);
 
   // <<<>>>
-    if (newarr.length + diff === length && dup_multiscore.length != 0 && dup_multiscore.length <= length) {
+    if (newarr.length + diff === length) {
+      if (download2[0]) { ret = download2[0]; } // change setting if instance count is plural + need outter scope notification
+
       return ret;
 
     } else {
@@ -313,8 +313,7 @@ const newPlay = (x) => { // the play controls and points function
                 displayPrevPlay.text(`${playLog[moves-1][0].innerHTML}`);
                 alert(`invalid play ${item[0].innerText}, to continue find another ${playLog[moves-1][0].innerText} on the gameboard.`);
 
-            }
-              else {
+            } else {
 
                 playLog.push(item);
                 // on valid plays change the prev play displayed for easier user gameplay
@@ -430,8 +429,8 @@ for (let x = 0; x < halfBoard; x++) {
 
     if (colorpattern) {
       var item = $('#'+x);
-//      logs(`${y} is the value of y`);
-//      item.addClass('multiscore');
+      // logs(`${y} is the value of y`);
+      // item.addClass('multiscore');
       addMultiscore(item);
       hasMultiscore.push(item); // log item to array
 
@@ -482,6 +481,8 @@ for (let i = 0; i < halfBoard; i++) {
     }
 
     let thiscount = [];
+    let onlyinstance = [];
+    let moreinstances = [];
     itemsnative.forEach( (item) => {
 
       var b = hasMultiscore;
@@ -490,40 +491,57 @@ for (let i = 0; i < halfBoard; i++) {
       let has = grab.hasClass('duplicate_multiscore');
 
         if (item.id > halfBoard) {
-          dup_limiter(item);
+          let notify = dup_limiter(item); notify;
+          let ce = notify;
 
+          logs(`${ce} returns for dup_limiter(item) for ${item.innerText}.`);
           logs(`${item.id} or ${domObj.id} is current loop focus &&  returned on ${grab[0].innerText}.`);
           logs(`div# is ${domObj.id} & ${domObj.innerText} is content of domObj... ${domObj.id} mirrors ${grab[0].id}`);
-
           logs(`dup_limiter func() returns true on ${grab[0].innerText}.`);
-
-            if (thiscount[thiscount.length -1] != false && thiscount[0] != false) {
-                let c = thiscount.length;
-                if (thiscount[c-1] === undefined && isNaN(thiscount[c-1]) ) {
-                  thiscount.pop(); // leaves it to luck the instance on next loop
-                  logs(`Works... popping this... ${thiscount[c-1]}.`);
-
-                } else {
-
-                logs(`Works... add another instance for ${thiscount[c]}.`);
-                // manually correct here if it doesn't return undefined
-
-                }
-
-            }
 
             if (dup_multiscore.includes(item.innerText) && thiscount.length < dup_multiscore.length) {
 
+              if ((ce == 1) && onlyinstance.includes(item.innerText) != true) {
                 addMultiscore(grab);
-                if (dup_limiter(item) > 1 && thiscount[0] != false) {
-                  logs(`dup_limiter reads ${dup_limiter(item)} for this is more than 1 duplicate. So add style or space for another ${item} before next loop. .`);
-                  for (c= 0; c < dup_limiter(item); c++) {
-                    thiscount.push(item.innerText); // makes space for the next instance to get multiscore before tertiary duplicate takes place
+                logs(`multiscore rendered ${grab} as ${item.innerText} ONCE.`);
+                thiscount.push(has===has);
+                onlyinstance.push(item.innerText);
+
+              } else if (ce > 1) {
+                logs(`dup_limiter returns ${ce} instances for this ${item.innerText}.`);
+
+                const anarray = []; // for limiting multiple instance repeats
+                if (moreinstances.includes(item.innerText) == true) {
+                  var length = moreinstances.length;
+                  for (c = 0; c < length; c++) {
+                      var xx = moreinstances[c];
+                      var y = item.innerText; // same as includes conditional
+
+                      if (y == xx) {
+                        logs(`${y} is same as ${xx}`);
+                        anarray.push(1);
+
+                      }
 
                   }
 
+                } else { moreinstances.push(item.innerText);}
+
+                let doubleinstance = anarray.length;
+                doubleinstance = ce - doubleinstance > 0;
+                if (doubleinstance) {
+                  addMultiscore(grab);
+                  // moreinstances.push(item.innerText);
+                  thiscount.push(has===has);
+
                 }
-                thiscount.push(has); logs(`${thiscount.length} towards multiscore limit...`);
+
+                logs(`multiscore rendered ${grab} as "${item.innerText}" 1 time.`);
+
+
+              }
+
+              logs(`${thiscount.length} towards multiscore limit...`);
 
             };
 
