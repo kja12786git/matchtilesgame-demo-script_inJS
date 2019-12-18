@@ -21,6 +21,9 @@ For upgrades:
     + The array catching the color pattern will have to filter smarter in order to randomly duplicate on the second halfBoard without producing too many or too few copies.
 
   + comp-mode colorpattern multiscore increased for more dynamic gameboard.
+    + more in depth conditionals worked to get accurate instance render.
+    + skip-loop doesn't work here due to render works different than more concise one for comp-mode-2.
+    - Perhaps already proven, must do more quality assurance runs to make certain render work well 100% of the renders.
 
   + comp-mode-2 reorganizes the comp-mode
     + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
@@ -28,5 +31,5 @@ For upgrades:
     + to perform faster and allow for any amount of multiscore the colorpattern includes...
     + fix inconsistant halfBoard pairing no matter how many blocks the colorpattern includes.
 
-  + comp-mode-2 now renders great
-    - give variation to colorpattern code so it will have a different wave upon every render
+  + comp-mode-2 and comp-mode both render as desired
+    - give variation to colorpattern renders so both modes can render unique patterns each time.
