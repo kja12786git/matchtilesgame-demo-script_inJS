@@ -115,6 +115,25 @@ const addMultiscore = (x) => {
 
 }
 
+const renderverify = (x) => {
+
+  for (c = halfBoard; c < slotsLngth; c++) { // replace slotsLngth with current loop feed if possible
+    let b = $('#'+c); // DOM selector for entire availability
+    let bstyle = b.hasClass('multiscore');
+    // logs(`let b is coming is as ${b} and bstyle is reading... ${bstyle}`);
+    let a = x[0].innerText == b[0].innerText; logs(`x comes as ${x[0].innerText} && b as ${b[0].innerText}.`)
+    let that = a && bstyle;
+    if (that) { renderstatus.push(a);
+    } // # reflects previous rendered amount during app build
+
+    logs(`render verifying id# ${b[0].id} && a is ${a} and var that is ${that} .`);
+
+  }
+
+  logs(`${renderstatus.length} return from renderverify...`);
+
+}
+
 const slotsLngth = items.length;
 var gfxLngth = icons.length;
 logs(slotsLngth + ':All slots.' + gfxLngth + ':Icons(gfx)count');
@@ -483,12 +502,14 @@ for (let i = 0; i < halfBoard; i++) {
     let thiscount = [];
     let onlyinstance = [];
     let moreinstances = [];
+    let renderstatus = [];
     itemsnative.forEach( (item) => {
 
       var b = hasMultiscore;
       let domObj = document.getElementById(item.id);
       let grab = $('#'+item.id);
       let has = grab.hasClass('duplicate_multiscore');
+      renderstatus = [];
 
         if (item.id > halfBoard) {
           let notify = dup_limiter(item); notify;
@@ -503,41 +524,57 @@ for (let i = 0; i < halfBoard; i++) {
 
               if ((ce == 1) && onlyinstance.includes(item.innerText) != true) {
                 addMultiscore(grab);
-                logs(`multiscore rendered ${grab} as ${item.innerText} ONCE.`);
+                logs(`multiscore rendered ${domObj} as ${item.innerText} ONCE.`);
                 thiscount.push(has===has);
                 onlyinstance.push(item.innerText);
 
               } else if (ce > 1) {
                 logs(`dup_limiter returns ${ce} instances for this ${item.innerText}.`);
-
                 const anarray = []; // for limiting multiple instance repeats
+
                 if (moreinstances.includes(item.innerText) == true) {
+                  renderverify(grab); // retrieve amount of duplicate_multiscore previously rendered
+
                   var length = moreinstances.length;
                   for (c = 0; c < length; c++) {
                       var xx = moreinstances[c];
                       var y = item.innerText; // same as includes conditional
 
                       if (y == xx) {
-                        logs(`${y} is same as ${xx}`);
-                        anarray.push(1);
+                        logs(`${y} is same as ${xx}.`);
+                        anarray.push(xx);
 
                       }
 
                   }
 
+
                 } else { moreinstances.push(item.innerText);}
 
-                let doubleinstance = anarray.length;
-                doubleinstance = ce - doubleinstance > 0;
-                if (doubleinstance) {
+                let doubleinstance = anarray.length; logs(`${doubleinstance} is doubleinstance.`);
+                doubleinstance = doubleinstance < ce && doubleinstance > 0;
+
+                logs(`${renderstatus} renderstatus for ${item.innerText} length of ${renderstatus.length}.`);
+                renderstatus = renderstatus.length;
+
+                if (doubleinstance && moreinstances.length > 1 && renderstatus < ce) { // must reverify which one its rendering here
                   addMultiscore(grab);
-                  // moreinstances.push(item.innerText);
+                  thiscount.push(has===has);
+                  logs(`3rd doubleinstance contains ${moreinstances[1]}.`);
+
+                } else if (doubleinstance && moreinstances.length == 1) {
+                  logs(`2nd doubleinstance contains ${moreinstances[0]}.`);
+                  addMultiscore(grab);
+                  thiscount.push(has===has);
+
+                } else if (moreinstances.length == 1 && anarray.length == 0) {
+                  logs(`First doubleinstance only... this was why the count is off.`);
+                  addMultiscore(grab);
                   thiscount.push(has===has);
 
                 }
 
                 logs(`multiscore rendered ${grab} as "${item.innerText}" 1 time.`);
-
 
               }
 
