@@ -394,7 +394,7 @@ for (let i = 0; i < halfBoard; i++) {
 
     let thiscount = []; // doubles dup_multiscore count
     let thiscount2 = []; // array for making another duplicate limiter.
-    //let thiscount3 = [];
+    let thiscount3 = [];
 
     dup_multiscore.forEach( (item) => {
 

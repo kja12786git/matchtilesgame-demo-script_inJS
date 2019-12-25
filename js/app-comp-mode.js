@@ -259,9 +259,6 @@ nameinput.on('keyup', () => {
 
 });
 
-/*let tgbcheck = togameboard.find(1);
-logs(tgbcheck + 'find togameboard');*/
-
 // to attempt to eliminate duplicate random numbers before pushing to the gameBoard
 const getGameboard = togameboard.forEach((ret) => {
             logs(ret + " frm getGameboard");
@@ -503,6 +500,7 @@ for (let i = 0; i < halfBoard; i++) {
     let onlyinstance = [];
     let moreinstances = [];
     let renderstatus = [];
+
     itemsnative.forEach( (item) => {
 
       var b = hasMultiscore;
