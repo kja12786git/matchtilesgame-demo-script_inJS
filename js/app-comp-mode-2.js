@@ -2,6 +2,7 @@
 let nameInputDiv = $('#name-input');
 let nameinput = $('form > input');
 let submitName = $('#name-input form button');
+let startButton = submitName;
 let nameFeed = $('.nameFeed');
 const logs = console.log;
 
@@ -62,8 +63,9 @@ nameinput.change(() => {
 });
 
 /* standard BUTTONS */
-// the submit button behaviour
+// the submit button event
 submitName.click((event) => {
+
     nameInputDiv.toggleClass('popup');
     event.preventDefault();
 
@@ -115,7 +117,6 @@ $('#reset').click(() => {
 
     }
 
-    setTimer;
 
 });
 
@@ -163,20 +164,17 @@ const getGameboard = togameboard.forEach((ret) => {
 
         });
 
-const setTimer = setInterval(startTimer, 1000);
+const setTimer = (x) =>{ setInterval(startTimer, 1000); }
 
 const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
     let moves = playLog.length;
 
     // only if moves are 0 or even, not yet played and total moves are less than the complete board, log the play and disable block until reset
-    if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
+    if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) { // for first or even moves
 
-          // to reset clock on the move after a valid pairs match
-          if (moves != 0 && moves % 2 === 0) {
-            $('#timer').html(0); // to restart timer after each valid match plays
-
-          }
+        // to reset countup timer
+        $('#timer').html(0); $('#timer').removeClass('hidden');
 
         $('#score').removeClass('scoreWobbActive');
         $('#score').removeClass('scoreWobbDblActive');
@@ -184,18 +182,13 @@ const newPlay = (x) => { // the play controls and points function
         item.addClass('newPlay'); // #DOMinsert to record valid play ---> item['0'].id === i['0'].id || item['0'].innerHTML != i['0'].innerHTML
         playLog.push(item);
 
-         // setTimer;
         logs(item['0'].id + ' console feed id# frm key data.');
 
-      }/*
-      else {
-          clearInterval(setTimer);
-          setTimer;
-
-    }*/
+      }
 
     if (moves === 0) {
-        // upon the first valid move...
+        // upon the first valid play...
+        setTimer(-1000);
         logs(`First move now played... ${x}`)
         displayPrevPlay.text(`${playLog[0][0].innerHTML}`);
 
@@ -232,11 +225,11 @@ const newPlay = (x) => { // the play controls and points function
 
                 // code for audio on valid play should initialize here
                 $('#movesaudio > #two').get(0).play();
-
                 // end code for audio
 
                 // alert and log points upon a match
                 // alert('Two Matched *!');
+                $('#timer').addClass('hidden');
                 if (item.hasClass('multiscore')) {
                   totalPoints.unshift(2000);
                   $('#score').toggleClass('scoreWobbDblActive');
@@ -249,12 +242,9 @@ const newPlay = (x) => { // the play controls and points function
 
 
                 // don't show timer after last match is accounted for
-                if (playLog.length >= togameboard.length) {
+                if (moves >= togameboard.length) {
                   $('#timer').addClass('hidden');
                   $('#movesaudio > #one').get(0).play();
-
-                  } else {
-                    $('#timer').removeClass('hidden');
 
                 }
 
@@ -266,9 +256,7 @@ const newPlay = (x) => { // the play controls and points function
                       logs(`${i[0].id} event, ${item[moves-1]} also should be the same`);
 
                           if (moves % 2 != 0) {
-                            $('timer').html = -1;
-                            // clearInterval(setTimer);
-                            setTimer;
+                            $('timer').html = 0;
 
                             logs(playLog.length);
                             item.addClass('newPlay');
@@ -299,9 +287,7 @@ const newPlay = (x) => { // the play controls and points function
 
 };
 
-//$(document).ready(() => { // unnecessary when embedded
-
-// append each of the given icons to a button on the gameboard twice in random sequence. The random return can only be controlled by a range starting from 0. So, it is not absolutely possible to limit the reccurences with this Javascript method unless maybe I limit the range from 0 to 2 and restart the loop every 2 pushes while pushing them all to an array and popping the two that already pushed. I attempted to push a random number from [0 to desired length] to an array replace any additional copy until it is complete. It didn't work because it kept looping and crashed so I had to just let it go without stressin for unique returns only. A good way may be to generate a first half randomly, and then pull values from a duplicate array to randomize the remaining half using the original values
+//$(document).ready(() => { // unnecessary when embedded }
 
 let halfBoard = slotsLngth/2;
 
