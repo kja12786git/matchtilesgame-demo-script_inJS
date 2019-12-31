@@ -259,9 +259,6 @@ nameinput.on('keyup', () => {
 
 });
 
-/*let tgbcheck = togameboard.find(1);
-logs(tgbcheck + 'find togameboard');*/
-
 // to attempt to eliminate duplicate random numbers before pushing to the gameBoard
 const getGameboard = togameboard.forEach((ret) => {
             logs(ret + " frm getGameboard");
@@ -272,7 +269,7 @@ const getGameboard = togameboard.forEach((ret) => {
 
         });
 
-const setTimer = setInterval(startTimer, 1000);
+const setTimer = (x) =>{ setInterval(startTimer, 1000); }
 
 const newPlay = (x) => { // the play controls and points function
     let item = $('#'+x);
@@ -281,11 +278,8 @@ const newPlay = (x) => { // the play controls and points function
     // only if moves are 0 or even, not yet played and total moves are less than the complete board, log the play and disable block until reset
     if ((moves === 0 || moves % 2 === 0 && moves != 0) && moves < slotsLngth) {
 
-          // to reset clock on the move after a valid pairs match
-          if (moves != 0 && moves % 2 === 0) {
-            $('#timer').html(0); // to restart timer after each valid match plays
-
-          }
+        // to reset countup timer
+        $('#timer').html(0); $('#timer').removeClass('hidden');
 
         $('#score').removeClass('scoreWobbActive');
         $('#score').removeClass('scoreWobbDblActive');
@@ -305,6 +299,7 @@ const newPlay = (x) => { // the play controls and points function
 
     if (moves === 0) {
         // upon the first valid move...
+        setTimer(-1000);
         logs(`First move now played... ${x}`)
         displayPrevPlay.text(`${playLog[0][0].innerHTML}`);
 
@@ -345,6 +340,7 @@ const newPlay = (x) => { // the play controls and points function
 
                 // alert and log points upon a match
                 // alert('Two Matched *!');
+                $('#timer').addClass('hidden');
                 if (item.hasClass('multiscore')) {
                   totalPoints.unshift(2000);
                   $('#score').toggleClass('scoreWobbDblActive');
@@ -357,12 +353,9 @@ const newPlay = (x) => { // the play controls and points function
 
 
                 // don't show timer after last match is accounted for
-                if (playLog.length >= togameboard.length) {
+                if (playLog.length == togameboard.length) {
                   $('#timer').addClass('hidden');
                   $('#movesaudio > #one').get(0).play();
-
-                  } else {
-                    $('#timer').removeClass('hidden');
 
                 }
 
@@ -503,6 +496,7 @@ for (let i = 0; i < halfBoard; i++) {
     let onlyinstance = [];
     let moreinstances = [];
     let renderstatus = [];
+
     itemsnative.forEach( (item) => {
 
       var b = hasMultiscore;

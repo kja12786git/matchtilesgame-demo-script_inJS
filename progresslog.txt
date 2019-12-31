@@ -10,10 +10,11 @@ For upgrades:
   + the displayPrevPlay was added to the DOM for easier gameplay
 
   + sound effects are good
-    - wants unique new ambient music
+    - wants unique new ambient music...
 
-  - timer still starts too early before first move.
-  - if reset button is hit it cannot reset timer... this may be unfixable in same page load of Javascript..? iFraming the gameboard area may be a solution. There is something about refreshing a div, maybe this can have some power.
+  + multiplier countup timer display and logic updated to be more responsive to every play.
+    - if reset button refreshes the build, the countup works, however, the speed seems to double the rate.
+    Redefining startTimer on the reset may fix this, but I think the DOM has to reset the timer itself.
 
   - quality testing on cell phone reveals it gets difficult to function 100% at zoom levels below 100%, but this even smaller because within Codepen iframe which is half the mobile screen.
 
@@ -23,7 +24,7 @@ For upgrades:
   + comp-mode colorpattern multiscore increased for more dynamic gameboard.
     + more in depth conditionals worked to get accurate instance render.
     + skip-loop doesn't work here due to render works different than more concise one for comp-mode-2.
-    - Perhaps already proven, must do more quality assurance runs to make certain render work well 100% of the renders.
+    + Renders work well 100% of the renders.
 
   + comp-mode-2 reorganizes the comp-mode
     + eliminate need for using too much in loops hasMultiscore, itemsnative and dup_limiter loop to get accurate dup_multiscore
@@ -32,4 +33,4 @@ For upgrades:
     + fix inconsistant halfBoard pairing no matter how many blocks the colorpattern includes.
 
   + comp-mode-2 and comp-mode both render as desired
-    - give variation to colorpattern renders so both modes can render unique patterns each time.
+    - give variation to colorpattern renders so both modes can render unique patterns each time... I reserve this until making extra improvement is more beneficial or most productive for time.
