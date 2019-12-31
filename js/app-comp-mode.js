@@ -353,7 +353,7 @@ const newPlay = (x) => { // the play controls and points function
 
 
                 // don't show timer after last match is accounted for
-                if (moves >= togameboard.length) {
+                if (playLog.length == togameboard.length) {
                   $('#timer').addClass('hidden');
                   $('#movesaudio > #one').get(0).play();
 
