@@ -158,6 +158,7 @@ const playLog = []; // for logging each player move
 const randomLog = []; // used for randomization checking
 const timerLog = []; // to accurately account for timing of each pair made
 const totalPoints = []; // for adding total points along the game
+var totalPointsPrev = [];
 
 nameInputDiv.toggleClass('hidden');
 nameInputDiv.toggleClass('popup');
@@ -214,9 +215,16 @@ const sumFunction = (total,num) => {
 $('#reset').click(() => {
     items.removeClass('newPlay');
     clearInterval(setTimer);
+	totalPointsPrev.push(totalPoints); // unused
+	let tplength = totalPoints.length;
+	for (c = 0; c < tplength; c++) {
+		totalPoints.pop();
+		
+	}
 
     $('#timer').text(0);
     $('#score').text(0);
+	
     displayPrevPlay.text(`no plays made`);
 
     while (playLog.length > 0) {
