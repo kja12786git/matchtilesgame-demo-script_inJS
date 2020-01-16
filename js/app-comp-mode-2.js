@@ -10,8 +10,8 @@ const logs = console.log;
 const items = $('.item');
 const displayPrevPlay = $('#displayPrevPlay > span');
 const itemsnative = [...new Set(items)];
-const icons1 = ['5','1','3','4','6','2'];
-const icons2 = ['$','❤','☆','★','♡','☺'];
+const icons1 = ['1','2','3','4','5','6'];
+const icons2 = ['☆','★','♡','❤','$','☺'];
 const icons = icons1;
 const hasMultiscore = [];
 const dup_multiscore = [];
@@ -112,7 +112,7 @@ $('#reset').click(() => {
 	let tplength = totalPoints.length;
 	for (c = 0; c < tplength; c++) {
 		totalPoints.pop();
-		
+
 	}
 
     $('#timer').text(0);
