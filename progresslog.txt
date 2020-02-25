@@ -33,4 +33,6 @@ For upgrades:
     + fix inconsistant halfBoard pairing no matter how many blocks the colorpattern includes.
 
   + comp-mode-2 and comp-mode both render as desired
-    - give variation to colorpattern renders so both modes can render unique patterns each time... I reserve this until making extra improvement is more beneficial or most productive for time.
+    - give variation to colorpattern renders so both modes can render unique patterns each time...
+      mode-1 delivers superior game pattern challenge because it randomizes 2nd halfBoard due to dependency on reversing the array
+      mode-2 technically renders faster but it doesn't randomize any because it's not depending on the first array.
